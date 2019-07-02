@@ -59,6 +59,7 @@ public class mainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         restartExperience();
         // Vector3 position = GetComponent<Rigidbody>().position;
         rb = GetComponent<Rigidbody>();
@@ -92,27 +93,23 @@ public class mainScript : MonoBehaviour
         {
             case (STAGE_TEST1):
                 {
-                    mainObject.transform.position = new Vector3(((Mathf.Sin(deltaTime *  Mathf.PI / 180f * test1Speed[test1Number])))*ballDistance, 0, Mathf.Abs(Mathf.Cos(deltaTime * Mathf.PI / 180f *test1Speed[test1Number]))*ballDistance);
+                    mainObject.transform.position = new Vector3(((Mathf.Sin(deltaTime *  Mathf.PI / 180f * test1Speed[test1Number])))*ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(deltaTime * Mathf.PI / 180f *test1Speed[test1Number]))*ballDistance);
 
                     RaycastHit seen = new RaycastHit();
                     Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
-                   
-                 //   GameObject.Find("gazeBeam").transform.position = raydirection.origin;
-                 //   GameObject.Find("gazeBeam").transform.eulerAngles = raydirection.direction;
-                    if (Physics.Raycast(raydirection, out seen, 100.0f))
+                    mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
+                    //   GameObject.Find("gazeBeam").transform.position = raydirection.origin;
+                    //   GameObject.Find("gazeBeam").transform.eulerAngles = raydirection.direction;
+                    if (Physics.Raycast(raydirection, out seen, 25.0f))
                     {
-                        Debug.DrawRay(seen.point, seen.normal, Color.magenta);
-                        Debug.DrawRay(raydirection.origin, raydirection.direction * 100f, Color.yellow);
+                      //  Debug.DrawRay(seen.point, seen.normal, Color.magenta);
+                       // Debug.DrawRay(raydirection.origin, raydirection.direction * 100f, Color.yellow);
                         if (seen.collider.tag == "matterObject")
                         {
                             mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
                             // Debug.Log("hit" + seen.transform.gameObject.name);
                         }
-                        else
-                        {
-                            mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
-                        }
-
+                        
 
                     }
                     break;
