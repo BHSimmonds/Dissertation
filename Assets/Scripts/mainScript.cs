@@ -26,13 +26,22 @@ public class mainScript : MonoBehaviour
 
     public GameObject[] UIpanels = new GameObject[4];
 
+    public float[] test1Times = new float[3];
+    public float[] test1Speed = new float[3];
+    public int test1Number = 0;
+
+
+    private Vector3 playerOrigin;
+
     public GameObject mainObject;
 
+    public GameObject OculusCenterEyes;
     public GameObject participantTextfield;
 
     public int participantId;
 
-    public float speed;
+    public float ballSpeed;
+    public float ballDistance;
     // public Vector3 cubeLocation;
     public Rigidbody rb;
     private float xPos;
@@ -41,6 +50,9 @@ public class mainScript : MonoBehaviour
     private float m; // angle multiplier;
     public double radius;
 
+    public bool StartPart;
+
+    private float timeStart;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +72,7 @@ public class mainScript : MonoBehaviour
         for (i = 1; i < 4; i++)
         {
             UIpanels[i].GetComponent<CanvasGroup>().alpha = 0.0f;
+            UIpanels[i].SetActive(false);
         }
         participantTextfield.GetComponent<Text>().text = participantId.ToString();
     }
@@ -67,6 +80,23 @@ public class mainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(StartPart==true)
+        {
+            changeStage(STAGE_TEST1);
+            StartPart = false;
+        }
+        float deltaTime = Time.time - timeStart;
+        switch (appStage)
+        {
+            case (STAGE_TEST1):
+                {
+                    mainObject.transform.position = new Vector3(((Mathf.Sin(deltaTime *  Mathf.PI / 180f * test1Speed[test1Number])))*ballDistance, 0, Mathf.Abs(Mathf.Cos(deltaTime * Mathf.PI / 180f *test1Speed[test1Number]))*ballDistance);
+
+
+                    break;
+                }
+
+        }
         /*
         GameObject go = GameObject.Find("CenterEyeAnchor"); // Find the game object with the script
         RotationInformation cs = go.GetComponent<RotationInformation>(); // identify the script
@@ -84,12 +114,39 @@ public class mainScript : MonoBehaviour
         */
     }
 
+
+    void FixedUpdate()
+    {
+        if (appStage == STAGE_TEST1)
+        {
+            RaycastHit seen;
+            Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
+            if (Physics.Raycast(raydirection, out seen, 100.0f))
+            {
+                if (seen.collider.tag == "matterObject")
+                {
+                    mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
+                    // Debug.Log("hit" + seen.transform.gameObject.name);
+                }
+                else
+                {
+                    mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
+                }
+
+
+            }
+        }
+
+    }
+
     public void ClickButton(int whichOne)
     {
+        Debug.Log("CLICK " + whichOne);
         switch (whichOne)
         {
             case (BUTTON_START_TEST1):
                 {
+                    Debug.Log("meh");
                     changeStage(STAGE_TEST1);
                     break;
                 }
@@ -102,7 +159,7 @@ public class mainScript : MonoBehaviour
 
             case (BUTTON_TEST2_YES):
                 {
-                    
+
                     break;
                 }
 
@@ -125,6 +182,17 @@ public class mainScript : MonoBehaviour
         }
     }
 
+    public void killCanvas(object number)
+    {
+      /*  int ilonczyn = number as int;
+        timeStart = Time.fixedTime;
+        if (ilonczyn == 0)
+        {
+            appStage = STAGE_TEST1;
+            UIpanels[0].SetActive(false);
+        }*/
+    }
+
     void changeStage(int whichStage)
     {
         switch (whichStage)
@@ -132,7 +200,12 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TEST1):
                 {
-                    LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
+                    LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.5f);// setOnComplete(killCanvas).setOnCompleteParam(STAGE_TEST1);
+                    LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), .5f);
+                    UIpanels[0].SetActive(false);
+                    appStage = STAGE_TEST1;
+                    timeStart = Time.fixedTime;
+                    playerOrigin = OculusCenterEyes.transform.position;
                     break;
                 }
 
@@ -170,7 +243,9 @@ public class mainScript : MonoBehaviour
 
 
         }
+
     }
 
 }
+
 
