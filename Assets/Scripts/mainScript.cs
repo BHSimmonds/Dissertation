@@ -32,6 +32,7 @@ public class mainScript : MonoBehaviour
 
 
     private Vector3 playerOrigin;
+    private Vector3 playerRotation;
 
     public GameObject mainObject;
 
@@ -44,13 +45,8 @@ public class mainScript : MonoBehaviour
 
     public float ballSpeed;
     public float ballDistance;
-    // public Vector3 cubeLocation;
-    public Rigidbody rb;
-    private float xPos;
-    private float yPos;
-    private float angle;
-    private float m; // angle multiplier;
-    public double radius;
+
+    public float gValue = .5f;
 
     public bool StartPart;
 
@@ -62,7 +58,7 @@ public class mainScript : MonoBehaviour
 
         restartExperience();
         // Vector3 position = GetComponent<Rigidbody>().position;
-        rb = GetComponent<Rigidbody>();
+     //   rb = GetComponent<Rigidbody>();
         // var cameraRotation = GameObject.Find("CenterEyeAnchor").transform.rotation;
     }
 
@@ -93,44 +89,35 @@ public class mainScript : MonoBehaviour
         {
             case (STAGE_TEST1):
                 {
-                    mainObject.transform.position = new Vector3(((Mathf.Sin(deltaTime *  Mathf.PI / 180f * test1Speed[test1Number])))*ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(deltaTime * Mathf.PI / 180f *test1Speed[test1Number]))*ballDistance);
+                    Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number])) * ballDistance);
+                    mainObject.transform.position = startRotation;
 
                     RaycastHit seen = new RaycastHit();
                     Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
                     mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
-                    //   GameObject.Find("gazeBeam").transform.position = raydirection.origin;
-                    //   GameObject.Find("gazeBeam").transform.eulerAngles = raydirection.direction;
                     if (Physics.Raycast(raydirection, out seen, 25.0f))
                     {
-                      //  Debug.DrawRay(seen.point, seen.normal, Color.magenta);
-                       // Debug.DrawRay(raydirection.origin, raydirection.direction * 100f, Color.yellow);
+                      
                         if (seen.collider.tag == "matterObject")
                         {
                             mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
-                            // Debug.Log("hit" + seen.transform.gameObject.name);
                         }
-                        
-
                     }
                     break;
                 }
 
-        }
-        /*
-        GameObject go = GameObject.Find("CenterEyeAnchor"); // Find the game object with the script
-        RotationInformation cs = go.GetComponent<RotationInformation>(); // identify the script
-        angle = cs.yAngle;    // get the variable I want
-        m = cs.m; // get multiplier from central script
+            case (STAGE_TEST2):
+                {
+                    Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
+                    rotation.y = rotation.y * gValue;
+                  //  SoundGameObject.transform.position = new Vector3(ballDistance * , playerOrigin.y, ballDistance *);
 
-        float yAngleRad = (Mathf.PI / 180) * angle * m;
-        double sinAngle = Mathf.Sin(angle);
-        double cosAngle = Mathf.Cos(angle);
-        xPos = (float) (radius * sinAngle);
-        yPos = (float) (radius * cosAngle);
-        Vector3 tempVect = new Vector3(xPos, yPos, 0);
-        tempVect = tempVect.normalized * Time.deltaTime;
-        rb.MovePosition(transform.position + tempVect);
-        */
+
+                    break;
+                }
+
+        }
+
     }
 
 
@@ -208,6 +195,7 @@ public class mainScript : MonoBehaviour
                     appStage = STAGE_TEST1;
                     timeStart = Time.fixedTime;
                     playerOrigin = OculusCenterEyes.transform.position;
+                    playerRotation = OculusCenterEyes.transform.eulerAngles;
                     Canvas.SetActive(false);
                     break;
                 }
