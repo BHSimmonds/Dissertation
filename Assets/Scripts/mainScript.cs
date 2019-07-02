@@ -38,6 +38,8 @@ public class mainScript : MonoBehaviour
     public GameObject OculusCenterEyes;
     public GameObject participantTextfield;
 
+    public GameObject Canvas;
+
     public int participantId;
 
     public float ballSpeed;
@@ -92,7 +94,27 @@ public class mainScript : MonoBehaviour
                 {
                     mainObject.transform.position = new Vector3(((Mathf.Sin(deltaTime *  Mathf.PI / 180f * test1Speed[test1Number])))*ballDistance, 0, Mathf.Abs(Mathf.Cos(deltaTime * Mathf.PI / 180f *test1Speed[test1Number]))*ballDistance);
 
+                    RaycastHit seen = new RaycastHit();
+                    Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
+                   
+                 //   GameObject.Find("gazeBeam").transform.position = raydirection.origin;
+                 //   GameObject.Find("gazeBeam").transform.eulerAngles = raydirection.direction;
+                    if (Physics.Raycast(raydirection, out seen, 100.0f))
+                    {
+                        Debug.DrawRay(seen.point, seen.normal, Color.magenta);
+                        Debug.DrawRay(raydirection.origin, raydirection.direction * 100f, Color.yellow);
+                        if (seen.collider.tag == "matterObject")
+                        {
+                            mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
+                            // Debug.Log("hit" + seen.transform.gameObject.name);
+                        }
+                        else
+                        {
+                            mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
+                        }
 
+
+                    }
                     break;
                 }
 
@@ -119,34 +141,17 @@ public class mainScript : MonoBehaviour
     {
         if (appStage == STAGE_TEST1)
         {
-            RaycastHit seen;
-            Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
-            if (Physics.Raycast(raydirection, out seen, 100.0f))
-            {
-                if (seen.collider.tag == "matterObject")
-                {
-                    mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
-                    // Debug.Log("hit" + seen.transform.gameObject.name);
-                }
-                else
-                {
-                    mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
-                }
-
-
-            }
+            
         }
 
     }
 
     public void ClickButton(int whichOne)
     {
-        Debug.Log("CLICK " + whichOne);
         switch (whichOne)
         {
             case (BUTTON_START_TEST1):
                 {
-                    Debug.Log("meh");
                     changeStage(STAGE_TEST1);
                     break;
                 }
@@ -206,6 +211,7 @@ public class mainScript : MonoBehaviour
                     appStage = STAGE_TEST1;
                     timeStart = Time.fixedTime;
                     playerOrigin = OculusCenterEyes.transform.position;
+                    Canvas.SetActive(false);
                     break;
                 }
 
