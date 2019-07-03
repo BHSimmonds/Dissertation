@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class testInstance
+{
+    public float gValue;
+    public bool floorReflection;
+    public bool RightwallReflection;
+
+    public bool leftWallReflection;
+
+    // turn to private
+    public bool finished;
+}
 
 public class mainScript : MonoBehaviour
 {
@@ -24,16 +36,21 @@ public class mainScript : MonoBehaviour
 
     private int appStage = 0;
 
-    public GameObject[] UIpanels = new GameObject[4];
+
+
     List<bool> testSuccessfull = new List<bool>();
 
-    public float[] test1Times = new float[3];
-    public float[] test1Speed = new float[3];
-    public int test1Number = 0;
+    public List<testInstance> tests = new List<testInstance>();
+    
+    public float[] trainingSpeed = new float[3];
+    private bool[] trainingFinished = new bool[3];
 
+    public float trainingTime;
 
     private Vector3 playerOrigin;
     private Vector3 playerRotation;
+
+    public GameObject[] UIpanels = new GameObject[4];
 
     public GameObject mainObject;
 
@@ -44,11 +61,11 @@ public class mainScript : MonoBehaviour
 
     public int participantId;
 
-    public float ballSpeed;
     public float ballDistance;
 
+    // to remove
     public float gValue = .5f;
-
+    public int test1Number = 0;
     public bool StartPart;
 
     private float timeStart;
@@ -57,6 +74,12 @@ public class mainScript : MonoBehaviour
     void Start()
     {
 
+        newSession();
+    }
+
+
+    void newSession()
+    {
         restartExperience();
     }
 
@@ -93,13 +116,13 @@ public class mainScript : MonoBehaviour
         {
             case (STAGE_TEST1):
                 {
-                    if (deltaTime >= test1Times[0])
+                    if (deltaTime >= trainingTime)
                     {
                         changeStage(STAGE_TEST2_SCREEN);
                     }
                     else
                     {
-                        Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number])) * ballDistance);
+                        Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * trainingSpeed[test1Number]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * trainingSpeed[test1Number])) * ballDistance);
                         mainObject.transform.position = startRotation;
 
                         RaycastHit seen = new RaycastHit();

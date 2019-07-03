@@ -3095,26 +3095,113 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4fec60b0fb6c34aa370a5d488095a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tests:
+  - gValue: -0.5
+    floorReflection: 0
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: -0.25
+    floorReflection: 0
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0
+    floorReflection: 0
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.25
+    floorReflection: 0
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.5
+    floorReflection: 0
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.75
+    floorReflection: 0
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: -0.5
+    floorReflection: 1
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: -0.25
+    floorReflection: 1
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0
+    floorReflection: 1
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.25
+    floorReflection: 1
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.5
+    floorReflection: 1
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.75
+    floorReflection: 1
+    RightwallReflection: 0
+    leftWallReflection: 0
+    finished: 0
+  - gValue: -0.5
+    floorReflection: 1
+    RightwallReflection: 1
+    leftWallReflection: 0
+    finished: 0
+  - gValue: -0.25
+    floorReflection: 1
+    RightwallReflection: 1
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0
+    floorReflection: 1
+    RightwallReflection: 1
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.25
+    floorReflection: 1
+    RightwallReflection: 1
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.5
+    floorReflection: 1
+    RightwallReflection: 1
+    leftWallReflection: 0
+    finished: 0
+  - gValue: 0.75
+    floorReflection: 1
+    RightwallReflection: 1
+    leftWallReflection: 0
+    finished: 0
+  trainingSpeed:
+  - 20
+  - 60
+  - 100
+  test1Number: 0
+  trainingTime: 5
   UIpanels:
   - {fileID: 792094305}
   - {fileID: 651454201}
   - {fileID: 381295014}
   - {fileID: 2067271881}
-  test1Times:
-  - 5
-  - 5
-  - 5
-  test1Speed:
-  - 30
-  - 60
-  - 100
-  test1Number: 0
   mainObject: {fileID: 986118183}
   OculusCenterEyes: {fileID: 461435256}
   participantTextfield: {fileID: 433379683}
   Canvas: {fileID: 1508536644}
   participantId: 0
-  ballSpeed: 1
   ballDistance: 5
   gValue: 0.5
   StartPart: 0
