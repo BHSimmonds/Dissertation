@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class testInstance
 
     // turn to private
     public bool[] finished = new bool[3] { false, false, false };
+    public bool[] results = new bool[3] { false, false, false };
 }
 
 public class mainScript : MonoBehaviour
@@ -39,8 +41,6 @@ public class mainScript : MonoBehaviour
 
     public int testResult = 0;
 
-    public int testRange;
-
     List<bool> testSuccessfull = new List<bool>();
 
     public List<testInstance> tests = new List<testInstance>();
@@ -50,10 +50,11 @@ public class mainScript : MonoBehaviour
 
     public float trainingTime;
 
-
     private Vector3 playerOrigin;
     private Vector3 playerRotation;
 
+    public GameObject yesButton;
+    public GameObject noButton;
     public GameObject testID;
     public GameObject floorReverb;
     public GameObject LeftWallReverb;
@@ -87,6 +88,15 @@ public class mainScript : MonoBehaviour
     void Start()
     {
         mainObject.GetComponent<AudioSource>().Play();
+        try
+        {
+            string index = System.IO.File.ReadAllText("index");
+            participantId = int.Parse(index);
+        }
+        catch (System.Exception e)
+        {
+
+        }
         newSession();
     }
 
@@ -98,33 +108,24 @@ public class mainScript : MonoBehaviour
 
     void restartExperience()
     {
+        trainingNumber = 0;
         int i;
-        appStage = STAGE_TRAINING_SCREEN;
         for(i=0;i<_AmountOfTests; i++)
         {
             tests[i].finished = new bool[3];
             tests[i].finished[0] = false;
             tests[i].finished[1] = false;
             tests[i].finished[2] = false;
+            tests[i].results = new bool[3];
+            tests[i].results[0] = false;
+            tests[i].results[1] = false;
+            tests[i].results[2] = false;
         }
         for(i=0;i<trainingFinished.Length; i++)
         {
             trainingFinished[i] = false;
         }
-        mainObject.transform.localScale = new Vector3(0, 0, 0);
-   
-        for (i = 1; i < 4; i++)
-        {
-            UIpanels[i].GetComponent<CanvasGroup>().alpha = 0.0f;
-            UIpanels[i].SetActive(false);
-        }
-        UIpanels[0].SetActive(true);
-        UIpanels[0].GetComponent<CanvasGroup>().alpha = 1.0f;
-
-        Canvas.SetActive(true);
-
-        participantTextfield.GetComponent<Text>().text = participantId.ToString();
-        mainObject.GetComponent<AudioSource>().mute = true;
+        changeStage(STAGE_TRAINING_SCREEN);
     }
 
     // Update is called once per frame
@@ -178,19 +179,21 @@ public class mainScript : MonoBehaviour
             case (STAGE_TEST):
                 {
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
-                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * rotation.y) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue*rotation.y)) * ballDistance);
-                    Debug.Log(rotation);
-                    if((rotation.y>180)||(rotation.y<0))
+                 /*   if(rotation.y>180)
                     {
-                        Debug.Log("rotation is negative - flip the x coordinate");
+                        rotation.y = 180 - rotation.y;
+                    }*/
+                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
+                    Debug.Log(rotation + ":" + gValue);
+                   
+                  /*  if((rotation.y>180)||(rotation.y<0))
+                    {
+                     //   Debug.Log("rotation is negative - flip the x coordinate");
                         startRotation.x = startRotation.x * -1;
-                    }
+                    }*/
 
                     mainObject.transform.position = startRotation;
-                //    Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
-                  //  rotation.y = rotation.y * gValue;
-                  //  SoundGameObject.transform.position = new Vector3(ballDistance * , playerOrigin.y, ballDistance *);
-
+           
 
                     break;
                 }
@@ -205,9 +208,10 @@ public class mainScript : MonoBehaviour
         bool sortedOut = false;
         bool outcome = true;
         bool[] testingAllVariants = new bool[_AmountOfTests];
+   //     Random.state = Time.time;
         while(sortedOut==false)
         {
-            int radom = Random.Range(0, testRange);
+            int radom = Random.Range(0, _AmountOfTests);
             testingAllVariants[radom] = true;
             if(tests[radom].finished[trainingNumber]==false)
             {
@@ -232,6 +236,7 @@ public class mainScript : MonoBehaviour
         {
             return (true);
         }
+        testID.GetComponent<Text>().text = chosenTest + "/" + trainingNumber;
         floorReverb.SetActive(tests[chosenTest].floorReflection);
         LeftWallReverb.SetActive(tests[chosenTest].leftWallReflection);
         RightWallReverb.SetActive(tests[chosenTest].RightwallReflection);
@@ -248,6 +253,32 @@ public class mainScript : MonoBehaviour
             
         }
 
+    }
+
+    public void acknowledgeTests(bool valjusz)
+    {
+        if(valjusz)
+        {
+            LeanTween.scale(yesButton, new Vector3(0,0,0), .15f);
+            LeanTween.scale(yesButton, new Vector3(0.002f, 0.002f, 0.002f), .15f).setDelay(.15f);
+
+        } else
+        {
+            LeanTween.scale(noButton, new Vector3(0, 0, 0), .15f);
+            LeanTween.scale(noButton, new Vector3(0.002f, 0.002f, 0.002f), .15f).setDelay(.15f);
+            
+        }
+        if(chooseRandomTest())
+        {
+            trainingNumber++;
+            if(trainingNumber==3)
+            {
+                changeStage(STAGE_FINAL_SCREEN);
+            } else
+            {
+                changeStage(STAGE_TRAINING_SCREEN);
+            }
+        }
     }
 
     public void ClickButton(int whichOne)
@@ -268,23 +299,62 @@ public class mainScript : MonoBehaviour
 
             case (BUTTON_TEST_YES):
                 {
-
+                    tests[chosenTest].results[trainingNumber] = true;
+                    tests[chosenTest].finished[trainingNumber] = true;
+                    acknowledgeTests(true);
                     break;
                 }
 
             case (BUTTON_TEST_NO):
                 {
+                    tests[chosenTest].results[trainingNumber] = false;
+                    tests[chosenTest].finished[trainingNumber] = true;
+                    acknowledgeTests(false);
                     break;
                 }
 
             case (BUTTON_FINAL_YES):
                 {
+
+                    StringBuilder builder = new StringBuilder();
+
+                  //  builder.Append("\"id");
+                    int i;
+                    int j;
+                    for (j = 0; j < 3; j++) {
+                        for (i = 0; i < _AmountOfTests; i++)
+                        {
+                            builder.Append("\"");
+                            builder.Append(participantId);
+                            builder.Append("\",\"");
+                            builder.Append(trainingSpeed[j]);
+                            builder.Append("\",\"");
+                            builder.Append(tests[i].floorReflection);
+                            builder.Append("\",\"");
+                            builder.Append(tests[i].RightwallReflection);
+                            builder.Append("\",\"");
+                            builder.Append(tests[i].leftWallReflection);
+                            builder.Append("\",\"");
+                            builder.Append(tests[i].gValue);
+                            builder.Append("\",\"");
+                            builder.Append(tests[i].results[j]);
+                            builder.Append("\"");
+                            builder.Append("\r\n");
+                        }
+                    }
+                    //   FileUtil.
+                    System.IO.File.AppendAllText("data" + participantId + ".csv", builder.ToString());
+                    // 
+                    participantId++;
+
+                    System.IO.File.WriteAllText("index", participantId.ToString());
+                    restartExperience();
                     break;
                 }
 
             case (BUTTON_FINAL_NO):
                 {
-
+                    restartExperience();
                     break;
                 }
 
@@ -306,10 +376,33 @@ public class mainScript : MonoBehaviour
         switch (whichStage)
         {
 
+            case (STAGE_TRAINING_SCREEN):
+                {
+                    mainObject.transform.localScale = new Vector3(0, 0, 0);
+                    int i;
+                    for (i = 1; i < 4; i++)
+                    {
+                        UIpanels[i].GetComponent<CanvasGroup>().alpha = 0.0f;
+                        UIpanels[i].SetActive(false);
+                    }
+                    UIpanels[0].SetActive(true);
+                    UIpanels[0].GetComponent<CanvasGroup>().alpha = 1.0f;
+
+                    Canvas.SetActive(true);
+
+                    participantTextfield.GetComponent<Text>().text = participantId.ToString();
+                    mainObject.GetComponent<AudioSource>().mute = true;
+                    appStage = STAGE_TRAINING_SCREEN;
+                    break;
+                }
+
             case (STAGE_TRAINING):
                 {
                     LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.7f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TRAINING);
                     LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), 1.0f);
+                    floorReverb.SetActive(false);
+                    LeftWallReverb.SetActive(false);
+                    RightWallReverb.SetActive(false);
                     break;
                 }
 
@@ -321,7 +414,6 @@ public class mainScript : MonoBehaviour
                     UIpanels[1].SetActive(true);
                     LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
-                    chooseRandomTest();
                     break;
                 }
 
@@ -333,7 +425,9 @@ public class mainScript : MonoBehaviour
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     playerOrigin = OculusCenterEyes.transform.position;
                     playerRotation = OculusCenterEyes.transform.eulerAngles;
+                    UIpanels[2].SetActive(true);
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, .5f);
+                    chooseRandomTest();
                     appStage = STAGE_TEST;
                     break;
                 }
@@ -341,7 +435,10 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_FINAL_SCREEN):
                 {
-                    LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
+                    mainObject.GetComponent<AudioSource>().mute = true;
+                    LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
+                    UIpanels[3].SetActive(true);
+                    LeanTween.alphaCanvas(UIpanels[3].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
                     break;
                 }
 
