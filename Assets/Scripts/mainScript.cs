@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 public class testInstance
@@ -131,7 +132,11 @@ public class mainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(audioTest)
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+        if (audioTest)
         {
             changeStage(STAGE_TEST);
             audioTest = false;
@@ -211,7 +216,7 @@ public class mainScript : MonoBehaviour
    //     Random.state = Time.time;
         while(sortedOut==false)
         {
-            int radom = Random.Range(0, _AmountOfTests);
+            int radom = UnityEngine.Random.Range(0, _AmountOfTests);
             testingAllVariants[radom] = true;
             if(tests[radom].finished[trainingNumber]==false)
             {
@@ -317,7 +322,7 @@ public class mainScript : MonoBehaviour
                 {
 
                     StringBuilder builder = new StringBuilder();
-
+                    builder.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
                   //  builder.Append("\"id");
                     int i;
                     int j;
@@ -329,15 +334,15 @@ public class mainScript : MonoBehaviour
                             builder.Append("\",\"");
                             builder.Append(trainingSpeed[j]);
                             builder.Append("\",\"");
-                            builder.Append(tests[i].floorReflection);
+                            builder.Append(Convert.ToInt32(tests[i].floorReflection));
                             builder.Append("\",\"");
-                            builder.Append(tests[i].RightwallReflection);
+                            builder.Append(Convert.ToInt32(tests[i].RightwallReflection));
                             builder.Append("\",\"");
-                            builder.Append(tests[i].leftWallReflection);
+                            builder.Append(Convert.ToInt32(tests[i].leftWallReflection));
                             builder.Append("\",\"");
                             builder.Append(tests[i].gValue);
                             builder.Append("\",\"");
-                            builder.Append(tests[i].results[j]);
+                            builder.Append(Convert.ToInt32(tests[i].results[j]));
                             builder.Append("\"");
                             builder.Append("\r\n");
                         }
