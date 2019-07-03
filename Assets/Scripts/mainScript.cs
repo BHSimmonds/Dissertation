@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class testInstance
 {
     public float gValue;
+    public bool anechoic;
     public bool floorReflection;
     public bool RightwallReflection;
 
@@ -19,20 +20,21 @@ public class testInstance
 public class mainScript : MonoBehaviour
 {
 
-    const int BUTTON_START_TEST1 = 0;
-    const int BUTTON_START_TEST2 = 1;
-    const int BUTTON_TEST2_YES = 2;
-    const int BUTTON_TEST2_NO = 3;
+    const int BUTTON_START_TRAINING = 0;
+    const int BUTTON_START_TEST = 1;
+    const int BUTTON_TEST_YES = 2;
+    const int BUTTON_TEST_NO = 3;
+
     const int BUTTON_FINAL_YES = 4;
     const int BUTTON_FINAL_NO = 5;
 
-    const int STAGE_TEST1_SCREEN = 0;
-    const int STAGE_TEST1 = 1;
-    const int STAGE_TEST2_SCREEN = 2;
-    const int STAGE_TEST2 = 3;
-    const int STAGE_TEST3_SCREEN = 4;
-    const int STAGE_TEST3 = 5;
-    const int STAGE_FINAL_SCREEN = 6;
+    const int STAGE_TRAINING_SCREEN = 0;
+    const int STAGE_TRAINING = 1;
+    const int STAGE_TEST_SCREEN = 2;
+    const int STAGE_TEST = 3;
+    const int STAGE_FINAL_SCREEN = 4;
+ //   const int STAGE_TEST3 = 5;
+  //  const int STAGE_FINAL_SCREEN = 6;
 
     private int appStage = 0;
 
@@ -65,7 +67,7 @@ public class mainScript : MonoBehaviour
 
     // to remove
     public float gValue = .5f;
-    public int test1Number = 0;
+    public int trainingNumber = 0;
     public bool StartPart;
 
     private float timeStart;
@@ -85,10 +87,18 @@ public class mainScript : MonoBehaviour
 
     void restartExperience()
     {
-
-        appStage = STAGE_TEST1_SCREEN;
-        mainObject.transform.localScale = new Vector3(0, 0, 0);
         int i;
+        appStage = STAGE_TRAINING_SCREEN;
+        for(i=0;i<tests.Count; i++)
+        {
+            tests[i].finished = false;
+        }
+        for(i=0;i<trainingFinished.Length; i++)
+        {
+            trainingFinished[i] = false;
+        }
+        mainObject.transform.localScale = new Vector3(0, 0, 0);
+   
         for (i = 1; i < 4; i++)
         {
             UIpanels[i].GetComponent<CanvasGroup>().alpha = 0.0f;
@@ -108,21 +118,22 @@ public class mainScript : MonoBehaviour
     {
         if(StartPart==true)
         {
-            changeStage(STAGE_TEST1);
+            changeStage(STAGE_TRAINING);
             StartPart = false;
         }
         float deltaTime = Time.fixedTime - timeStart;
         switch (appStage)
         {
-            case (STAGE_TEST1):
+            case (STAGE_TRAINING):
                 {
                     if (deltaTime >= trainingTime)
                     {
-                        changeStage(STAGE_TEST2_SCREEN);
+                        trainingFinished[trainingNumber] = true;
+                        changeStage(STAGE_TEST_SCREEN);
                     }
                     else
                     {
-                        Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * trainingSpeed[test1Number]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * trainingSpeed[test1Number])) * ballDistance);
+                        Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * trainingSpeed[trainingNumber]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * trainingSpeed[trainingNumber])) * ballDistance);
                         mainObject.transform.position = startRotation;
 
                         RaycastHit seen = new RaycastHit();
@@ -144,11 +155,16 @@ public class mainScript : MonoBehaviour
                     break;
                 }
 
-            case (STAGE_TEST2):
+            case (STAGE_TEST):
                 {
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
-                    Vector3 startRotation = new Vector3(( Mathf.PI / 180f *  gValue * rotation.y) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue*rotation.y)) * ballDistance);
-
+                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * rotation.y) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue*rotation.y)) * ballDistance);
+                    Debug.Log(rotation);
+                    if((rotation.y>180)||(rotation.y<0))
+                    {
+                        Debug.Log("rotation is negative - flip the x coordinate");
+                        startRotation.x = startRotation.x * -1;
+                    }
 
                     mainObject.transform.position = startRotation;
                 //    Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
@@ -166,7 +182,7 @@ public class mainScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (appStage == STAGE_TEST1)
+        if (appStage == STAGE_TRAINING)
         {
             
         }
@@ -177,25 +193,25 @@ public class mainScript : MonoBehaviour
     {
         switch (whichOne)
         {
-            case (BUTTON_START_TEST1):
+            case (BUTTON_START_TRAINING):
                 {
-                    changeStage(STAGE_TEST1);
+                    changeStage(STAGE_TRAINING);
                     break;
                 }
 
-            case (BUTTON_START_TEST2):
+            case (BUTTON_START_TEST):
                 {
-                    changeStage(STAGE_TEST2);
+                    changeStage(STAGE_TEST);
                     break;
                 }
 
-            case (BUTTON_TEST2_YES):
+            case (BUTTON_TEST_YES):
                 {
 
                     break;
                 }
 
-            case (BUTTON_TEST2_NO):
+            case (BUTTON_TEST_NO):
                 {
                     break;
                 }
@@ -224,21 +240,27 @@ public class mainScript : MonoBehaviour
         Canvas.SetActive(false);
     }
 
+
+    int  chooseRandomTest()
+    {
+        return (0);
+    }
+
     void changeStage(int whichStage)
     {
         switch (whichStage)
         {
 
-            case (STAGE_TEST1):
+            case (STAGE_TRAINING):
                 {
-                    LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.7f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TEST1);
+                    LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.7f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TRAINING);
                     LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), 1.0f);
                     break;
                 }
 
-            case (STAGE_TEST2_SCREEN):
+            case (STAGE_TEST_SCREEN):
                 {
-                    appStage = STAGE_TEST2_SCREEN;
+                    appStage = STAGE_TEST_SCREEN;
                     Canvas.SetActive(true);
                     UIpanels[0].SetActive(false);
                     UIpanels[1].SetActive(true);
@@ -248,33 +270,20 @@ public class mainScript : MonoBehaviour
                 }
 
 
-            case (STAGE_TEST2):
+            case (STAGE_TEST):
                 {
                     mainObject.GetComponent<AudioSource>().mute = false;
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
-                    LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TEST2);
+                    LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TEST);
                     break;
                 }
 
 
-            case (STAGE_TEST3_SCREEN):
+            case (STAGE_FINAL_SCREEN):
                 {
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
                     break;
                 }
-
-            case (STAGE_TEST3):
-                {
-                    LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
-                    break;
-                }
-
-            case (STAGE_FINAL_SCREEN):
-                {
-                    LeanTween.alphaCanvas(UIpanels[3].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
-                    break;
-                }
-
 
         }
 

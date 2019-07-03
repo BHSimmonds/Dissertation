@@ -163,11 +163,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -0.023956299, y: 0.0031738281, z: 0}
+  savedPos: {x: 7.110596, y: 0.0032186508, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0, y: 0.3046875}
+  savedTextUV0: {x: 0.15625, y: 0.21484375}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -428,11 +428,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -500, y: -249.99686, z: 0}
+  savedPos: {x: -424.60004, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.078125, y: 0.15234375}
+  savedTextUV0: {x: 0.40625, y: 0.33984375}
   savedFill: 0
 --- !u!114 &282318818
 MonoBehaviour:
@@ -529,11 +529,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 7.110596, y: 0.0031738281, z: 0}
+  savedPos: {x: 82.51059, y: 0.0032186508, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.6640625, y: 0.08203125}
+  savedTextUV0: {x: 0.3125, y: 0.30078125}
   savedFill: 0
 --- !u!114 &362491627
 MonoBehaviour:
@@ -628,11 +628,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -0.023956299, y: -249.99686, z: 0}
+  savedPos: {x: 7.110596, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.0625, y: 0}
+  savedTextUV0: {x: 0.7265625, y: 0}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -782,11 +782,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -0.023956299, y: 0.0031738281, z: 0}
+  savedPos: {x: 7.110596, y: 0.0032186508, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.53125, y: 0.22265625}
+  savedTextUV0: {x: 0.5, y: 0.25}
   savedFill: 0
 --- !u!114 &406628752
 MonoBehaviour:
@@ -882,11 +882,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -382.13455, y: 77.495834, z: 0}
+  savedPos: {x: -375.00003, y: 82.48854, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.3125, y: 0.109375}
+  savedTextUV0: {x: 0.26171875, y: 0}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1354,7 +1354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651454201}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -507.13455, y: -70.00415, z: 0}
+  m_LocalPosition: {x: -500, y: -70.00415, z: 0}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_Children:
   - {fileID: 406628750}
@@ -1604,7 +1604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792094305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -507.13455, y: -70.00415, z: 0}
+  m_LocalPosition: {x: -500, y: -70.00415, z: 0}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_Children:
   - {fileID: 61038078}
@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -0.023956299, y: -249.99684, z: 0}
+  savedPos: {x: 7.110596, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 233.93274, y: 150}
   savedColor: {r: 0, g: 0, b: 0, a: 0.522}
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.65625, y: 0}
+  savedTextUV0: {x: 0.5, y: 0.35546875}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2212,11 +2212,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 40.75473, y: 77.495834, z: 0}
+  savedPos: {x: 47.889286, y: 82.48854, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.53125, y: 0.2734375}
+  savedTextUV0: {x: 0.03125, y: 0.05859375}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2409,11 +2409,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -0.023956299, y: -249.99686, z: 0}
+  savedPos: {x: 7.110596, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.0625, y: 0}
+  savedTextUV0: {x: 0.7265625, y: 0}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -2544,7 +2544,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.6640625, y: 0.08203125}
+  savedTextUV0: {x: 0.3125, y: 0.30078125}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -2821,7 +2821,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0, y: 0.08984375}
+  savedTextUV0: {x: 0.7109375, y: 0.1640625}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -3190,7 +3190,6 @@ MonoBehaviour:
   - 20
   - 60
   - 100
-  test1Number: 0
   trainingTime: 5
   UIpanels:
   - {fileID: 792094305}
@@ -3204,6 +3203,7 @@ MonoBehaviour:
   participantId: 0
   ballDistance: 5
   gValue: 0.5
+  trainingNumber: 0
   StartPart: 0
 --- !u!1 &1886629318
 GameObject:
@@ -3258,7 +3258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -500, y: -249.99684, z: 0}
+  savedPos: {x: -424.60004, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 233.93274, y: 150}
   savedColor: {r: 0, g: 0, b: 0, a: 0.522}
@@ -3405,11 +3405,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -500, y: -249.99686, z: 0}
+  savedPos: {x: -424.60004, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.078125, y: 0.15234375}
+  savedTextUV0: {x: 0.40625, y: 0.33984375}
   savedFill: 0
 --- !u!114 &1979813211
 MonoBehaviour:
@@ -3508,7 +3508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -0.023956299, y: -249.99684, z: 0}
+  savedPos: {x: 7.110596, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 233.93274, y: 150}
   savedColor: {r: 0, g: 0, b: 0, a: 0.522}
@@ -3657,7 +3657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -500, y: -249.99684, z: 0}
+  savedPos: {x: -424.60004, y: -249.99684, z: 0}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 233.93274, y: 150}
   savedColor: {r: 0, g: 0, b: 0, a: 0.522}
@@ -3779,7 +3779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067271881}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -500, y: -70.00415, z: 0}
+  m_LocalPosition: {x: -424.6, y: -70.00415, z: 0}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_Children:
   - {fileID: 362491625}
