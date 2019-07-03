@@ -25,6 +25,7 @@ public class mainScript : MonoBehaviour
     private int appStage = 0;
 
     public GameObject[] UIpanels = new GameObject[4];
+    List<bool> testSuccessfull = new List<bool>();
 
     public float[] test1Times = new float[3];
     public float[] test1Speed = new float[3];
@@ -57,9 +58,6 @@ public class mainScript : MonoBehaviour
     {
 
         restartExperience();
-        // Vector3 position = GetComponent<Rigidbody>().position;
-     //   rb = GetComponent<Rigidbody>();
-        // var cameraRotation = GameObject.Find("CenterEyeAnchor").transform.rotation;
     }
 
     void restartExperience()
@@ -73,7 +71,13 @@ public class mainScript : MonoBehaviour
             UIpanels[i].GetComponent<CanvasGroup>().alpha = 0.0f;
             UIpanels[i].SetActive(false);
         }
+        UIpanels[0].SetActive(true);
+        UIpanels[0].GetComponent<CanvasGroup>().alpha = 1.0f;
+
+        Canvas.SetActive(true);
+
         participantTextfield.GetComponent<Text>().text = participantId.ToString();
+        mainObject.GetComponent<AudioSource>().mute = true;
     }
 
     // Update is called once per frame
@@ -84,24 +88,35 @@ public class mainScript : MonoBehaviour
             changeStage(STAGE_TEST1);
             StartPart = false;
         }
-        float deltaTime = Time.time - timeStart;
+        float deltaTime = Time.fixedTime - timeStart;
         switch (appStage)
         {
             case (STAGE_TEST1):
                 {
-                    Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number])) * ballDistance);
-                    mainObject.transform.position = startRotation;
-
-                    RaycastHit seen = new RaycastHit();
-                    Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
-                    mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
-                    if (Physics.Raycast(raydirection, out seen, 25.0f))
+                    if (deltaTime >= test1Times[0])
                     {
-                      
-                        if (seen.collider.tag == "matterObject")
+                        changeStage(STAGE_TEST2_SCREEN);
+                    }
+                    else
+                    {
+                        Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * test1Speed[test1Number])) * ballDistance);
+                        mainObject.transform.position = startRotation;
+
+                        RaycastHit seen = new RaycastHit();
+                        Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
+                        mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
+                        bool trying = false;
+                        if (Physics.Raycast(raydirection, out seen, 25.0f))
                         {
-                            mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
+
+                            if (seen.collider.tag == "matterObject")
+                            {
+                                mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
+                                trying = true;
+                            }
+
                         }
+                        testSuccessfull.Add(trying);
                     }
                     break;
                 }
@@ -109,7 +124,12 @@ public class mainScript : MonoBehaviour
             case (STAGE_TEST2):
                 {
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
-                    rotation.y = rotation.y * gValue;
+                    Vector3 startRotation = new Vector3(( Mathf.PI / 180f *  gValue * rotation.y) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue*rotation.y)) * ballDistance);
+
+
+                    mainObject.transform.position = startRotation;
+                //    Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
+                  //  rotation.y = rotation.y * gValue;
                   //  SoundGameObject.transform.position = new Vector3(ballDistance * , playerOrigin.y, ballDistance *);
 
 
@@ -171,15 +191,14 @@ public class mainScript : MonoBehaviour
         }
     }
 
-    public void killCanvas(object number)
+    public void finishScreenTransition(object number)
     {
-      /*  int ilonczyn = number as int;
+        appStage = (int)number;
+        Debug.Log(appStage);
         timeStart = Time.fixedTime;
-        if (ilonczyn == 0)
-        {
-            appStage = STAGE_TEST1;
-            UIpanels[0].SetActive(false);
-        }*/
+        playerOrigin = OculusCenterEyes.transform.position;
+        playerRotation = OculusCenterEyes.transform.eulerAngles;
+        Canvas.SetActive(false);
     }
 
     void changeStage(int whichStage)
@@ -189,19 +208,18 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TEST1):
                 {
-                    LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.5f);// setOnComplete(killCanvas).setOnCompleteParam(STAGE_TEST1);
-                    LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), .5f);
-                    UIpanels[0].SetActive(false);
-                    appStage = STAGE_TEST1;
-                    timeStart = Time.fixedTime;
-                    playerOrigin = OculusCenterEyes.transform.position;
-                    playerRotation = OculusCenterEyes.transform.eulerAngles;
-                    Canvas.SetActive(false);
+                    LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.7f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TEST1);
+                    LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), 1.0f);
                     break;
                 }
 
             case (STAGE_TEST2_SCREEN):
                 {
+                    appStage = STAGE_TEST2_SCREEN;
+                    Canvas.SetActive(true);
+                    UIpanels[0].SetActive(false);
+                    UIpanels[1].SetActive(true);
+                    LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
                     break;
                 }
@@ -209,7 +227,9 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TEST2):
                 {
-                    LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
+                    mainObject.GetComponent<AudioSource>().mute = false;
+                    LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
+                    LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TEST2);
                     break;
                 }
 
