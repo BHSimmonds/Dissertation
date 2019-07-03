@@ -7,14 +7,12 @@ using UnityEngine.UI;
 public class testInstance
 {
     public float gValue;
-    public bool anechoic;
     public bool floorReflection;
     public bool RightwallReflection;
-
     public bool leftWallReflection;
 
     // turn to private
-    public bool finished;
+    public bool[] finished = new bool[3] { false, false, false };
 }
 
 public class mainScript : MonoBehaviour
@@ -33,12 +31,15 @@ public class mainScript : MonoBehaviour
     const int STAGE_TEST_SCREEN = 2;
     const int STAGE_TEST = 3;
     const int STAGE_FINAL_SCREEN = 4;
- //   const int STAGE_TEST3 = 5;
-  //  const int STAGE_FINAL_SCREEN = 6;
+    //   const int STAGE_TEST3 = 5;
+    //  const int STAGE_FINAL_SCREEN = 6;
+
 
     private int appStage = 0;
 
+    public int testResult = 0;
 
+    public int testRange;
 
     List<bool> testSuccessfull = new List<bool>();
 
@@ -49,8 +50,14 @@ public class mainScript : MonoBehaviour
 
     public float trainingTime;
 
+
     private Vector3 playerOrigin;
     private Vector3 playerRotation;
+
+    public GameObject testID;
+    public GameObject floorReverb;
+    public GameObject LeftWallReverb;
+    public GameObject RightWallReverb;
 
     public GameObject[] UIpanels = new GameObject[4];
 
@@ -62,7 +69,7 @@ public class mainScript : MonoBehaviour
     public GameObject Canvas;
 
     public int participantId;
-
+    public int _AmountOfTests = 5;
     public float ballDistance;
 
     // to remove
@@ -71,6 +78,10 @@ public class mainScript : MonoBehaviour
     public bool StartPart;
 
     private float timeStart;
+
+    public bool audioTest;
+
+    public int chosenTest;
 
     // Start is called before the first frame update
     void Start()
@@ -89,9 +100,12 @@ public class mainScript : MonoBehaviour
     {
         int i;
         appStage = STAGE_TRAINING_SCREEN;
-        for(i=0;i<tests.Count; i++)
+        for(i=0;i<_AmountOfTests; i++)
         {
-            tests[i].finished = false;
+            tests[i].finished = new bool[3];
+            tests[i].finished[0] = false;
+            tests[i].finished[1] = false;
+            tests[i].finished[2] = false;
         }
         for(i=0;i<trainingFinished.Length; i++)
         {
@@ -116,12 +130,18 @@ public class mainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(audioTest)
+        {
+            changeStage(STAGE_TEST);
+            audioTest = false;
+        }
         if(StartPart==true)
         {
             changeStage(STAGE_TRAINING);
             StartPart = false;
         }
         float deltaTime = Time.fixedTime - timeStart;
+
         switch (appStage)
         {
             case (STAGE_TRAINING):
@@ -178,6 +198,47 @@ public class mainScript : MonoBehaviour
         }
 
     }
+
+
+    bool chooseRandomTest()
+    {
+        bool sortedOut = false;
+        bool outcome = true;
+        bool[] testingAllVariants = new bool[_AmountOfTests];
+        while(sortedOut==false)
+        {
+            int radom = Random.Range(0, testRange);
+            testingAllVariants[radom] = true;
+            if(tests[radom].finished[trainingNumber]==false)
+            {
+                chosenTest = radom;
+                sortedOut = true;
+            }
+            int i;
+            outcome = true;
+            for (i=0;i<_AmountOfTests; i++)
+            {
+                if(tests[i].finished[trainingNumber]==false)
+                {
+                    outcome = false;
+                }
+            }
+            if(outcome)
+            {
+                sortedOut = true;
+            }
+        }
+        if(outcome)
+        {
+            return (true);
+        }
+        floorReverb.SetActive(tests[chosenTest].floorReflection);
+        LeftWallReverb.SetActive(tests[chosenTest].leftWallReflection);
+        RightWallReverb.SetActive(tests[chosenTest].RightwallReflection);
+        gValue = tests[chosenTest].gValue;
+        return (false);
+    }
+
 
 
     void FixedUpdate()
@@ -240,12 +301,6 @@ public class mainScript : MonoBehaviour
         Canvas.SetActive(false);
     }
 
-
-    int  chooseRandomTest()
-    {
-        return (0);
-    }
-
     void changeStage(int whichStage)
     {
         switch (whichStage)
@@ -266,6 +321,7 @@ public class mainScript : MonoBehaviour
                     UIpanels[1].SetActive(true);
                     LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
+                    chooseRandomTest();
                     break;
                 }
 
@@ -274,7 +330,11 @@ public class mainScript : MonoBehaviour
                 {
                     mainObject.GetComponent<AudioSource>().mute = false;
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
-                    LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TEST);
+                    LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
+                    playerOrigin = OculusCenterEyes.transform.position;
+                    playerRotation = OculusCenterEyes.transform.eulerAngles;
+                    LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, .5f);
+                    appStage = STAGE_TEST;
                     break;
                 }
 
