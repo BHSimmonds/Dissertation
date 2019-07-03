@@ -167,7 +167,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.15625, y: 0.21484375}
+  savedTextUV0: {x: 0, y: 0.05859375}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -352,7 +352,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &194223339
 MonoBehaviour:
@@ -432,7 +432,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.40625, y: 0.33984375}
+  savedTextUV0: {x: 0.2890625, y: 0.34765625}
   savedFill: 0
 --- !u!114 &282318818
 MonoBehaviour:
@@ -533,7 +533,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3125, y: 0.30078125}
+  savedTextUV0: {x: 0.58203125, y: 0}
   savedFill: 0
 --- !u!114 &362491627
 MonoBehaviour:
@@ -632,7 +632,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.7265625, y: 0}
+  savedTextUV0: {x: 0.70703125, y: 0}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -786,7 +786,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.25}
+  savedTextUV0: {x: 0.57421875, y: 0.26953125}
   savedFill: 0
 --- !u!114 &406628752
 MonoBehaviour:
@@ -886,7 +886,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.26171875, y: 0}
+  savedTextUV0: {x: 0.21484375, y: 0.109375}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1894,6 +1894,7 @@ GameObject:
   - component: {fileID: 986118185}
   - component: {fileID: 986118184}
   - component: {fileID: 986118188}
+  - component: {fileID: 986118189}
   m_Layer: 0
   m_Name: mainSphere
   m_TagString: matterObject
@@ -1971,7 +1972,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &986118188
 AudioSource:
@@ -1989,18 +1990,18 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
-  Spatialize: 0
-  SpatializePostEffects: 0
+  Mute: 0
+  Spatialize: 1
+  SpatializePostEffects: 1
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
-  BypassListenerEffects: 1
-  BypassReverbZones: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2030,7 +2031,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2039,7 +2040,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2054,7 +2055,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2069,98 +2070,30 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!1 &1086482384
-GameObject:
+    m_RotationOrder: 0
+--- !u!114 &986118189
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1086482388}
-  - component: {fileID: 1086482387}
-  - component: {fileID: 1086482386}
-  - component: {fileID: 1086482385}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!65 &1086482385
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086482384}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 986118183}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1086482386
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086482384}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1086482387
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086482384}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1086482388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086482384}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.010827199, y: -0.44533005, z: 2.7}
-  m_LocalScale: {x: 10, y: 10, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5e1719799ca4f9b9f5db81449517ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bypassRoomEffects: 0
+  directivityAlpha: 0
+  directivitySharpness: 1
+  listenerDirectivityAlpha: 0
+  listenerDirectivitySharpness: 1
+  gainDb: 0
+  nearFieldEffectEnabled: 0
+  nearFieldEffectGain: 1
+  occlusionEnabled: 0
+  occlusionIntensity: 1
+  quality: 2
 --- !u!1 &1110392616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,7 +2149,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.03125, y: 0.05859375}
+  savedTextUV0: {x: 0.703125, y: 0.296875}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2413,7 +2346,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.7265625, y: 0}
+  savedTextUV0: {x: 0.70703125, y: 0}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -2544,7 +2477,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3125, y: 0.30078125}
+  savedTextUV0: {x: 0.58203125, y: 0}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -2821,7 +2754,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.7109375, y: 0.1640625}
+  savedTextUV0: {x: 0.78515625, y: 0.28515625}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -2902,6 +2835,60 @@ Transform:
   - {fileID: 1110392617}
   m_Father: {fileID: 792094306}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1808706276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808706278}
+  - component: {fileID: 1808706277}
+  m_Layer: 0
+  m_Name: virtualRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1808706277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808706276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7929fa5e730414cb1f18134aef71c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftWall: 4
+  rightWall: 4
+  floor: 14
+  ceiling: 15
+  backWall: 4
+  frontWall: 4
+  reflectivity: 1
+  reverbGainDb: 0
+  reverbBrightness: 0
+  reverbTime: 1
+  size: {x: 1, y: 1, z: 1}
+--- !u!4 &1808706278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808706276}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1859688528
 GameObject:
@@ -3097,91 +3084,109 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tests:
   - gValue: -0.5
+    anechoic: 0
     floorReflection: 0
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: -0.25
+    anechoic: 0
     floorReflection: 0
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0
+    anechoic: 0
     floorReflection: 0
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0.25
+    anechoic: 0
     floorReflection: 0
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0.5
+    anechoic: 0
     floorReflection: 0
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0.75
+    anechoic: 0
     floorReflection: 0
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: -0.5
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: -0.25
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0.25
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0.5
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: 0.75
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 0
     leftWallReflection: 0
     finished: 0
   - gValue: -0.5
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 1
     leftWallReflection: 0
     finished: 0
   - gValue: -0.25
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 1
     leftWallReflection: 0
     finished: 0
   - gValue: 0
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 1
     leftWallReflection: 0
     finished: 0
   - gValue: 0.25
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 1
     leftWallReflection: 0
     finished: 0
   - gValue: 0.5
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 1
     leftWallReflection: 0
     finished: 0
   - gValue: 0.75
+    anechoic: 0
     floorReflection: 1
     RightwallReflection: 1
     leftWallReflection: 0
@@ -3409,7 +3414,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.40625, y: 0.33984375}
+  savedTextUV0: {x: 0.2890625, y: 0.34765625}
   savedFill: 0
 --- !u!114 &1979813211
 MonoBehaviour:
