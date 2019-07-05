@@ -562,7 +562,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5625, y: 0.33984375}
+  savedTextUV0: {x: 0.11328125, y: 0.19140625}
   savedFill: 0
 --- !u!114 &362491627
 MonoBehaviour:
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.578125, y: 0.109375}
+  savedTextUV0: {x: 0.234375, y: 0.35546875}
   savedFill: 0
 --- !u!114 &845393154
 MonoBehaviour:
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.578125, y: 0.109375}
+  savedTextUV0: {x: 0.234375, y: 0.35546875}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2956,7 +2956,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.1640625}
+  savedTextUV0: {x: 0, y: 0.171875}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -3512,7 +3512,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.08203125}
+  savedTextUV0: {x: 0, y: 0.08984375}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -3703,7 +3703,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.1640625}
+  savedTextUV0: {x: 0, y: 0.171875}
   savedFill: 0
 --- !u!114 &1835400575
 MonoBehaviour:
@@ -3944,38 +3944,38 @@ MonoBehaviour:
   testResult: 0
   tests:
   - gValue: -0.5
-    floorReflection: 0
-    RightwallReflection: 0
+    floorReflection: 1
+    RightwallReflection: 1
     leftWallReflection: 0
     finished: 
     results: 000000
   - gValue: -0.25
-    floorReflection: 0
-    RightwallReflection: 0
+    floorReflection: 1
+    RightwallReflection: 1
     leftWallReflection: 0
     finished: 
     results: 000000
   - gValue: 0
-    floorReflection: 0
-    RightwallReflection: 0
+    floorReflection: 1
+    RightwallReflection: 1
     leftWallReflection: 0
     finished: 
     results: 000000
   - gValue: 0.25
-    floorReflection: 0
-    RightwallReflection: 0
+    floorReflection: 1
+    RightwallReflection: 1
     leftWallReflection: 0
     finished: 
     results: 000000
   - gValue: 0.5
-    floorReflection: 0
-    RightwallReflection: 0
+    floorReflection: 1
+    RightwallReflection: 1
     leftWallReflection: 0
     finished: 
     results: 000000
   - gValue: 0.75
-    floorReflection: 0
-    RightwallReflection: 0
+    floorReflection: 1
+    RightwallReflection: 1
     leftWallReflection: 0
     finished: 
     results: 000000
@@ -4338,7 +4338,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.08203125}
+  savedTextUV0: {x: 0, y: 0.08984375}
   savedFill: 0
 --- !u!114 &2074610849
 MonoBehaviour:

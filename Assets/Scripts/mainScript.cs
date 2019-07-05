@@ -9,17 +9,31 @@ using System;
 public class testInstance
 {
     public float gValue;
-    public bool floorReflection;
-    public bool RightwallReflection;
-    public bool leftWallReflection;
+    public uint reflections; // bitwise boolean value = refFloor, refRWall, refLWall
+    //public bool[] reflections = new bool[3];
+   // public bool floorReflection;
+   // public bool RightwallReflection;
+   // public bool leftWallReflection;
+    public bool finished;
+    public bool result;
+
+    public List<float> headRotation;
+    public List<float> timestamp;
 
     // turn to private
-    public bool[] finished = new bool[3] { false, false, false };
-    public bool[] results = new bool[3] { false, false, false };
+ //   public bool[] finished = new bool[3] { false, false, false };
+  //  public bool[] results = new bool[3] { false, false, false };
 }
 
 public class mainScript : MonoBehaviour
 {
+
+    const int _RefFloor = 0;
+    const int _RefRWall = 1;
+    const int _refLWall = 2;
+
+    const int _amountG = 6;
+    const int _amountOf = 8;
 
     const int BUTTON_START_TRAINING = 0;
     const int BUTTON_START_TEST = 1;
@@ -44,7 +58,7 @@ public class mainScript : MonoBehaviour
 
     List<bool> testSuccessfull = new List<bool>();
 
-    public List<testInstance> tests = new List<testInstance>();
+    public testInstance[,] tests = new testInstance[3,_amountG*_amountOf];
     
     public float[] trainingSpeed = new float[3];
     private bool[] trainingFinished = new bool[3];
@@ -62,6 +76,8 @@ public class mainScript : MonoBehaviour
     public GameObject RightWallReverb;
 
     public GameObject[] UIpanels = new GameObject[4];
+
+    private float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
 
     public GameObject mainObject;
 
@@ -98,6 +114,31 @@ public class mainScript : MonoBehaviour
         {
 
         }
+
+        int i;
+        int j;
+        uint m;
+        for(j=0; j<3; j++)
+        {
+            int k;
+            i = 0;
+            k = 0;
+            for (k = 0; k < _amountG; k++)
+            {
+                for (m = 0; m < _amountOf; m++)
+                {
+                    tests[j, i] = new testInstance();
+                    tests[j, i].gValue = gValues[k];
+                    tests[j, i].reflections = m;
+                    tests[j, i].finished = false;
+                    tests[j, i].result = false;
+                    i++;
+                }
+                
+            }
+
+        }
+
         newSession();
     }
 
@@ -111,16 +152,14 @@ public class mainScript : MonoBehaviour
     {
         trainingNumber = 0;
         int i;
-        for(i=0;i<_AmountOfTests; i++)
+        int j;
+        for (j = 0; j < 3; j++)
         {
-            tests[i].finished = new bool[3];
-            tests[i].finished[0] = false;
-            tests[i].finished[1] = false;
-            tests[i].finished[2] = false;
-            tests[i].results = new bool[3];
-            tests[i].results[0] = false;
-            tests[i].results[1] = false;
-            tests[i].results[2] = false;
+            for (i = 0; i < _amountG * _amountOf; i++)
+            {
+                tests[j, i].finished = false;
+                tests[j, i].result = false;
+            }
         }
         for(i=0;i<trainingFinished.Length; i++)
         {
@@ -184,19 +223,8 @@ public class mainScript : MonoBehaviour
             case (STAGE_TEST):
                 {
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
-                 /*   if(rotation.y>180)
-                    {
-                        rotation.y = 180 - rotation.y;
-                    }*/
-                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
-                    Debug.Log(rotation + ":" + gValue);
-                   
-                  /*  if((rotation.y>180)||(rotation.y<0))
-                    {
-                     //   Debug.Log("rotation is negative - flip the x coordinate");
-                        startRotation.x = startRotation.x * -1;
-                    }*/
 
+                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
                     mainObject.transform.position = startRotation;
            
 
@@ -218,7 +246,7 @@ public class mainScript : MonoBehaviour
         {
             int radom = UnityEngine.Random.Range(0, _AmountOfTests);
             testingAllVariants[radom] = true;
-            if(tests[radom].finished[trainingNumber]==false)
+            if(tests[trainingNumber,radom].finished==false)
             {
                 chosenTest = radom;
                 sortedOut = true;
@@ -227,7 +255,7 @@ public class mainScript : MonoBehaviour
             outcome = true;
             for (i=0;i<_AmountOfTests; i++)
             {
-                if(tests[i].finished[trainingNumber]==false)
+                if(tests[trainingNumber,i].finished==false)
                 {
                     outcome = false;
                 }
@@ -242,10 +270,14 @@ public class mainScript : MonoBehaviour
             return (true);
         }
         testID.GetComponent<Text>().text = chosenTest + "/" + trainingNumber;
-        floorReverb.SetActive(tests[chosenTest].floorReflection);
-        LeftWallReverb.SetActive(tests[chosenTest].leftWallReflection);
-        RightWallReverb.SetActive(tests[chosenTest].RightwallReflection);
-        gValue = tests[chosenTest].gValue;
+        //   tests[trainingNumber, chosenTest].reflections
+       
+        Debug.Log(tests[trainingNumber, chosenTest].reflections & 0x1);
+       
+        floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1); 
+        LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
+        RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
+        gValue = tests[trainingNumber, chosenTest].gValue;
         return (false);
     }
 
@@ -304,16 +336,16 @@ public class mainScript : MonoBehaviour
 
             case (BUTTON_TEST_YES):
                 {
-                    tests[chosenTest].results[trainingNumber] = true;
-                    tests[chosenTest].finished[trainingNumber] = true;
+                   // tests[chosenTest].results[trainingNumber] = true;
+                   // tests[chosenTest].finished[trainingNumber] = true;
                     acknowledgeTests(true);
                     break;
                 }
 
             case (BUTTON_TEST_NO):
                 {
-                    tests[chosenTest].results[trainingNumber] = false;
-                    tests[chosenTest].finished[trainingNumber] = true;
+                    //tests[chosenTest].results[trainingNumber] = false;
+                    //tests[chosenTest].finished[trainingNumber] = true;
                     acknowledgeTests(false);
                     break;
                 }
@@ -327,25 +359,27 @@ public class mainScript : MonoBehaviour
                     int i;
                     int j;
                     for (j = 0; j < 3; j++) {
-                        for (i = 0; i < _AmountOfTests; i++)
+                        for (i = 0; i < _amountG*_amountOf; i++)
                         {
+                            
                             builder.Append("\"");
                             builder.Append(participantId);
                             builder.Append("\",\"");
                             builder.Append(trainingSpeed[j]);
                             builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32(tests[i].floorReflection));
+                            builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x01) == 1));
                             builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32(tests[i].RightwallReflection));
+                            builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x02) == 2));
                             builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32(tests[i].leftWallReflection));
+                            builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x04) == 4));
                             builder.Append("\",\"");
-                            builder.Append(tests[i].gValue);
+                            builder.Append(tests[j,i].gValue);
                             builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32(tests[i].results[j]));
+                            builder.Append(Convert.ToInt32(tests[j,i].result));
                             builder.Append("\"");
                             builder.Append("\r\n");
-                        }
+                        
+    }
                     }
                     //   FileUtil.
                     System.IO.File.AppendAllText("data" + participantId + ".csv", builder.ToString());
