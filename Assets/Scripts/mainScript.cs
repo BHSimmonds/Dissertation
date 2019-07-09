@@ -51,10 +51,7 @@ public class mainScript : MonoBehaviour
     //   const int STAGE_TEST3 = 5;
     //  const int STAGE_FINAL_SCREEN = 6;
 
-
     private int appStage = 0;
-
-    public int testResult = 0;
 
     List<bool> testSuccessfull = new List<bool>();
 
@@ -63,27 +60,33 @@ public class mainScript : MonoBehaviour
     public float[] trainingSpeed = new float[3];
     private bool[] trainingFinished = new bool[3];
 
-    public float trainingTime;
+ //   public float trainingTime;
 
     private Vector3 playerOrigin;
     private Vector3 playerRotation;
-
+    [HideInInspector]
     public GameObject yesButton;
+    [HideInInspector]
     public GameObject noButton;
+    [HideInInspector]
     public GameObject testID;
+    [HideInInspector]
     public GameObject floorReverb;
     public GameObject LeftWallReverb;
     public GameObject RightWallReverb;
-
+    [HideInInspector]
+    public GameObject worldAnchor;
+    [HideInInspector]
     public GameObject[] UIpanels = new GameObject[4];
 
     private float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
-
+    [HideInInspector]
     public GameObject mainObject;
-
+    [HideInInspector]
     public GameObject OculusCenterEyes;
+    [HideInInspector]
     public GameObject participantTextfield;
-
+    [HideInInspector]
     public GameObject Canvas;
 
     private int participantId;
@@ -106,6 +109,7 @@ public class mainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //worldAnchor.transform = OculusCenterEyes.transform;
         if(debugObjects==false)
         {
             floorReverb.GetComponent<MeshRenderer>().enabled = false;
@@ -200,6 +204,14 @@ public class mainScript : MonoBehaviour
 
         switch (appStage)
         {
+            case (STAGE_TRAINING_SCREEN):
+                {
+                    Vector3 murcki = worldAnchor.transform.position;
+                    murcki.x = OculusCenterEyes.transform.position.x;
+                    murcki.z = OculusCenterEyes.transform.position.z;
+                    worldAnchor.transform.position = murcki;
+                    break;
+                }
             case (STAGE_TRAINING):
                 {
 
@@ -243,14 +255,15 @@ public class mainScript : MonoBehaviour
                
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
-                  Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
-                  mainObject.transform.position = startRotation;
-
-
-                  if(rotation.y>180)
+                   
+                    if (rotation.y > 180)
                     {
-                        rotation.y = rotation.y-360;
+                        rotation.y = rotation.y - 360;
                     }
+
+                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
+                    mainObject.transform.position = startRotation;
+
                     tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
                     tests[trainingNumber, chosenTest].headRotation.Add(rotation.y);
 
@@ -300,24 +313,14 @@ public class mainScript : MonoBehaviour
         testID.GetComponent<Text>().text = chosenTest + "/" + trainingNumber;
         //   tests[trainingNumber, chosenTest].reflections
 
-        Debug.Log("chosen:"+trainingNumber + ":" + chosenTest+":"+_AmountOfTests );// tests[trainingNumber, chosenTest].reflections & 0x1);
+        Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
        
         floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1); 
         LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
         RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
         gValue = tests[trainingNumber, chosenTest].gValue;
+        Debug.Log("G Value: " + gValue + ":Floor:" + floorReverb.active + ":LeftWall:" + LeftWallReverb.active + ":RightWall:" + RightWallReverb.active);
         return (false);
-    }
-
-
-
-    void FixedUpdate()
-    {
-        if (appStage == STAGE_TRAINING)
-        {
-            
-        }
-
     }
 
     public void acknowledgeTests(bool valjusz)
@@ -463,7 +466,6 @@ public class mainScript : MonoBehaviour
                     UIpanels[0].GetComponent<CanvasGroup>().alpha = 1.0f;
 
                     Canvas.SetActive(true);
-
                     participantTextfield.GetComponent<Text>().text = participantId.ToString();
                     mainObject.GetComponent<AudioSource>().mute = true;
                     appStage = STAGE_TRAINING_SCREEN;
@@ -501,6 +503,7 @@ public class mainScript : MonoBehaviour
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     playerOrigin = OculusCenterEyes.transform.position;
                     playerRotation = OculusCenterEyes.transform.eulerAngles;
+                    UIpanels[0].SetActive(false);
                     UIpanels[2].SetActive(true);
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, .5f);
                     if (debugObjects == false)
