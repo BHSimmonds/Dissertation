@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2b0f2e7fc23e46c78f6dc1a54c32708, type: 3}
-  m_Name: LeftWall
+  m_Name: acoustic
   m_EditorClassIdentifier: 
   surfaceMaterialFromGuid:
     guids:
-    - 845714f6f6090ad44851dc765dec500d
-    - 0000000000000000f000000000000000
     - f9da22ae34fa249c9b5d876eaa40a3a2
+    - 0000000000000000f000000000000000
     - f2c557482b42f1c4a8a6194fecec5080
-    surfaceMaterials: 0000000000000000000000000c000000
+    - 8c109a1acfdc7b04293d1cc71410e62c
+    - 5290b34c1f8339a4dabf2b5899701503
+    - 845714f6f6090ad44851dc765dec500d
+    surfaceMaterials: 000000000000000013000000130000001300000000000000

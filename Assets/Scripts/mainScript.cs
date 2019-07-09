@@ -58,6 +58,7 @@ public class mainScript : MonoBehaviour
     public testInstance[,] tests = new testInstance[3,_amountG*_amountOf];
     
     public float[] trainingSpeed = new float[3];
+    public float[] trainingTime = new float[3];
     private bool[] trainingFinished = new bool[3];
 
  //   public float trainingTime;
@@ -70,7 +71,6 @@ public class mainScript : MonoBehaviour
     public GameObject noButton;
     [HideInInspector]
     public GameObject testID;
-    [HideInInspector]
     public GameObject floorReverb;
     public GameObject LeftWallReverb;
     public GameObject RightWallReverb;
@@ -224,8 +224,8 @@ public class mainScript : MonoBehaviour
                     }
 
 
-                     if(alpha<=-180)
-                        {
+                     if(trainingTime[trainingNumber]>deltaTime) {
+                        
                             trainingFinished[trainingNumber] = true;
                             changeStage(STAGE_TEST_SCREEN);
                         }

@@ -167,7 +167,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0, y: 0.05859375}
+  savedTextUV0: {x: 0.109375, y: 0.3828125}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -273,52 +273,13 @@ GameObject:
   - component: {fileID: 179281075}
   - component: {fileID: 179281074}
   - component: {fileID: 179281073}
-  - component: {fileID: 179281072}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FloorReverb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &179281072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179281071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rt60s:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  reverbGainDb: 0
-  reverbBrightness: 0
-  reverbTime: 1
-  regionShape: 1
-  boxRegionSize: {x: 1, y: 1, z: 1}
-  sphereRegionRadius: 1
-  onlyApplyWhenVisible: 1
-  proxyRoomPosition: {x: 0, y: 0, z: 0}
-  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
-  proxyRoomSize: {x: 0, y: 0, z: 0}
-  proxyRoomLeftWall: 0
-  proxyRoomRightWall: 0
-  proxyRoomFloor: 0
-  proxyRoomCeiling: 0
-  proxyRoomBackWall: 0
-  proxyRoomFrontWall: 0
 --- !u!65 &179281073
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -349,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f2c557482b42f1c4a8a6194fecec5080, type: 2}
+  - {fileID: 2100000, guid: 5290b34c1f8339a4dabf2b5899701503, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -385,11 +346,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179281071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 8, y: 0.25, z: 5}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 0.0625, z: 1.25}
   m_Children: []
-  m_Father: {fileID: 1501405077}
-  m_RootOrder: 5
+  m_Father: {fileID: 1055957454}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &194223334
 GameObject:
@@ -482,7 +443,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 1501405077}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &194223339
 MonoBehaviour:
@@ -661,7 +622,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3671875, y: 0.35546875}
+  savedTextUV0: {x: 0.1015625, y: 0.296875}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -918,7 +879,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.21484375, y: 0.109375}
+  savedTextUV0: {x: 0.26171875, y: 0}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1102,7 +1063,7 @@ MonoBehaviour:
   stereoSpeakerModeEnabled: 0
   recorderSeamless: 0
   recorderSourceTag: Untagged
-  recorderFoldout: 0
+  recorderFoldout: 1
 --- !u!1 &461435258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,75 +1524,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652294458}
   m_CullTransparentMesh: 0
---- !u!1 &680069121
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 680069123}
-  - component: {fileID: 680069122}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &680069122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680069121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rt60s:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  reverbGainDb: 0
-  reverbBrightness: 0
-  reverbTime: 1
-  regionShape: 1
-  boxRegionSize: {x: 1, y: 1, z: 1}
-  sphereRegionRadius: 1
-  onlyApplyWhenVisible: 1
-  proxyRoomPosition: {x: 0, y: 0, z: 0}
-  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
-  proxyRoomSize: {x: 1, y: 1, z: 1}
-  proxyRoomLeftWall: 0
-  proxyRoomRightWall: 0
-  proxyRoomFloor: 0
-  proxyRoomCeiling: 0
-  proxyRoomBackWall: 0
-  proxyRoomFrontWall: 0
---- !u!4 &680069123
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680069121}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.019055763, y: 2.0832512, z: 2.2636473}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1501405077}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &682061685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1895,52 +1787,13 @@ GameObject:
   - component: {fileID: 819249043}
   - component: {fileID: 819249042}
   - component: {fileID: 819249041}
-  - component: {fileID: 819249040}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &819249040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819249039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rt60s:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  reverbGainDb: 0
-  reverbBrightness: 0
-  reverbTime: 1
-  regionShape: 1
-  boxRegionSize: {x: 1, y: 1, z: 1}
-  sphereRegionRadius: 1
-  onlyApplyWhenVisible: 1
-  proxyRoomPosition: {x: 0, y: 0, z: 0}
-  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
-  proxyRoomSize: {x: 0, y: 0, z: 0}
-  proxyRoomLeftWall: 0
-  proxyRoomRightWall: 0
-  proxyRoomFloor: 0
-  proxyRoomCeiling: 0
-  proxyRoomBackWall: 0
-  proxyRoomFrontWall: 0
 --- !u!65 &819249041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1971,7 +1824,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f2c557482b42f1c4a8a6194fecec5080, type: 2}
+  - {fileID: 2100000, guid: 8c109a1acfdc7b04293d1cc71410e62c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2007,11 +1860,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819249039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9, y: 1.1, z: 0}
-  m_LocalScale: {x: 0.25, y: 4, z: 5}
+  m_LocalPosition: {x: 0.475, y: 0.025000006, z: 0}
+  m_LocalScale: {x: 0.03125, y: 1, z: 1.25}
   m_Children: []
-  m_Father: {fileID: 1501405077}
-  m_RootOrder: 4
+  m_Father: {fileID: 1826539014}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &826184418
 GameObject:
@@ -2573,6 +2426,76 @@ MonoBehaviour:
   occlusionEnabled: 0
   occlusionIntensity: 1
   quality: 2
+--- !u!1 &1055957453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1055957454}
+  - component: {fileID: 1055957455}
+  m_Layer: 0
+  m_Name: reverbFloor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1055957454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055957453}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 8, y: 4, z: 4}
+  m_Children:
+  - {fileID: 179281076}
+  m_Father: {fileID: 1501405077}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1055957455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055957453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rt60s:
+  - 0.038875222
+  - 0.03887622
+  - 0.038877398
+  - 0.03887649
+  - 0.038876504
+  - 0.03887646
+  - 0.038875487
+  - 0.03887649
+  - 0.038877163
+  reverbGainDb: 5
+  reverbBrightness: 0
+  reverbTime: 1
+  regionShape: 1
+  boxRegionSize: {x: 1, y: 1, z: 1}
+  sphereRegionRadius: 1
+  onlyApplyWhenVisible: 1
+  proxyRoomPosition: {x: -0.007545875, y: -0.87499994, z: 0.0023624108}
+  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
+  proxyRoomSize: {x: 3.9897645, y: 3.9897645, z: 3.9897645}
+  proxyRoomLeftWall: 4
+  proxyRoomRightWall: 4
+  proxyRoomFloor: 19
+  proxyRoomCeiling: 0
+  proxyRoomBackWall: 1
+  proxyRoomFrontWall: 1
 --- !u!1 &1110392616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,7 +2551,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.6015625, y: 0.05078125}
+  savedTextUV0: {x: 0.03125, y: 0.05859375}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -3067,7 +2990,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1501405077}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1461735356
 GameObject:
@@ -3081,52 +3004,13 @@ GameObject:
   - component: {fileID: 1461735360}
   - component: {fileID: 1461735359}
   - component: {fileID: 1461735358}
-  - component: {fileID: 1461735357}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1461735357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461735356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rt60s:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  reverbGainDb: 0
-  reverbBrightness: 0
-  reverbTime: 1
-  regionShape: 1
-  boxRegionSize: {x: 1, y: 1, z: 1}
-  sphereRegionRadius: 1
-  onlyApplyWhenVisible: 1
-  proxyRoomPosition: {x: 0, y: 0, z: 0}
-  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
-  proxyRoomSize: {x: 0, y: 0, z: 0}
-  proxyRoomLeftWall: 0
-  proxyRoomRightWall: 0
-  proxyRoomFloor: 0
-  proxyRoomCeiling: 0
-  proxyRoomBackWall: 0
-  proxyRoomFrontWall: 0
 --- !u!65 &1461735358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3193,11 +3077,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461735356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.9, y: 1.1, z: 0}
-  m_LocalScale: {x: 0.25, y: 4, z: 5}
+  m_LocalPosition: {x: -0.475, y: 0.025000006, z: 0}
+  m_LocalScale: {x: 0.03125, y: 1, z: 1.25}
   m_Children: []
-  m_Father: {fileID: 1501405077}
-  m_RootOrder: 3
+  m_Father: {fileID: 1808706278}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1501405076
 GameObject:
@@ -3228,12 +3112,10 @@ Transform:
   m_Children:
   - {fileID: 986118187}
   - {fileID: 1808706278}
+  - {fileID: 1826539014}
+  - {fileID: 1055957454}
   - {fileID: 1508536648}
-  - {fileID: 1461735361}
-  - {fileID: 819249044}
-  - {fileID: 179281076}
   - {fileID: 194223338}
-  - {fileID: 680069123}
   - {fileID: 1394278485}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -3340,7 +3222,7 @@ RectTransform:
   - {fileID: 381295015}
   - {fileID: 2067271882}
   m_Father: {fileID: 1501405077}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3644,7 +3526,7 @@ GameObject:
   - component: {fileID: 1808706278}
   - component: {fileID: 1808706277}
   m_Layer: 0
-  m_Name: virtualRoom
+  m_Name: reverbLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3659,20 +3541,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1808706276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b7929fa5e730414cb1f18134aef71c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftWall: 4
-  rightWall: 4
-  floor: 14
-  ceiling: 15
-  backWall: 4
-  frontWall: 4
-  reflectivity: 1
-  reverbGainDb: 0
+  rt60s:
+  - 0.02003565
+  - 0.020039575
+  - 0.020037644
+  - 0.020036014
+  - 0.020035952
+  - 0.020035952
+  - 0.020036014
+  - 0.020036014
+  - 0.020036014
+  reverbGainDb: 5
   reverbBrightness: 0
   reverbTime: 1
-  size: {x: 1, y: 1, z: 1}
+  regionShape: 1
+  boxRegionSize: {x: 1, y: 1, z: 1}
+  sphereRegionRadius: 1
+  onlyApplyWhenVisible: 1
+  proxyRoomPosition: {x: -3.6748767, y: 1.070877, z: -0.001965436}
+  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
+  proxyRoomSize: {x: 7.3497534, y: 7.3497534, z: 7.3497534}
+  proxyRoomLeftWall: 19
+  proxyRoomRightWall: 0
+  proxyRoomFloor: 0
+  proxyRoomCeiling: 0
+  proxyRoomBackWall: 0
+  proxyRoomFrontWall: 0
 --- !u!4 &1808706278
 Transform:
   m_ObjectHideFlags: 0
@@ -3683,10 +3580,81 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 8, y: 4, z: 4}
-  m_Children: []
+  m_Children:
+  - {fileID: 1461735361}
   m_Father: {fileID: 1501405077}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1826539013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1826539014}
+  - component: {fileID: 1826539015}
+  m_Layer: 0
+  m_Name: reverbRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1826539014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826539013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 8, y: 4, z: 4}
+  m_Children:
+  - {fileID: 819249044}
+  m_Father: {fileID: 1501405077}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1826539015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826539013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97139fbde32144241958106d7df4b4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rt60s:
+  - 0.01839428
+  - 0.01839428
+  - 0.01839428
+  - 0.01839428
+  - 0.01839428
+  - 0.01839428
+  - 0.018394388
+  - 0.018394388
+  - 0.01839428
+  reverbGainDb: 5
+  reverbBrightness: 0
+  reverbTime: 1
+  regionShape: 1
+  boxRegionSize: {x: 1, y: 1, z: 1}
+  sphereRegionRadius: 1
+  onlyApplyWhenVisible: 1
+  proxyRoomPosition: {x: 3.6748767, y: 1.092595, z: -0.019113053}
+  proxyRoomRotation: {x: 0, y: 0, z: 0, w: 1}
+  proxyRoomSize: {x: 7.3497534, y: 7.3497534, z: 7.3497534}
+  proxyRoomLeftWall: 0
+  proxyRoomRightWall: 0
+  proxyRoomFloor: 0
+  proxyRoomCeiling: 0
+  proxyRoomBackWall: 0
+  proxyRoomFrontWall: 0
 --- !u!1 &1835400572
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,12 +3952,16 @@ MonoBehaviour:
   - 20
   - 60
   - 100
+  trainingTime:
+  - 5
+  - 5
+  - 5
   yesButton: {fileID: 652294458}
   noButton: {fileID: 1859688528}
   testID: {fileID: 1835400572}
-  floorReverb: {fileID: 179281071}
-  LeftWallReverb: {fileID: 1461735356}
-  RightWallReverb: {fileID: 819249039}
+  floorReverb: {fileID: 1055957453}
+  LeftWallReverb: {fileID: 1808706276}
+  RightWallReverb: {fileID: 1826539013}
   worldAnchor: {fileID: 1501405076}
   UIpanels:
   - {fileID: 792094305}
