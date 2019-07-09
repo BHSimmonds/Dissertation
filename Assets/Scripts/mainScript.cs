@@ -74,6 +74,10 @@ public class mainScript : MonoBehaviour
     public GameObject floorReverb;
     public GameObject LeftWallReverb;
     public GameObject RightWallReverb;
+
+    public GameObject objectFloor;
+    public GameObject objectLeftWall;
+    public GameObject objectRightWall;
     [HideInInspector]
     public GameObject worldAnchor;
     [HideInInspector]
@@ -112,11 +116,16 @@ public class mainScript : MonoBehaviour
         //worldAnchor.transform = OculusCenterEyes.transform;
         if(debugObjects==false)
         {
-            floorReverb.GetComponent<MeshRenderer>().enabled = false;
-            LeftWallReverb.GetComponent<MeshRenderer>().enabled = false;
-            RightWallReverb.GetComponent<MeshRenderer>().enabled = false;
+            objectFloor.SetActive(false);
+            objectLeftWall.SetActive(false);
+            objectRightWall.SetActive(false);
+           
         }
-        _AmountOfTests = 5;
+        if(_AmountOfTests==0)
+        {
+            _AmountOfTests = _amountG * _amountOf;
+        }
+        Debug.Log("AMOUNT: "+_AmountOfTests);
         mainObject.GetComponent<AudioSource>().Play();
         try
         {
@@ -280,12 +289,19 @@ public class mainScript : MonoBehaviour
         bool sortedOut = false;
         bool outcome = true;
         bool[] testingAllVariants = new bool[_AmountOfTests];
+
+        Debug.Log(testingAllVariants.Length);
+
         //     Random.state = Time.time;
 
         timeStart = Time.fixedTime;
         while (sortedOut==false)
         {
             int radom = UnityEngine.Random.Range(0, _AmountOfTests);
+            if(radom==_AmountOfTests)
+            {
+                radom--;
+            }
             testingAllVariants[radom] = true;
             if(tests[trainingNumber,radom].finished==false)
             {
@@ -316,8 +332,11 @@ public class mainScript : MonoBehaviour
         Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
        
         floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1); 
+        objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1);
         LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
+        objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
         RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
+        objectRightWall.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
         gValue = tests[trainingNumber, chosenTest].gValue;
         Debug.Log("G Value: " + gValue + ":Floor:" + floorReverb.active + ":LeftWall:" + LeftWallReverb.active + ":RightWall:" + RightWallReverb.active);
         return (false);

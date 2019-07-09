@@ -167,7 +167,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.109375, y: 0.3828125}
+  savedTextUV0: {x: 0, y: 0.05859375}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -346,11 +346,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179281071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 0.0625, z: 1.25}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 8, y: 0.25, z: 5}
   m_Children: []
-  m_Father: {fileID: 1055957454}
-  m_RootOrder: 0
+  m_Father: {fileID: 1501405077}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &194223334
 GameObject:
@@ -622,7 +622,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.1015625, y: 0.296875}
+  savedTextUV0: {x: 0.3671875, y: 0.35546875}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -879,7 +879,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.26171875, y: 0}
+  savedTextUV0: {x: 0.21484375, y: 0.109375}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1860,11 +1860,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819249039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.475, y: 0.025000006, z: 0}
-  m_LocalScale: {x: 0.03125, y: 1, z: 1.25}
+  m_LocalPosition: {x: 3.8, y: 1.1, z: 0}
+  m_LocalScale: {x: 0.25, y: 4, z: 5}
   m_Children: []
-  m_Father: {fileID: 1826539014}
-  m_RootOrder: 0
+  m_Father: {fileID: 1501405077}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &826184418
 GameObject:
@@ -2453,8 +2453,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 8, y: 4, z: 4}
-  m_Children:
-  - {fileID: 179281076}
+  m_Children: []
   m_Father: {fileID: 1501405077}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2551,7 +2550,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.03125, y: 0.05859375}
+  savedTextUV0: {x: 0.6015625, y: 0.05078125}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -3077,11 +3076,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461735356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.475, y: 0.025000006, z: 0}
-  m_LocalScale: {x: 0.03125, y: 1, z: 1.25}
+  m_LocalPosition: {x: -3.8, y: 1.1, z: 0}
+  m_LocalScale: {x: 0.25, y: 4, z: 5}
   m_Children: []
-  m_Father: {fileID: 1808706278}
-  m_RootOrder: 0
+  m_Father: {fileID: 1501405077}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1501405076
 GameObject:
@@ -3117,6 +3116,9 @@ Transform:
   - {fileID: 1508536648}
   - {fileID: 194223338}
   - {fileID: 1394278485}
+  - {fileID: 1461735361}
+  - {fileID: 819249044}
+  - {fileID: 179281076}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3580,8 +3582,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 8, y: 4, z: 4}
-  m_Children:
-  - {fileID: 1461735361}
+  m_Children: []
   m_Father: {fileID: 1501405077}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3612,8 +3613,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 8, y: 4, z: 4}
-  m_Children:
-  - {fileID: 819249044}
+  m_Children: []
   m_Father: {fileID: 1501405077}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3962,6 +3962,9 @@ MonoBehaviour:
   floorReverb: {fileID: 1055957453}
   LeftWallReverb: {fileID: 1808706276}
   RightWallReverb: {fileID: 1826539013}
+  objectFloor: {fileID: 179281071}
+  objectLeftWall: {fileID: 1461735356}
+  objectRightWall: {fileID: 819249039}
   worldAnchor: {fileID: 1501405076}
   UIpanels:
   - {fileID: 792094305}
@@ -3972,7 +3975,7 @@ MonoBehaviour:
   OculusCenterEyes: {fileID: 461435256}
   participantTextfield: {fileID: 433379683}
   Canvas: {fileID: 1508536644}
-  _AmountOfTests: 3
+  _AmountOfTests: 0
   ballDistance: 5
   gValue: 0.5
   trainingNumber: 0
