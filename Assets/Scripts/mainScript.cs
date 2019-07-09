@@ -87,7 +87,7 @@ public class mainScript : MonoBehaviour
     public GameObject Canvas;
 
     public int participantId;
-    public int _AmountOfTests = 5;
+    public int _AmountOfTests;
     public float ballDistance;
 
     // to remove
@@ -104,6 +104,7 @@ public class mainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _AmountOfTests = 5;
         mainObject.GetComponent<AudioSource>().Play();
         try
         {
@@ -132,6 +133,8 @@ public class mainScript : MonoBehaviour
                     tests[j, i].reflections = m;
                     tests[j, i].finished = false;
                     tests[j, i].result = false;
+                    tests[j, i].timestamp = new List<float>();
+                    tests[j, i].headRotation = new List<float>();
                     i++;
                 }
                 
@@ -224,9 +227,16 @@ public class mainScript : MonoBehaviour
                 {
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
-                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
-                    mainObject.transform.position = startRotation;
-           
+                  //  Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
+                  //  mainObject.transform.position = startRotation;
+                  if(rotation.y>180)
+                    {
+                        rotation.y = rotation.y-360;
+                    }
+                    Debug.Log(trainingNumber + ":" + chosenTest);
+                    tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
+                    tests[trainingNumber, chosenTest].headRotation.Add(rotation.y);
+                    Debug.Log(rotation.y);
 
                     break;
                 }
@@ -241,8 +251,10 @@ public class mainScript : MonoBehaviour
         bool sortedOut = false;
         bool outcome = true;
         bool[] testingAllVariants = new bool[_AmountOfTests];
-   //     Random.state = Time.time;
-        while(sortedOut==false)
+        //     Random.state = Time.time;
+
+        timeStart = Time.fixedTime;
+        while (sortedOut==false)
         {
             int radom = UnityEngine.Random.Range(0, _AmountOfTests);
             testingAllVariants[radom] = true;
@@ -271,8 +283,8 @@ public class mainScript : MonoBehaviour
         }
         testID.GetComponent<Text>().text = chosenTest + "/" + trainingNumber;
         //   tests[trainingNumber, chosenTest].reflections
-       
-        Debug.Log(tests[trainingNumber, chosenTest].reflections & 0x1);
+
+        Debug.Log("chosen:"+trainingNumber + ":" + chosenTest+":"+_AmountOfTests );// tests[trainingNumber, chosenTest].reflections & 0x1);
        
         floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1); 
         LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
@@ -336,16 +348,16 @@ public class mainScript : MonoBehaviour
 
             case (BUTTON_TEST_YES):
                 {
-                   // tests[chosenTest].results[trainingNumber] = true;
-                   // tests[chosenTest].finished[trainingNumber] = true;
+                   tests[trainingNumber,chosenTest].result = true;
+                   tests[trainingNumber,chosenTest].finished = true;
                     acknowledgeTests(true);
                     break;
                 }
 
             case (BUTTON_TEST_NO):
                 {
-                    //tests[chosenTest].results[trainingNumber] = false;
-                    //tests[chosenTest].finished[trainingNumber] = true;
+                    tests[trainingNumber,chosenTest].result = false;
+                    tests[trainingNumber,chosenTest].finished = true;
                     acknowledgeTests(false);
                     break;
                 }
@@ -354,30 +366,37 @@ public class mainScript : MonoBehaviour
                 {
 
                     StringBuilder builder = new StringBuilder();
-                    builder.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
+                    builder.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation\"");
                   //  builder.Append("\"id");
                     int i;
                     int j;
+                    int k;
                     for (j = 0; j < 3; j++) {
-                        for (i = 0; i < _amountG*_amountOf; i++)
+                        for (i = 0; i < _AmountOfTests; i++)
                         {
-                            
-                            builder.Append("\"");
-                            builder.Append(participantId);
-                            builder.Append("\",\"");
-                            builder.Append(trainingSpeed[j]);
-                            builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x01) == 1));
-                            builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x02) == 2));
-                            builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x04) == 4));
-                            builder.Append("\",\"");
-                            builder.Append(tests[j,i].gValue);
-                            builder.Append("\",\"");
-                            builder.Append(Convert.ToInt32(tests[j,i].result));
-                            builder.Append("\"");
-                            builder.Append("\r\n");
+                            for (k = 0; k < tests[j, i].timestamp.Count; k++)
+                            {
+                                builder.Append("\"");
+                                builder.Append(participantId);
+                                builder.Append("\",\"");
+                                builder.Append(trainingSpeed[j]);
+                                builder.Append("\",\"");
+                                builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x01) == 1));
+                                builder.Append("\",\"");
+                                builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x02) == 2));
+                                builder.Append("\",\"");
+                                builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x04) == 4));
+                                builder.Append("\",\"");
+                                builder.Append(tests[j, i].gValue);
+                                builder.Append("\",\"");
+                                builder.Append(Convert.ToInt32(tests[j, i].result));
+                                builder.Append("\",\"");
+                                builder.Append(tests[j, i].timestamp[k]);
+                                builder.Append("\",\"");
+                                builder.Append(tests[j, i].headRotation[k]);
+                                builder.Append("\"");
+                                builder.Append("\r\n");
+                            }
                         
     }
                     }
@@ -474,6 +493,7 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_FINAL_SCREEN):
                 {
+                    appStage = STAGE_FINAL_SCREEN;
                     mainObject.GetComponent<AudioSource>().mute = true;
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     UIpanels[3].SetActive(true);

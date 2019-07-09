@@ -167,7 +167,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.73828125, y: 0.109375}
+  savedTextUV0: {x: 0.734375, y: 0}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -562,7 +562,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.11328125, y: 0.19140625}
+  savedTextUV0: {x: 0.0078125, y: 0.171875}
   savedFill: 0
 --- !u!114 &362491627
 MonoBehaviour:
@@ -661,7 +661,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3203125, y: 0}
+  savedTextUV0: {x: 0.0625, y: 0}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -724,7 +724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &381295015
 Transform:
   m_ObjectHideFlags: 0
@@ -818,7 +818,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0}
+  savedTextUV0: {x: 0.6875, y: 0.10546875}
   savedFill: 0
 --- !u!114 &406628752
 MonoBehaviour:
@@ -918,7 +918,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.171875, y: 0.33203125}
+  savedTextUV0: {x: 0.171875, y: 0.19140625}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1845,7 +1845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &792094306
 Transform:
   m_ObjectHideFlags: 0
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.234375, y: 0.35546875}
+  savedTextUV0: {x: 0.12890625, y: 0}
   savedFill: 0
 --- !u!114 &845393154
 MonoBehaviour:
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.234375, y: 0.35546875}
+  savedTextUV0: {x: 0.12890625, y: 0}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2464,7 +2464,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 248799cb4acba48f7b3ee842a80f788c,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: df160f2b97dd94d5bbd28a63d257177f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 187f3676149694364858bfcf8273c523, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2628,7 +2628,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.68359375, y: 0.2734375}
+  savedTextUV0: {x: 0.18359375, y: 0.453125}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2825,7 +2825,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3203125, y: 0}
+  savedTextUV0: {x: 0.0625, y: 0}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -2956,7 +2956,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0, y: 0.171875}
+  savedTextUV0: {x: 0.33203125, y: 0.1953125}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -3305,7 +3305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 1.5}
   m_SizeDelta: {x: 2000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1652461546
@@ -3703,7 +3703,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
-  savedTextUV0: {x: 0, y: 0.171875}
+  savedTextUV0: {x: 0.33203125, y: 0.1953125}
   savedFill: 0
 --- !u!114 &1835400575
 MonoBehaviour:
@@ -3942,115 +3942,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testResult: 0
-  tests:
-  - gValue: -0.5
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: -0.25
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.25
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.5
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.75
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: -0.5
-    floorReflection: 1
-    RightwallReflection: 0
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: -0.25
-    floorReflection: 1
-    RightwallReflection: 0
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0
-    floorReflection: 1
-    RightwallReflection: 0
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.25
-    floorReflection: 1
-    RightwallReflection: 0
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.5
-    floorReflection: 1
-    RightwallReflection: 0
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.75
-    floorReflection: 1
-    RightwallReflection: 0
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: -0.5
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: -0.25
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.25
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.5
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
-  - gValue: 0.75
-    floorReflection: 1
-    RightwallReflection: 1
-    leftWallReflection: 0
-    finished: 
-    results: 000000
   trainingSpeed:
   - 20
   - 60
@@ -4245,7 +4136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2067271882
 Transform:
   m_ObjectHideFlags: 0
