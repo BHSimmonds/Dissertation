@@ -3980,12 +3980,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4fec60b0fb6c34aa370a5d488095a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testResult: 0
   trainingSpeed:
   - 20
   - 60
   - 100
-  trainingTime: 5
   yesButton: {fileID: 652294458}
   noButton: {fileID: 1859688528}
   testID: {fileID: 1835400572}
@@ -4009,7 +4007,7 @@ MonoBehaviour:
   StartPart: 0
   audioTest: 0
   chosenTest: 0
-  debugObjects: 1
+  debugObjects: 0
 --- !u!1 &2033533806
 GameObject:
   m_ObjectHideFlags: 0
