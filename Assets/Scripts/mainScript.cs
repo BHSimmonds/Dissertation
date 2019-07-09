@@ -86,7 +86,7 @@ public class mainScript : MonoBehaviour
 
     public GameObject Canvas;
 
-    public int participantId;
+    private int participantId;
     public int _AmountOfTests;
     public float ballDistance;
 
@@ -101,9 +101,17 @@ public class mainScript : MonoBehaviour
 
     public int chosenTest;
 
+    public bool debugObjects = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        if(debugObjects==false)
+        {
+            floorReverb.GetComponent<MeshRenderer>().enabled = false;
+            LeftWallReverb.GetComponent<MeshRenderer>().enabled = false;
+            RightWallReverb.GetComponent<MeshRenderer>().enabled = false;
+        }
         _AmountOfTests = 5;
         mainObject.GetComponent<AudioSource>().Play();
         try
@@ -194,15 +202,22 @@ public class mainScript : MonoBehaviour
         {
             case (STAGE_TRAINING):
                 {
-                    if (deltaTime >= trainingTime)
-                    {
-                        trainingFinished[trainingNumber] = true;
-                        changeStage(STAGE_TEST_SCREEN);
-                    }
-                    else
-                    {
-                        Vector3 startRotation = new Vector3(((Mathf.Sin((deltaTime) * Mathf.PI / 180f * trainingSpeed[trainingNumber]))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos((deltaTime) * Mathf.PI / 180f * trainingSpeed[trainingNumber])) * ballDistance);
+
+                        float alpha = (deltaTime) * trainingSpeed[trainingNumber];
+                        Vector3 startRotation = new Vector3(((Mathf.Sin(alpha * Mathf.PI / 180f))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                         mainObject.transform.position = startRotation;
+                    if(alpha>180)
+                    {
+                        alpha = 180 - alpha;
+                    }
+
+
+                     if(alpha<=-180)
+                        {
+                            trainingFinished[trainingNumber] = true;
+                            changeStage(STAGE_TEST_SCREEN);
+                        }
+                        
 
                         RaycastHit seen = new RaycastHit();
                         Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
@@ -219,24 +234,25 @@ public class mainScript : MonoBehaviour
 
                         }
                         testSuccessfull.Add(trying);
-                    }
+                   // }
                     break;
                 }
 
             case (STAGE_TEST):
                 {
+               
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
-                  //  Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
-                  //  mainObject.transform.position = startRotation;
+                  Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
+                  mainObject.transform.position = startRotation;
+
+
                   if(rotation.y>180)
                     {
                         rotation.y = rotation.y-360;
                     }
-                    Debug.Log(trainingNumber + ":" + chosenTest);
                     tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
                     tests[trainingNumber, chosenTest].headRotation.Add(rotation.y);
-                    Debug.Log(rotation.y);
 
                     break;
                 }
@@ -456,6 +472,8 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TRAINING):
                 {
+                    mainObject.GetComponent<MeshRenderer>().enabled = true;
+                    timeStart = Time.fixedTime;
                     LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.7f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TRAINING);
                     LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), 1.0f);
                     floorReverb.SetActive(false);
@@ -485,6 +503,10 @@ public class mainScript : MonoBehaviour
                     playerRotation = OculusCenterEyes.transform.eulerAngles;
                     UIpanels[2].SetActive(true);
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, .5f);
+                    if (debugObjects == false)
+                    {
+                        mainObject.GetComponent<MeshRenderer>().enabled = false;
+                    }
                     chooseRandomTest();
                     appStage = STAGE_TEST;
                     break;
