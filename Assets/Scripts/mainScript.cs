@@ -233,7 +233,7 @@ public class mainScript : MonoBehaviour
                     }
 
 
-                     if(trainingTime[trainingNumber]>deltaTime) {
+                     if(deltaTime>trainingTime[trainingNumber]) {
                         
                             trainingFinished[trainingNumber] = true;
                             changeStage(STAGE_TEST_SCREEN);
