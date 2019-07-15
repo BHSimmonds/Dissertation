@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using System;
 
 [System.Serializable]
@@ -106,7 +107,11 @@ public class mainScript : MonoBehaviour
 
     public bool audioTest;
 
+    public AudioMixerSnapshot volumeUp; // to control audio mixer snapshots
+    public AudioMixerSnapshot volumeDown; //
+
     public int chosenTest;
+    public int testCount = 0;
 
     public bool debugObjects = false;
 
@@ -225,7 +230,7 @@ public class mainScript : MonoBehaviour
                 {
 
                         float alpha = (deltaTime) * trainingSpeed[trainingNumber];
-                        Vector3 startRotation = new Vector3(((Mathf.Sin(alpha * Mathf.PI / 180f))) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
+                        Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                         mainObject.transform.position = startRotation;
                     if(alpha>180)
                     {
@@ -326,7 +331,8 @@ public class mainScript : MonoBehaviour
         {
             return (true);
         }
-        testID.GetComponent<Text>().text = chosenTest + "/" + trainingNumber;
+        testCount += 1;
+        testID.GetComponent<Text>().text = testCount + "/" + _AmountOfTests;
         //   tests[trainingNumber, chosenTest].reflections
 
         Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
@@ -389,6 +395,7 @@ public class mainScript : MonoBehaviour
                    tests[trainingNumber,chosenTest].result = true;
                    tests[trainingNumber,chosenTest].finished = true;
                     acknowledgeTests(true);
+                    // volumeDown.TransitionTo(.5f);
                     break;
                 }
 
@@ -397,6 +404,7 @@ public class mainScript : MonoBehaviour
                     tests[trainingNumber,chosenTest].result = false;
                     tests[trainingNumber,chosenTest].finished = true;
                     acknowledgeTests(false);
+                    // volumeDown.TransitionTo(.5f);
                     break;
                 }
 
@@ -531,6 +539,7 @@ public class mainScript : MonoBehaviour
                     }
                     chooseRandomTest();
                     appStage = STAGE_TEST;
+                    // volumeUp.TransitionTo(.5f);
                     break;
                 }
 
