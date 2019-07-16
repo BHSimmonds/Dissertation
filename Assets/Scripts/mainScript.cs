@@ -21,9 +21,9 @@ public class testInstance
 public class mainScript : MonoBehaviour
 {
 
-    const int _RefFloor = 0;
-    const int _RefRWall = 1;
-    const int _refLWall = 2;
+    const uint _RefFloor = 1;
+    const uint _RefRWall = 2;
+    const uint _refLWall = 4;
 
     const int BUTTON_START_TRAINING = 0;
     const int BUTTON_START_TEST = 1;
@@ -53,6 +53,8 @@ public class mainScript : MonoBehaviour
     public float[] trainingSpeed = new float[3];
     public float[] trainingTime = new float[3];
     private bool[] trainingFinished = new bool[3];
+    public int firstTrainingToPerform;
+    public bool ReverbVersion = false;
 
     private int _variantsG = 6;  // amount of G variants
     private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
@@ -117,9 +119,7 @@ public class mainScript : MonoBehaviour
 
     public int chosenTest;
 
-    public int testCount = 0;
-
-    public bool ReverbVersion = false;
+    private int testCount = 0;
 
     public bool StartPart;   // debug only, maybe remove? 
     public bool audioTest;   // debuug only, maybe remove?
@@ -128,24 +128,14 @@ public class mainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //worldAnchor.transform = OculusCenterEyes.transform;
-        if(debugObjects==false)
-        {
-            objectFloor.SetActive(false);
-            objectLeftWall.SetActive(false);
-            objectRightWall.SetActive(false);
-            limitLeftSide.SetActive(false);
-            limitRightSide.SetActive(false);
-        }
-        if(_amountTestsToPerform == 0)
-        {
-            _amountTestsToPerform = _variantsG * _variantsTests;
-        }
+  
+      
 
         if(ReverbVersion)
         {
             // TEST 2
             _variantsTests = 4;
+            firstTrainingToPerform = 0;
         } else
         {
             // TEST 1
@@ -153,6 +143,11 @@ public class mainScript : MonoBehaviour
         }
 
         tests = new testInstance[_variantsTraining, _variantsG * _variantsTests];
+
+        if (_amountTestsToPerform == 0)
+        {
+            _amountTestsToPerform = _variantsG * _variantsTests;
+        }
 
         Debug.Log("AMOUNT: "+ _amountTestsToPerform);
         mainObject.GetComponent<AudioSource>().Play();
@@ -173,7 +168,6 @@ public class mainScript : MonoBehaviour
         int i;
         int j;
         uint m;
-        uint one = 1;
         for(j=0; j<3; j++)
         {
             int k;
@@ -240,7 +234,8 @@ public class mainScript : MonoBehaviour
 
     void restartExperience()
     {
-        trainingNumber = 0;
+        testCount = 0;
+        trainingNumber =firstTrainingToPerform;
         int i;
         int j;
         for (j = 0; j < 3; j++)
@@ -394,18 +389,29 @@ public class mainScript : MonoBehaviour
             return (true);
         }
         testCount += 1;
-        testID.GetComponent<Text>().text = testCount + "/" + _amountTestsToPerform;
+        if (ReverbVersion)
+        {
+            testID.GetComponent<Text>().text = testCount + "/" + _amountTestsToPerform;
+        } else
+        {
+            testID.GetComponent<Text>().text = testCount + "/" + _amountTestsToPerform * _variantsTraining;
+
+        }
         //   tests[trainingNumber, chosenTest].reflections
 
         Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
        
-        floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1); 
-        objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1);
+        floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor); 
+        LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
+        RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
+   
+        if(debugObjects)
+        {
+            objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor);
+            objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
+            objectRightWall.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
+        }
 
-        LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
-        objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
-        RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
-        objectRightWall.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
         gValue = tests[trainingNumber, chosenTest].gValue;
         Debug.Log("G Value: " + gValue + ":Floor:" + floorReverb.active + ":LeftWall:" + LeftWallReverb.active + ":RightWall:" + RightWallReverb.active);
         return (false);
@@ -426,7 +432,14 @@ public class mainScript : MonoBehaviour
         }
         if(chooseRandomTest())
         {
-            trainingNumber++;
+            if (ReverbVersion)
+            {
+                trainingNumber = _variantsTraining;
+            }
+            else
+            {
+                trainingNumber++;
+            }
             if(trainingNumber==_variantsTraining)
             {
                 changeStage(STAGE_FINAL_SCREEN);
@@ -547,6 +560,10 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TRAINING_SCREEN):
                 {
+                    objectFloor.SetActive(false);
+                    objectLeftWall.SetActive(false);
+                    objectRightWall.SetActive(false);
+
                     mainObject.transform.localScale = new Vector3(0, 0, 0);
                     int i;
                     for (i = 1; i < 4; i++)
@@ -560,6 +577,10 @@ public class mainScript : MonoBehaviour
                     Canvas.SetActive(true);
                     participantTextfield.GetComponent<Text>().text = participantId.ToString();
                     mainObject.GetComponent<AudioSource>().mute = true;
+
+                    limitLeftSide.SetActive(false);
+                    limitRightSide.SetActive(false);
+
                     appStage = STAGE_TRAINING_SCREEN;
                     break;
                 }
@@ -573,6 +594,9 @@ public class mainScript : MonoBehaviour
                     floorReverb.SetActive(false);
                     LeftWallReverb.SetActive(false);
                     RightWallReverb.SetActive(false);
+                    objectLeftWall.SetActive(false);
+                    objectRightWall.SetActive(false);
+                    objectFloor.SetActive(false);
                     limitLeftSide.SetActive(true);
                     limitRightSide.SetActive(true);
                     break;
@@ -602,9 +626,13 @@ public class mainScript : MonoBehaviour
                     UIpanels[0].SetActive(false);
                     UIpanels[2].SetActive(true);
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 1.0f, .5f);
+                    LeanTween.scale(mainObject, new Vector3(1f, 1f, 1f), .5f);
                     if (debugObjects == false)
                     {
                         mainObject.GetComponent<MeshRenderer>().enabled = false;
+                    } else
+                    {
+                        mainObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     chooseRandomTest();
                     appStage = STAGE_TEST;
