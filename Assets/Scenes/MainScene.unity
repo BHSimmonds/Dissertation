@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 16315945}
   - component: {fileID: 16315948}
   - component: {fileID: 16315947}
-  - component: {fileID: 16315946}
   m_Layer: 0
   m_Name: rightSphereLimit
   m_TagString: Untagged
@@ -145,19 +144,6 @@ Transform:
   m_Father: {fileID: 1501405077}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &16315946
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16315944}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &16315947
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -714,7 +700,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.31640625, y: 0.38671875}
+  savedTextUV0: {x: 0.5, y: 0.30078125}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -933,7 +919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &433379684
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1429,7 +1415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &651454202
 Transform:
   m_ObjectHideFlags: 0
@@ -1828,7 +1814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &792094306
 Transform:
   m_ObjectHideFlags: 0
@@ -2161,7 +2147,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.234375, y: 0.4140625}
+  savedTextUV0: {x: 0.6015625, y: 0.19140625}
   savedFill: 0
 --- !u!114 &845393154
 MonoBehaviour:
@@ -2260,7 +2246,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0, y: 0.0078125}
+  savedTextUV0: {x: 0.6015625, y: 0.19140625}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2408,7 +2394,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 248799cb4acba48f7b3ee842a80f788c,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2934313131d5cd444898aa1b343ee047, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b382a0a63632344e954a9e3e1920bc8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2604,7 +2590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1110392617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2641,7 +2627,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.13671875}
+  savedTextUV0: {x: 0.7890625, y: 0.05078125}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2838,7 +2824,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.31640625, y: 0.38671875}
+  savedTextUV0: {x: 0.5, y: 0.30078125}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -2969,7 +2955,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.0703125, y: 0.0859375}
+  savedTextUV0: {x: 0.6484375, y: 0.2734375}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -3335,7 +3321,6 @@ GameObject:
   - component: {fileID: 1529923701}
   - component: {fileID: 1529923704}
   - component: {fileID: 1529923703}
-  - component: {fileID: 1529923702}
   m_Layer: 0
   m_Name: leftSphereLimit
   m_TagString: Untagged
@@ -3357,19 +3342,6 @@ Transform:
   m_Father: {fileID: 1501405077}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1529923702
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529923700}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1529923703
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3619,7 +3591,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.28125, y: 0.171875}
+  savedTextUV0: {x: 0.5625, y: 0.38671875}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -3894,7 +3866,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
-  savedTextUV0: {x: 0.0703125, y: 0.0859375}
+  savedTextUV0: {x: 0.6484375, y: 0.2734375}
   savedFill: 0
 --- !u!114 &1835400575
 MonoBehaviour:
@@ -4137,9 +4109,20 @@ MonoBehaviour:
   - 60
   - 100
   trainingTime:
-  - 30
-  - 30
-  - 30
+  - 2
+  - 2
+  - 2
+  firstTrainingToPerform: 0
+  ReverbVersion: 1
+  worldAnchor: {fileID: 1501405076}
+  OculusCenterEyes: {fileID: 461435256}
+  Canvas: {fileID: 1508536644}
+  UIpanels:
+  - {fileID: 792094305}
+  - {fileID: 651454201}
+  - {fileID: 381295014}
+  - {fileID: 2067271881}
+  participantTextfield: {fileID: 433379683}
   yesButton: {fileID: 652294458}
   noButton: {fileID: 1859688528}
   testID: {fileID: 1835400572}
@@ -4149,28 +4132,20 @@ MonoBehaviour:
   objectFloor: {fileID: 179281071}
   objectLeftWall: {fileID: 1461735356}
   objectRightWall: {fileID: 819249039}
-  worldAnchor: {fileID: 1501405076}
-  UIpanels:
-  - {fileID: 792094305}
-  - {fileID: 651454201}
-  - {fileID: 381295014}
-  - {fileID: 2067271881}
   mainObject: {fileID: 986118183}
-  OculusCenterEyes: {fileID: 461435256}
-  participantTextfield: {fileID: 433379683}
-  Canvas: {fileID: 1508536644}
-  _AmountOfTests: 0
+  limitRightSide: {fileID: 16315944}
+  limitLeftSide: {fileID: 1529923700}
+  _amountTestsToPerform: 0
   ballDistance: 5
   gValue: 0.5
   trainingNumber: 0
-  StartPart: 0
-  audioTest: 0
   volumeUp: {fileID: 245809288968866536, guid: 248799cb4acba48f7b3ee842a80f788c, type: 2}
   volumeDown: {fileID: 245499549223179644, guid: 248799cb4acba48f7b3ee842a80f788c,
     type: 2}
   chosenTest: 0
-  testCount: 0
-  debugObjects: 0
+  StartPart: 0
+  audioTest: 0
+  debugObjects: 1
 --- !u!1 &2033533806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4337,7 +4312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2067271882
 Transform:
   m_ObjectHideFlags: 0
@@ -4430,7 +4405,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.671875, y: 0}
+  savedTextUV0: {x: 0.5625, y: 0.38671875}
   savedFill: 0
 --- !u!114 &2074610849
 MonoBehaviour:
