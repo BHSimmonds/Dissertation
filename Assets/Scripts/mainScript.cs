@@ -54,8 +54,9 @@ public class mainScript : MonoBehaviour
     public float[] trainingTime = new float[3];
     private bool[] trainingFinished = new bool[3];
 
-    private int _amountG = 6;  // amount of G variants
-    private int _amountOf = 4; // amount of test variations - if sound is reflective or not? 
+    private int _variantsG = 6;  // amount of G variants
+    private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
+    private int _variantsTraining = 3; // amount of trainings
 
     // ______________ BINDINGS TO GAMEOBJECTS
 
@@ -101,7 +102,7 @@ public class mainScript : MonoBehaviour
     private float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
 
     private int participantId;
-    public int _AmountOfTests;    // during launch should be 0, if you put other value it conduct only _AmountOfTests from each training
+    public int _amountTestsToPerform;    // during launch should be 0, if you put other value it conduct only _AmountOfTests from each training
     public float ballDistance;
 
     // to remove
@@ -136,24 +137,24 @@ public class mainScript : MonoBehaviour
             limitLeftSide.SetActive(false);
             limitRightSide.SetActive(false);
         }
-        if(_AmountOfTests==0)
+        if(_amountTestsToPerform == 0)
         {
-            _AmountOfTests = _amountG * _amountOf;
+            _amountTestsToPerform = _variantsG * _variantsTests;
         }
 
         if(ReverbVersion)
         {
             // TEST 2
-            _amountOf = 4;
+            _variantsTests = 4;
         } else
         {
             // TEST 1
-            _amountOf = 3;
+            _variantsTests = 3;
         }
 
-        tests = new testInstance[3, _amountG * _amountOf];
+        tests = new testInstance[_variantsTraining, _variantsG * _variantsTests];
 
-        Debug.Log("AMOUNT: "+_AmountOfTests);
+        Debug.Log("AMOUNT: "+ _amountTestsToPerform);
         mainObject.GetComponent<AudioSource>().Play();
 
         // loading the index file to get the most recent participant ID
@@ -178,14 +179,16 @@ public class mainScript : MonoBehaviour
             int k;
             i = 0;
             k = 0;
-            for (k = 0; k < _amountG; k++)
+            for (k = 0; k < _variantsG; k++)
             {
-                for (m = 0; m < _amountOf; m++)
+                for (m = 0; m < _variantsTests; m++)
                 {
                     tests[j, i] = new testInstance();
                     tests[j, i].gValue = gValues[k];
-              
-                     switch(m)
+                    if (ReverbVersion)
+                    {
+
+                        switch (m)
                         {
                             case (0):
                                 {
@@ -211,6 +214,10 @@ public class mainScript : MonoBehaviour
                                     break;
                                 }
                         }
+                    } else
+                    {
+                        tests[j, i].reflections = 0;
+                    }
                     tests[j, i].finished = false;
                     tests[j, i].result = false;
                     tests[j, i].timestamp = new List<float>();
@@ -238,7 +245,7 @@ public class mainScript : MonoBehaviour
         int j;
         for (j = 0; j < 3; j++)
         {
-            for (i = 0; i < _amountG * _amountOf; i++)
+            for (i = 0; i < _variantsG * _variantsTests; i++)
             {
                 tests[j, i].finished = false;
                 tests[j, i].result = false;
@@ -348,7 +355,7 @@ public class mainScript : MonoBehaviour
     {
         bool sortedOut = false;
         bool outcome = true;
-        bool[] testingAllVariants = new bool[_AmountOfTests];
+        bool[] testingAllVariants = new bool[_amountTestsToPerform];
 
         Debug.Log(testingAllVariants.Length);
 
@@ -357,8 +364,8 @@ public class mainScript : MonoBehaviour
         timeStart = Time.fixedTime;
         while (sortedOut==false)
         {
-            int radom = UnityEngine.Random.Range(0, _AmountOfTests);
-            if(radom==_AmountOfTests)
+            int radom = UnityEngine.Random.Range(0, _amountTestsToPerform);
+            if(radom== _amountTestsToPerform)
             {
                 radom--;
             }
@@ -370,7 +377,7 @@ public class mainScript : MonoBehaviour
             }
             int i;
             outcome = true;
-            for (i=0;i<_AmountOfTests; i++)
+            for (i=0;i< _amountTestsToPerform; i++)
             {
                 if(tests[trainingNumber,i].finished==false)
                 {
@@ -387,7 +394,7 @@ public class mainScript : MonoBehaviour
             return (true);
         }
         testCount += 1;
-        testID.GetComponent<Text>().text = testCount + "/" + _AmountOfTests;
+        testID.GetComponent<Text>().text = testCount + "/" + _amountTestsToPerform;
         //   tests[trainingNumber, chosenTest].reflections
 
         Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
@@ -420,7 +427,7 @@ public class mainScript : MonoBehaviour
         if(chooseRandomTest())
         {
             trainingNumber++;
-            if(trainingNumber==3)
+            if(trainingNumber==_variantsTraining)
             {
                 changeStage(STAGE_FINAL_SCREEN);
             } else
@@ -474,7 +481,7 @@ public class mainScript : MonoBehaviour
                     int j;
                     int k;
                     for (j = 0; j < 3; j++) {
-                        for (i = 0; i < _AmountOfTests; i++)
+                        for (i = 0; i < _amountTestsToPerform; i++)
                         {
                          
                             for (k = 0; k < tests[j, i].timestamp.Count; k++)
