@@ -11,19 +11,11 @@ public class testInstance
 {
     public float gValue;
     public uint reflections; // bitwise boolean value = refFloor, refRWall, refLWall
-    //public bool[] reflections = new bool[3];
-   // public bool floorReflection;
-   // public bool RightwallReflection;
-   // public bool leftWallReflection;
     public bool finished;
     public bool result;
 
     public List<float> headRotation;
     public List<float> timestamp;
-
-    // turn to private
- //   public bool[] finished = new bool[3] { false, false, false };
-  //  public bool[] results = new bool[3] { false, false, false };
 }
 
 public class mainScript : MonoBehaviour
@@ -32,9 +24,6 @@ public class mainScript : MonoBehaviour
     const int _RefFloor = 0;
     const int _RefRWall = 1;
     const int _refLWall = 2;
-
-    const int _amountG = 6;
-    const int _amountOf = 8;
 
     const int BUTTON_START_TRAINING = 0;
     const int BUTTON_START_TEST = 1;
@@ -52,26 +41,44 @@ public class mainScript : MonoBehaviour
     //   const int STAGE_TEST3 = 5;
     //  const int STAGE_FINAL_SCREEN = 6;
 
+
+
+
     private int appStage = 0;
 
     List<bool> testSuccessfull = new List<bool>();
 
-    public testInstance[,] tests = new testInstance[3,_amountG*_amountOf];
+    public testInstance[,] tests;
     
     public float[] trainingSpeed = new float[3];
     public float[] trainingTime = new float[3];
     private bool[] trainingFinished = new bool[3];
 
- //   public float trainingTime;
+    private int _amountG = 6;  // amount of G variants
+    private int _amountOf = 4; // amount of test variations - if sound is reflective or not? 
+
+    // ______________ BINDINGS TO GAMEOBJECTS
 
     private Vector3 playerOrigin;
     private Vector3 playerRotation;
+
+    [HideInInspector]
+    public GameObject worldAnchor;
+    [HideInInspector]
+    public GameObject OculusCenterEyes;
+    [HideInInspector]
+    public GameObject Canvas;
+    [HideInInspector]
+    public GameObject[] UIpanels = new GameObject[4];
+    [HideInInspector]
+    public GameObject participantTextfield;
     [HideInInspector]
     public GameObject yesButton;
     [HideInInspector]
     public GameObject noButton;
     [HideInInspector]
     public GameObject testID;
+
     public GameObject floorReverb;
     public GameObject LeftWallReverb;
     public GameObject RightWallReverb;
@@ -79,41 +86,43 @@ public class mainScript : MonoBehaviour
     public GameObject objectFloor;
     public GameObject objectLeftWall;
     public GameObject objectRightWall;
-    [HideInInspector]
-    public GameObject worldAnchor;
-    [HideInInspector]
-    public GameObject[] UIpanels = new GameObject[4];
+
+
+
+
+    public GameObject mainObject;
+    public GameObject limitRightSide;
+    public GameObject limitLeftSide;
+
+
+
+    //______________________________________________ IMPORTANT VALUES
 
     private float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
-    [HideInInspector]
-    public GameObject mainObject;
-    [HideInInspector]
-    public GameObject OculusCenterEyes;
-    [HideInInspector]
-    public GameObject participantTextfield;
-    [HideInInspector]
-    public GameObject Canvas;
 
     private int participantId;
-    public int _AmountOfTests;
+    public int _AmountOfTests;    // during launch should be 0, if you put other value it conduct only _AmountOfTests from each training
     public float ballDistance;
 
     // to remove
     public float gValue = .5f;
-    public int trainingNumber = 0;
-    public bool StartPart;
+    public int trainingNumber = 0;   // 0, 1, 2
 
-    private float timeStart;
 
-    public bool audioTest;
+    private float timeStart;   
 
     public AudioMixerSnapshot volumeUp; // to control audio mixer snapshots
     public AudioMixerSnapshot volumeDown; //
 
     public int chosenTest;
+
     public int testCount = 0;
 
-    public bool debugObjects = false;
+    public bool ReverbVersion = false;
+
+    public bool StartPart;   // debug only, maybe remove? 
+    public bool audioTest;   // debuug only, maybe remove?
+    public bool debugObjects = false;   // shows or hids the graphics object
 
     // Start is called before the first frame update
     void Start()
@@ -124,14 +133,30 @@ public class mainScript : MonoBehaviour
             objectFloor.SetActive(false);
             objectLeftWall.SetActive(false);
             objectRightWall.SetActive(false);
-           
+            limitLeftSide.SetActive(false);
+            limitRightSide.SetActive(false);
         }
         if(_AmountOfTests==0)
         {
             _AmountOfTests = _amountG * _amountOf;
         }
+
+        if(ReverbVersion)
+        {
+            // TEST 2
+            _amountOf = 4;
+        } else
+        {
+            // TEST 1
+            _amountOf = 3;
+        }
+
+        tests = new testInstance[3, _amountG * _amountOf];
+
         Debug.Log("AMOUNT: "+_AmountOfTests);
         mainObject.GetComponent<AudioSource>().Play();
+
+        // loading the index file to get the most recent participant ID
         try
         {
             string index = System.IO.File.ReadAllText("index");
@@ -142,9 +167,12 @@ public class mainScript : MonoBehaviour
 
         }
 
+        // this is the part where you generate all the test variants
+
         int i;
         int j;
         uint m;
+        uint one = 1;
         for(j=0; j<3; j++)
         {
             int k;
@@ -156,7 +184,33 @@ public class mainScript : MonoBehaviour
                 {
                     tests[j, i] = new testInstance();
                     tests[j, i].gValue = gValues[k];
-                    tests[j, i].reflections = m;
+              
+                     switch(m)
+                        {
+                            case (0):
+                                {
+                                    tests[j, i].reflections = 0;
+                                    break;
+                                }
+
+                            case (1):
+                                {
+                                    tests[j, i].reflections = _RefFloor;
+                                    break;
+                                }
+
+                            case (2):
+                                {
+                                    tests[j, i].reflections = _RefRWall;
+                                    break;
+                                }
+
+                            case (3):
+                                {
+                                    tests[j, i].reflections = _refLWall;
+                                    break;
+                                }
+                        }
                     tests[j, i].finished = false;
                     tests[j, i].result = false;
                     tests[j, i].timestamp = new List<float>();
@@ -231,7 +285,8 @@ public class mainScript : MonoBehaviour
 
                         float alpha = (deltaTime) * trainingSpeed[trainingNumber];
                         Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
-                        mainObject.transform.position = startRotation;
+             //       startRotation.x = startRotation.x; 
+                    mainObject.transform.localPosition = startRotation;
                     if(alpha>180)
                     {
                         alpha = 180 - alpha;
@@ -339,6 +394,7 @@ public class mainScript : MonoBehaviour
        
         floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1); 
         objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & 0x1) == 1);
+
         LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
         objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & 0x2) == 2);
         RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & 0x4) == 4);
@@ -420,6 +476,7 @@ public class mainScript : MonoBehaviour
                     for (j = 0; j < 3; j++) {
                         for (i = 0; i < _AmountOfTests; i++)
                         {
+                         
                             for (k = 0; k < tests[j, i].timestamp.Count; k++)
                             {
                                 builder.Append("\"");
@@ -443,8 +500,9 @@ public class mainScript : MonoBehaviour
                                 builder.Append("\"");
                                 builder.Append("\r\n");
                             }
-                        
-    }
+                            builder.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+
+                        }
                     }
                     //   FileUtil.
                     System.IO.File.AppendAllText("data" + participantId + ".csv", builder.ToString());
@@ -508,6 +566,8 @@ public class mainScript : MonoBehaviour
                     floorReverb.SetActive(false);
                     LeftWallReverb.SetActive(false);
                     RightWallReverb.SetActive(false);
+                    limitLeftSide.SetActive(true);
+                    limitRightSide.SetActive(true);
                     break;
                 }
 
@@ -519,6 +579,8 @@ public class mainScript : MonoBehaviour
                     UIpanels[1].SetActive(true);
                     LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
+                    limitLeftSide.SetActive(false);
+                    limitRightSide.SetActive(false);
                     break;
                 }
 
