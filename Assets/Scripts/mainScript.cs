@@ -139,7 +139,7 @@ public class mainScript : MonoBehaviour
         } else
         {
             // TEST 1
-            _variantsTests = 3;
+            _variantsTests = 1; // THIS ONE??? THis was originally 3 but now is 1 as there is only the anechoic condition in the reverb free test
         }
 
         tests = new testInstance[_variantsTraining, _variantsG * _variantsTests];
@@ -168,14 +168,14 @@ public class mainScript : MonoBehaviour
         int i;
         int j;
         uint m;
-        for(j=0; j<3; j++)
+        for(j=0; j<3; j++) // speeds??
         {
             int k;
             i = 0;
             k = 0;
             for (k = 0; k < _variantsG; k++)
             {
-                for (m = 0; m < _variantsTests; m++)
+                for (m = 0; m < _variantsTests; m++) // reverb variants for each g value
                 {
                     tests[j, i] = new testInstance();
                     tests[j, i].gValue = gValues[k];
@@ -401,19 +401,19 @@ public class mainScript : MonoBehaviour
 
         Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
        
-        floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor); 
-        LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
-        RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
+        // floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor); 
+        // LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
+        // RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
    
-        if(debugObjects)
-        {
+        // if(debugObjects)
+        //{
             objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor);
             objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
             objectRightWall.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
-        }
+        //}
 
         gValue = tests[trainingNumber, chosenTest].gValue;
-        Debug.Log("G Value: " + gValue + ":Floor:" + floorReverb.active + ":LeftWall:" + LeftWallReverb.active + ":RightWall:" + RightWallReverb.active);
+        Debug.Log("G Value: " + gValue + ":Floor:" + objectFloor.active + ":LeftWall:" + objectLeftWall.active + ":RightWall:" + objectRightWall.active);
         return (false);
     }
 
