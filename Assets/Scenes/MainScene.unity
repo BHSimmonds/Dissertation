@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 16315948}
   - component: {fileID: 16315947}
   - component: {fileID: 16315946}
+  - component: {fileID: 16315949}
   m_Layer: 0
   m_Name: rightSphereLimit
   m_TagString: Untagged
@@ -139,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16315944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 1.5, z: -1}
+  m_LocalPosition: {x: 5, y: 1.2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1501405077}
@@ -162,7 +163,7 @@ MonoBehaviour:
     LowFreqAbsorption: 0
     MidFreqAbsorption: 0
     HighFreqAbsorption: 0
-    Scattering: 0
+    Scattering: 1
     LowFreqTransmission: 1
     MidFreqTransmission: 1
     HighFreqTransmission: 1
@@ -211,6 +212,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16315944}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &16315949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16315944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TerrainSimplificationLevel: 0
+  exportAllChildren: 0
 --- !u!1 &61038077
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +281,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0, y: 0.05859375}
+  savedTextUV0: {x: 0.6953125, y: 0}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -301,8 +316,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Follow the ball with your head, when your head rotation matches the ball
-    rotation it will turn green. Try and keep this speed for the subsequent tests.
+  m_Text: Follow the ball with your head, when your head rotation matches, the ball
+    will turn green. Try and keep it green. Aim to rotate your head at the same speed
+    during the test
 --- !u!222 &61038082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -374,6 +390,7 @@ GameObject:
   - component: {fileID: 179281073}
   - component: {fileID: 179281077}
   - component: {fileID: 179281072}
+  - component: {fileID: 179281078}
   m_Layer: 11
   m_Name: FloorReverb
   m_TagString: Untagged
@@ -487,6 +504,20 @@ MonoBehaviour:
     LowFreqTransmission: 0
     MidFreqTransmission: 0
     HighFreqTransmission: 0
+--- !u!114 &179281078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179281071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TerrainSimplificationLevel: 0
+  exportAllChildren: 0
 --- !u!1 &194223334
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +687,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.078125, y: 0}
+  savedTextUV0: {x: 0.10546875, y: 0.10546875}
   savedFill: 0
 --- !u!114 &362491627
 MonoBehaviour:
@@ -756,7 +787,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.30078125}
+  savedTextUV0: {x: 0.7734375, y: 0}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -913,7 +944,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.078125, y: 0}
+  savedTextUV0: {x: 0, y: 0.27734375}
   savedFill: 0
 --- !u!114 &406628752
 MonoBehaviour:
@@ -949,6 +980,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Try and keep your head rotation the same for the whole of the testing phase.
+    If it helps count - slowest speed should be 9 seconds between yellow blocks, middle
+    speed 3 seconds, fast speed 1.5 seconds.
 --- !u!222 &406628753
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1012,7 +1045,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0, y: 0.3359375}
+  savedTextUV0: {x: 0.26171875, y: 0}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1493,7 +1526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &651454202
 Transform:
   m_ObjectHideFlags: 0
@@ -1892,7 +1925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &792094306
 Transform:
   m_ObjectHideFlags: 0
@@ -1944,6 +1977,7 @@ GameObject:
   - component: {fileID: 819249041}
   - component: {fileID: 819249045}
   - component: {fileID: 819249040}
+  - component: {fileID: 819249046}
   m_Layer: 10
   m_Name: RightWall
   m_TagString: Untagged
@@ -2030,8 +2064,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819249039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 1.63, z: 0}
-  m_LocalScale: {x: 0.25, y: 5.18387, z: 31.602968}
+  m_LocalPosition: {x: 10, y: 1.1, z: 0}
+  m_LocalScale: {x: 0.25, y: 4, z: 10}
   m_Children: []
   m_Father: {fileID: 1501405077}
   m_RootOrder: 7
@@ -2057,6 +2091,20 @@ MonoBehaviour:
     LowFreqTransmission: 0
     MidFreqTransmission: 0
     HighFreqTransmission: 0
+--- !u!114 &819249046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819249039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TerrainSimplificationLevel: 0
+  exportAllChildren: 0
 --- !u!1 &826184418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,7 +2309,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.6015625, y: 0.19140625}
+  savedTextUV0: {x: 0.3359375, y: 0.359375}
   savedFill: 0
 --- !u!114 &845393154
 MonoBehaviour:
@@ -2360,7 +2408,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.6015625, y: 0.19140625}
+  savedTextUV0: {x: 0.3359375, y: 0.359375}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2510,7 +2558,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 2fbf61c4b4579f44ea50d43ca3c0d73a,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2a5324bb824c3df4fb0f7a27be0a1d84, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b382a0a63632344e954a9e3e1920bc8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2620,7 +2668,7 @@ MonoBehaviour:
   directMixLevel: 1
   reflections: 1
   indirectBinaural: 1
-  indirectMixLevel: 0.48
+  indirectMixLevel: 0.5
   simulationType: 0
   uniqueIdentifier: 
   avoidSilenceDuringInit: 0
@@ -2726,7 +2774,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.7890625, y: 0.05078125}
+  savedTextUV0: {x: 0.03125, y: 0.05859375}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2923,7 +2971,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.30078125}
+  savedTextUV0: {x: 0.7734375, y: 0}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -3017,7 +3065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1283119275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3054,7 +3102,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.6484375, y: 0.2734375}
+  savedTextUV0: {x: 0.76953125, y: 0.38671875}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -3089,7 +3137,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Is the sound source stationary?
+  m_Text: Keep moving your head at the same rate. Does the source seem stationary?
 --- !u!222 &1283119278
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3294,6 +3342,7 @@ GameObject:
   - component: {fileID: 1461735358}
   - component: {fileID: 1461735362}
   - component: {fileID: 1461735357}
+  - component: {fileID: 1461735363}
   m_Layer: 9
   m_Name: LeftWall
   m_TagString: Untagged
@@ -3407,6 +3456,20 @@ MonoBehaviour:
     LowFreqTransmission: 0
     MidFreqTransmission: 0
     HighFreqTransmission: 0
+--- !u!114 &1461735363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461735356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TerrainSimplificationLevel: 0
+  exportAllChildren: 0
 --- !u!1 &1501405076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,7 +3480,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1501405077}
   - component: {fileID: 1501405079}
-  - component: {fileID: 1501405078}
   m_Layer: 0
   m_Name: mainAnchor
   m_TagString: Untagged
@@ -3448,20 +3510,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1501405078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501405076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TerrainSimplificationLevel: 0
-  exportAllChildren: 1
 --- !u!114 &1501405079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3604,6 +3652,7 @@ GameObject:
   - component: {fileID: 1529923704}
   - component: {fileID: 1529923703}
   - component: {fileID: 1529923702}
+  - component: {fileID: 1529923705}
   m_Layer: 0
   m_Name: leftSphereLimit
   m_TagString: Untagged
@@ -3619,7 +3668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529923700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 1.5, z: -1}
+  m_LocalPosition: {x: -5, y: 1.2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1501405077}
@@ -3642,7 +3691,7 @@ MonoBehaviour:
     LowFreqAbsorption: 0
     MidFreqAbsorption: 0
     HighFreqAbsorption: 0
-    Scattering: 0
+    Scattering: 1
     LowFreqTransmission: 1
     MidFreqTransmission: 1
     HighFreqTransmission: 1
@@ -3691,6 +3740,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529923700}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1529923705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529923700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TerrainSimplificationLevel: 0
+  exportAllChildren: 0
 --- !u!1 &1652461546
 GameObject:
   m_ObjectHideFlags: 0
@@ -3895,7 +3958,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5625, y: 0.38671875}
+  savedTextUV0: {x: 0.41796875, y: 0.19921875}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -4032,7 +4095,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
-  savedTextUV0: {x: 0.6484375, y: 0.2734375}
+  savedTextUV0: {x: 0.58984375, y: 0}
   savedFill: 0
 --- !u!114 &1835400575
 MonoBehaviour:
@@ -4275,9 +4338,9 @@ MonoBehaviour:
   - 60
   - 100
   trainingTime:
-  - 1
-  - 1
-  - 1
+  - 30
+  - 30
+  - 30
   firstTrainingToPerform: 0
   ReverbVersion: 1
   worldAnchor: {fileID: 1501405076}
@@ -4568,7 +4631,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.5625, y: 0.38671875}
+  savedTextUV0: {x: 0.41796875, y: 0.19921875}
   savedFill: 0
 --- !u!114 &2074610849
 MonoBehaviour:
