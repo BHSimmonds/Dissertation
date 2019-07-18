@@ -660,8 +660,8 @@ public class mainScript : MonoBehaviour
                     UIpanels[1].SetActive(true);
                     LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
-                    limitLeftSide.SetActive(false);
-                    limitRightSide.SetActive(false);
+                    // limitLeftSide.SetActive(false);
+                    // limitRightSide.SetActive(false);
                     break;
                 }
 
@@ -701,6 +701,8 @@ public class mainScript : MonoBehaviour
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     UIpanels[3].SetActive(true);
                     LeanTween.alphaCanvas(UIpanels[3].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
+                    limitLeftSide.SetActive(false);
+                    limitRightSide.SetActive(false);
                     break;
                 }
 
