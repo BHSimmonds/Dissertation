@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 16315945}
   - component: {fileID: 16315948}
   - component: {fileID: 16315947}
+  - component: {fileID: 16315946}
   m_Layer: 0
   m_Name: rightSphereLimit
   m_TagString: Untagged
@@ -144,6 +145,27 @@ Transform:
   m_Father: {fileID: 1501405077}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &16315946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16315944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43300f764e354d642abf0f0dbb612011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Preset: 11
+  Value:
+    LowFreqAbsorption: 0
+    MidFreqAbsorption: 0
+    HighFreqAbsorption: 0
+    Scattering: 0
+    LowFreqTransmission: 1
+    MidFreqTransmission: 1
+    HighFreqTransmission: 1
 --- !u!23 &16315947
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -352,7 +374,6 @@ GameObject:
   - component: {fileID: 179281073}
   - component: {fileID: 179281077}
   - component: {fileID: 179281072}
-  - component: {fileID: 179281078}
   m_Layer: 11
   m_Name: FloorReverb
   m_TagString: Untagged
@@ -372,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e33811057654a34b97fc1b6b0779af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetFileName: 
+  assetFileName: MainScene_FloorReverb.instancedmesh
 --- !u!65 &179281073
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -466,20 +487,6 @@ MonoBehaviour:
     LowFreqTransmission: 0
     MidFreqTransmission: 0
     HighFreqTransmission: 0
---- !u!114 &179281078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179281071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TerrainSimplificationLevel: 0
-  exportAllChildren: 0
 --- !u!1 &194223334
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,9 +589,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 194223334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b7929fa5e730414cb1f18134aef71c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 43300f764e354d642abf0f0dbb612011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Preset: 11
+  Value:
+    LowFreqAbsorption: 0
+    MidFreqAbsorption: 0
+    HighFreqAbsorption: 0
+    Scattering: 1
+    LowFreqTransmission: 1
+    MidFreqTransmission: 1
+    HighFreqTransmission: 1
 --- !u!1 &362491624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,9 +1170,7 @@ GameObject:
   - component: {fileID: 469430138}
   - component: {fileID: 463364738}
   - component: {fileID: 461435257}
-  - component: {fileID: 461435261}
   - component: {fileID: 461435259}
-  - component: {fileID: 461435263}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -1210,10 +1224,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 461435256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e33811057654a34b97fc1b6b0779af7, type: 3}
+  m_Script: {fileID: 11500000, guid: 43300f764e354d642abf0f0dbb612011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetFileName: 
+  Preset: 11
+  Value:
+    LowFreqAbsorption: 0
+    MidFreqAbsorption: 0
+    HighFreqAbsorption: 0
+    Scattering: 1
+    LowFreqTransmission: 1
+    MidFreqTransmission: 1
+    HighFreqTransmission: 1
 --- !u!1 &461435260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,27 +1253,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &461435261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461435256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43300f764e354d642abf0f0dbb612011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Preset: 0
-  Value:
-    LowFreqAbsorption: 0.1
-    MidFreqAbsorption: 0.2
-    HighFreqAbsorption: 0.3
-    Scattering: 0.05
-    LowFreqTransmission: 0.1
-    MidFreqTransmission: 0.05
-    HighFreqTransmission: 0.03
 --- !u!1 &461435262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,20 +1272,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &461435263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461435256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TerrainSimplificationLevel: 0
-  exportAllChildren: 0
 --- !u!1 &461576252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,7 +1944,6 @@ GameObject:
   - component: {fileID: 819249041}
   - component: {fileID: 819249045}
   - component: {fileID: 819249040}
-  - component: {fileID: 819249046}
   m_Layer: 10
   m_Name: RightWall
   m_TagString: Untagged
@@ -1977,7 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e33811057654a34b97fc1b6b0779af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetFileName: 
+  assetFileName: MainScene_RightWall.instancedmesh
 --- !u!65 &819249041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2071,20 +2057,6 @@ MonoBehaviour:
     LowFreqTransmission: 0
     MidFreqTransmission: 0
     HighFreqTransmission: 0
---- !u!114 &819249046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819249039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TerrainSimplificationLevel: 0
-  exportAllChildren: 0
 --- !u!1 &826184418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,9 +2418,8 @@ GameObject:
   - component: {fileID: 986118184}
   - component: {fileID: 986118188}
   - component: {fileID: 986118189}
-  - component: {fileID: 986118192}
-  - component: {fileID: 986118191}
   - component: {fileID: 986118190}
+  - component: {fileID: 986118191}
   m_Layer: 0
   m_Name: mainSphere
   m_TagString: matterObject
@@ -2615,7 +2586,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2649,7 +2620,7 @@ MonoBehaviour:
   directMixLevel: 1
   reflections: 1
   indirectBinaural: 1
-  indirectMixLevel: 1
+  indirectMixLevel: 0.48
   simulationType: 0
   uniqueIdentifier: 
   avoidSilenceDuringInit: 0
@@ -2675,25 +2646,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 986118183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TerrainSimplificationLevel: 0
-  exportAllChildren: 0
---- !u!114 &986118191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986118183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e33811057654a34b97fc1b6b0779af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetFileName: 
---- !u!114 &986118192
+  assetFileName: MainScene_mainSphere.instancedmesh
+--- !u!114 &986118191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2710,7 +2667,7 @@ MonoBehaviour:
     LowFreqAbsorption: 0
     MidFreqAbsorption: 0
     HighFreqAbsorption: 0
-    Scattering: 0
+    Scattering: 1
     LowFreqTransmission: 1
     MidFreqTransmission: 1
     HighFreqTransmission: 1
@@ -3195,15 +3152,15 @@ MonoBehaviour:
   audioEngine: 0
   sofaFiles: []
   currentSOFAFile: 0
-  materialPreset: 0
+  materialPreset: 11
   materialValue:
-    LowFreqAbsorption: 0.1
-    MidFreqAbsorption: 0.2
-    HighFreqAbsorption: 0.3
-    Scattering: 0.05
-    LowFreqTransmission: 0.1
-    MidFreqTransmission: 0.05
-    HighFreqTransmission: 0.03
+    LowFreqAbsorption: 0
+    MidFreqAbsorption: 0
+    HighFreqAbsorption: 0
+    Scattering: 0
+    LowFreqTransmission: 1
+    MidFreqTransmission: 1
+    HighFreqTransmission: 1
   simulationPreset: 3
   simulationValue:
     OcclusionSamples: 128
@@ -3215,10 +3172,10 @@ MonoBehaviour:
     BakeSecondaryRays: 4096
     BakeBounces: 32
     BakeThreadsPercentage: 5
-    Duration: 3.02
+    Duration: 0.1
     AmbisonicsOrder: 3
-    MaxSources: 32
-    IrradianceMinDistance: 1
+    MaxSources: 1
+    IrradianceMinDistance: 0.1
   updateComponents: 1
   currentAudioListener: {fileID: 0}
   showLoadTimeOptions: 0
@@ -3337,8 +3294,6 @@ GameObject:
   - component: {fileID: 1461735358}
   - component: {fileID: 1461735362}
   - component: {fileID: 1461735357}
-  - component: {fileID: 1461735363}
-  - component: {fileID: 1461735364}
   m_Layer: 9
   m_Name: LeftWall
   m_TagString: Untagged
@@ -3358,7 +3313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e33811057654a34b97fc1b6b0779af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetFileName: 
+  assetFileName: MainScene_LeftWall.instancedmesh
 --- !u!65 &1461735358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3452,36 +3407,6 @@ MonoBehaviour:
     LowFreqTransmission: 0
     MidFreqTransmission: 0
     HighFreqTransmission: 0
---- !u!114 &1461735363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461735356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TerrainSimplificationLevel: 0
-  exportAllChildren: 0
---- !u!54 &1461735364
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461735356}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1501405076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,10 +3457,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501405076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e33811057654a34b97fc1b6b0779af7, type: 3}
+  m_Script: {fileID: 11500000, guid: a79e99846fd75c4438917229c144155a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetFileName: 
+  TerrainSimplificationLevel: 0
+  exportAllChildren: 1
 --- !u!114 &1501405079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3677,6 +3603,7 @@ GameObject:
   - component: {fileID: 1529923701}
   - component: {fileID: 1529923704}
   - component: {fileID: 1529923703}
+  - component: {fileID: 1529923702}
   m_Layer: 0
   m_Name: leftSphereLimit
   m_TagString: Untagged
@@ -3698,6 +3625,27 @@ Transform:
   m_Father: {fileID: 1501405077}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1529923702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529923700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43300f764e354d642abf0f0dbb612011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Preset: 11
+  Value:
+    LowFreqAbsorption: 0
+    MidFreqAbsorption: 0
+    HighFreqAbsorption: 0
+    Scattering: 0
+    LowFreqTransmission: 1
+    MidFreqTransmission: 1
+    HighFreqTransmission: 1
 --- !u!23 &1529923703
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4357,13 +4305,10 @@ MonoBehaviour:
   ballDistance: 5
   gValue: 0.5
   trainingNumber: 0
-  volumeUp: {fileID: 245809288968866536, guid: 248799cb4acba48f7b3ee842a80f788c, type: 2}
-  volumeDown: {fileID: 245499549223179644, guid: 248799cb4acba48f7b3ee842a80f788c,
-    type: 2}
   chosenTest: 0
   StartPart: 0
   audioTest: 0
-  debugObjects: 1
+  debugObjects: 0
 --- !u!1 &2033533806
 GameObject:
   m_ObjectHideFlags: 0

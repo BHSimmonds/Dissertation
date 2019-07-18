@@ -64,6 +64,12 @@ public class mainScript : MonoBehaviour
 
     private Vector3 playerOrigin;
     private Vector3 playerRotation;
+    private Vector3 origFloorPos;
+    private Vector3 origLWallPos;
+    private Vector3 origRWallPos;
+    private Vector3 farFloorPos;
+    private Vector3 farLWallPos;
+    private Vector3 farRWallPos;
 
     [HideInInspector]
     public GameObject worldAnchor;
@@ -114,8 +120,8 @@ public class mainScript : MonoBehaviour
 
     private float timeStart;   
 
-    public AudioMixerSnapshot volumeUp; // to control audio mixer snapshots
-    public AudioMixerSnapshot volumeDown; //
+    // public AudioMixerSnapshot volumeUp; // to control audio mixer snapshots
+    // public AudioMixerSnapshot volumeDown; //
 
     public int chosenTest;
 
@@ -128,10 +134,18 @@ public class mainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-  
-      
 
-        if(ReverbVersion)
+        origFloorPos = objectFloor.transform.position; // Get position of reverberant surfaces and make far positions
+        origLWallPos = objectLeftWall.transform.position;
+        origRWallPos = objectRightWall.transform.position;
+        farFloorPos = origFloorPos;
+        farLWallPos = origFloorPos;
+        farRWallPos = origFloorPos;
+        farFloorPos.y -= 10000;
+        farLWallPos.x -= 10000;
+        farRWallPos.x += 10000;
+
+        if (ReverbVersion)
         {
             // TEST 2
             _variantsTests = 4;
@@ -400,16 +414,52 @@ public class mainScript : MonoBehaviour
         //   tests[trainingNumber, chosenTest].reflections
 
         Debug.Log("chosenTest: "+ chosenTest + ": at speed: " + trainingSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
-       
+
         // floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor); 
         // LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
         // RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
-   
+
+        if ((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor) // moves the walls away instead of deactivating
+        {
+            objectFloor.transform.position = origFloorPos;
+        }
+        else
+        {
+            
+            objectFloor.transform.position = farFloorPos;
+        }
+
+
+
+        if ((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall)
+        {
+            objectLeftWall.transform.position = origLWallPos;
+        }
+        else
+        {
+            // Vector3 lWallPos = new Vector3(-10000, 1.1f, 0);
+            objectLeftWall.transform.position = farLWallPos;
+        }
+
+
+        if ((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall)
+        {
+            // Vector3 rWallPos = new Vector3(10, 1.63f, 0);
+            objectRightWall.transform.position = origRWallPos;
+        }
+        else
+        {
+            // Vector3 rWallPos = new Vector3(10000, 1.63f, 0);
+            objectRightWall.transform.position = farRWallPos;
+        }
+
+
+
         // if(debugObjects)
         //{
-            objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor);
-            objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
-            objectRightWall.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
+        //   objectFloor.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor);
+        //   objectLeftWall.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
+        //   objectRightWall.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
         //}
 
         gValue = tests[trainingNumber, chosenTest].gValue;
@@ -560,9 +610,12 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TRAINING_SCREEN):
                 {
-                    objectFloor.SetActive(false);
-                    objectLeftWall.SetActive(false);
-                    objectRightWall.SetActive(false);
+                    objectFloor.transform.position = farFloorPos;
+                    objectLeftWall.transform.position = farLWallPos;
+                    objectRightWall.transform.position = farRWallPos;
+                    // objectFloor.SetActive(false);
+                    // objectLeftWall.SetActive(false);
+                    // objectRightWall.SetActive(false);
 
                     mainObject.transform.localScale = new Vector3(0, 0, 0);
                     int i;
@@ -591,12 +644,9 @@ public class mainScript : MonoBehaviour
                     timeStart = Time.fixedTime;
                     LeanTween.alphaCanvas(UIpanels[0].GetComponent<CanvasGroup>(), 0.0f, 0.7f).setOnComplete(finishScreenTransition).setOnCompleteParam(STAGE_TRAINING);
                     LeanTween.scale(mainObject, new Vector3(1.0f, 1.0f, 1.0f), 1.0f);
-                    floorReverb.SetActive(false);
-                    LeftWallReverb.SetActive(false);
-                    RightWallReverb.SetActive(false);
-                    objectLeftWall.SetActive(false);
-                    objectRightWall.SetActive(false);
-                    objectFloor.SetActive(false);
+                    objectFloor.transform.position = farFloorPos;
+                    objectLeftWall.transform.position = farLWallPos;
+                    objectRightWall.transform.position = farRWallPos;
                     limitLeftSide.SetActive(true);
                     limitRightSide.SetActive(true);
                     break;
@@ -618,6 +668,9 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TEST):
                 {
+                    objectFloor.transform.position = origFloorPos;
+                    objectLeftWall.transform.position = origLWallPos;
+                    objectRightWall.transform.position = origRWallPos;
                     mainObject.GetComponent<AudioSource>().mute = false;
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
