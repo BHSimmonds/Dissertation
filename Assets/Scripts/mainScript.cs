@@ -70,6 +70,9 @@ public class mainScript : MonoBehaviour
     private Vector3 farFloorPos;
     private Vector3 farLWallPos;
     private Vector3 farRWallPos;
+    private float sourceDirection;
+    private int deltaAlpha;
+    private bool rotationClock;
 
     [HideInInspector]
     public GameObject worldAnchor;
@@ -299,11 +302,11 @@ public class mainScript : MonoBehaviour
             case (STAGE_TRAINING):
                 {
 
-                        float alpha = (deltaTime) * trainingSpeed[trainingNumber];
-                        Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
-             //       startRotation.x = startRotation.x; 
+                    float alpha = (deltaTime) * trainingSpeed[trainingNumber];
+                    Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                     mainObject.transform.localPosition = startRotation;
-                    if(alpha>180)
+                   
+                    if (alpha>180)
                     {
                         alpha = 180 - alpha;
                     }
@@ -348,6 +351,10 @@ public class mainScript : MonoBehaviour
 
                     Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
                     mainObject.transform.position = startRotation;
+                    sourceDirection = (gValue * (rotation.y)) + 180;
+                    mainObject.transform.eulerAngles = new Vector3(0, sourceDirection, 0);
+
+                    // Vector3 sourceDirection
 
                     tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
                     tests[trainingNumber, chosenTest].headRotation.Add(rotation.y);
