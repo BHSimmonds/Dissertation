@@ -293,10 +293,10 @@ public class mainScript : MonoBehaviour
         {
             case (STAGE_TRAINING_SCREEN):
                 {
-                    Vector3 murcki = worldAnchor.transform.position;
-                    murcki.x = OculusCenterEyes.transform.position.x;
-                    murcki.z = OculusCenterEyes.transform.position.z;
-                    worldAnchor.transform.position = murcki;
+                    // Vector3 murcki = worldAnchor.transform.position;
+                    // murcki.x = OculusCenterEyes.transform.position.x;
+                    // murcki.z = OculusCenterEyes.transform.position.z;
+                    // worldAnchor.transform.position = murcki;
                     break;
                 }
             case (STAGE_TRAINING):
