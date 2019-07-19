@@ -687,7 +687,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.10546875, y: 0.10546875}
+  savedTextUV0: {x: 0.5, y: 0.109375}
   savedFill: 0
 --- !u!114 &362491627
 MonoBehaviour:
@@ -2309,7 +2309,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3359375, y: 0.359375}
+  savedTextUV0: {x: 0, y: 0.0078125}
   savedFill: 0
 --- !u!114 &845393154
 MonoBehaviour:
@@ -2408,7 +2408,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.3359375, y: 0.359375}
+  savedTextUV0: {x: 0, y: 0.0078125}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2712,9 +2712,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Preset: 11
   Value:
-    LowFreqAbsorption: 0
-    MidFreqAbsorption: 0
-    HighFreqAbsorption: 0
+    LowFreqAbsorption: 1
+    MidFreqAbsorption: 1
+    HighFreqAbsorption: 1
     Scattering: 1
     LowFreqTransmission: 1
     MidFreqTransmission: 1
@@ -3065,7 +3065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1283119275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3102,7 +3102,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.76953125, y: 0.38671875}
+  savedTextUV0: {x: 0, y: 0.19140625}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -3202,9 +3202,9 @@ MonoBehaviour:
   currentSOFAFile: 0
   materialPreset: 11
   materialValue:
-    LowFreqAbsorption: 0
-    MidFreqAbsorption: 0
-    HighFreqAbsorption: 0
+    LowFreqAbsorption: 1
+    MidFreqAbsorption: 1
+    HighFreqAbsorption: 1
     Scattering: 1
     LowFreqTransmission: 1
     MidFreqTransmission: 1
@@ -3958,7 +3958,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.41796875, y: 0.19921875}
+  savedTextUV0: {x: 0.3828125, y: 0.21875}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -4095,7 +4095,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
-  savedTextUV0: {x: 0.58984375, y: 0}
+  savedTextUV0: {x: 0.34765625, y: 0.2734375}
   savedFill: 0
 --- !u!114 &1835400575
 MonoBehaviour:
@@ -4631,7 +4631,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.41796875, y: 0.19921875}
+  savedTextUV0: {x: 0.3828125, y: 0.21875}
   savedFill: 0
 --- !u!114 &2074610849
 MonoBehaviour:

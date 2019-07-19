@@ -603,7 +603,7 @@ public class mainScript : MonoBehaviour
         Canvas.SetActive(false);
     }
 
-    void changeStage(int whichStage)
+    void changeStage(int whichStage) // Building the scenarios and stages 
     {
         switch (whichStage)
         {
