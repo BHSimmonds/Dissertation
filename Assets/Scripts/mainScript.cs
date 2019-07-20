@@ -55,6 +55,7 @@ public class mainScript : MonoBehaviour
     private bool[] trainingFinished = new bool[3];
     public int firstTrainingToPerform;
     public bool ReverbVersion = false;
+    public bool directionalSource = false;
 
     private int _variantsG = 6;  // amount of G variants
     private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
@@ -71,8 +72,7 @@ public class mainScript : MonoBehaviour
     private Vector3 farLWallPos;
     private Vector3 farRWallPos;
     private float sourceDirection;
-    private int deltaAlpha;
-    private bool rotationClock;
+   
 
     [HideInInspector]
     public GameObject worldAnchor;
@@ -293,10 +293,10 @@ public class mainScript : MonoBehaviour
         {
             case (STAGE_TRAINING_SCREEN):
                 {
-                    // Vector3 murcki = worldAnchor.transform.position;
-                    // murcki.x = OculusCenterEyes.transform.position.x;
-                    // murcki.z = OculusCenterEyes.transform.position.z;
-                    // worldAnchor.transform.position = murcki;
+                    Vector3 murcki = worldAnchor.transform.position;
+                    murcki.x = OculusCenterEyes.transform.position.x;
+                    murcki.z = OculusCenterEyes.transform.position.z;
+                    worldAnchor.transform.position = murcki;
                     break;
                 }
             case (STAGE_TRAINING):
@@ -350,11 +350,11 @@ public class mainScript : MonoBehaviour
                     }
 
                     Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
-                    mainObject.transform.position = startRotation;
-                    sourceDirection = (gValue * (rotation.y)) + 180;
+                    mainObject.transform.localPosition = startRotation;
+                    
+                    sourceDirection = (gValue * (rotation.y)) + 180; // makes the source dirtectional
                     mainObject.transform.eulerAngles = new Vector3(0, sourceDirection, 0);
-
-                    // Vector3 sourceDirection
+                    
 
                     tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
                     tests[trainingNumber, chosenTest].headRotation.Add(rotation.y);
