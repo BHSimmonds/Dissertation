@@ -477,7 +477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179281071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.51, y: -1, z: 0}
+  m_LocalPosition: {x: 7.87, y: -1, z: 0}
   m_LocalScale: {x: 26.30562, y: 0.25, z: 10}
   m_Children: []
   m_Father: {fileID: 1501405077}
@@ -2581,7 +2581,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.1
+      value: 1.0017849
       inSlope: -0.005026427
       outSlope: -0.005026427
       tangentMode: 0
@@ -2590,7 +2590,7 @@ AudioSource:
       outWeight: 0.14038603
     - serializedVersion: 3
       time: 1
-      value: 1.1
+      value: 1.0017849
       inSlope: -0.000008063316
       outSlope: -0.000008063316
       tangentMode: 0
@@ -2661,8 +2661,8 @@ MonoBehaviour:
   interpolation: 1
   physicsBasedAttenuation: 1
   airAbsorption: 0
-  dipoleWeight: 0.771
-  dipolePower: 2.16
+  dipoleWeight: 0.307
+  dipolePower: 0.85
   occlusionMode: 0
   occlusionMethod: 0
   sourceRadius: 1
@@ -3216,7 +3216,7 @@ MonoBehaviour:
     RealtimeRays: 4096
     RealtimeSecondaryRays: 4096
     RealtimeBounces: 18
-    RealtimeThreadsPercentage: 18
+    RealtimeThreadsPercentage: 30
     BakeRays: 16384
     BakeSecondaryRays: 4096
     BakeBounces: 32
@@ -3430,7 +3430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461735356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 1.1, z: 0}
+  m_LocalPosition: {x: -5.16, y: 1.1, z: 0}
   m_LocalScale: {x: 0.25, y: 4, z: 10}
   m_Children: []
   m_Father: {fileID: 1501405077}
@@ -4059,7 +4059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1831405594
 Transform:
   m_ObjectHideFlags: 0
@@ -4435,7 +4435,7 @@ MonoBehaviour:
   - 10
   - 1
   firstTrainingToPerform: 0
-  ReverbVersion: 0
+  ReverbVersion: 1
   worldAnchor: {fileID: 1501405076}
   OculusCenterEyes: {fileID: 461435256}
   Canvas: {fileID: 1508536644}

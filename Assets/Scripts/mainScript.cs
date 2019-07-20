@@ -55,8 +55,7 @@ public class mainScript : MonoBehaviour
     private bool[] trainingFinished = new bool[3];
     public int firstTrainingToPerform;
     public bool ReverbVersion = false;
-    public bool directionalSource = false;
-
+ 
     private int _variantsG = 6;  // amount of G variants
     private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
     private int _variantsTraining = 3; // amount of trainings
