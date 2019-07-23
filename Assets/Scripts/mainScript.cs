@@ -14,7 +14,9 @@ public class testInstance
     public bool finished;
     public bool result;
 
-    public List<float> headRotation;
+    public List<float> headRotationx;
+    public List<float> headRotationy;
+    public List<float> headRotationz;
     public List<float> timestamp;
 }
 
@@ -55,6 +57,7 @@ public class mainScript : MonoBehaviour
     private bool[] trainingFinished = new bool[3];
     public int firstTrainingToPerform;
     public bool ReverbVersion = false;
+    public bool recordXandZ = false;
  
     private int _variantsG = 6;  // amount of G variants
     private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
@@ -231,7 +234,14 @@ public class mainScript : MonoBehaviour
                     tests[j, i].finished = false;
                     tests[j, i].result = false;
                     tests[j, i].timestamp = new List<float>();
-                    tests[j, i].headRotation = new List<float>();
+                    tests[j, i].headRotationy = new List<float>();
+                    if (recordXandZ)
+                    {
+                        tests[j, i].headRotationx = new List<float>();
+                        tests[j, i].headRotationz = new List<float>();
+
+                    }
+                    
                     i++;
                 }
                 
@@ -356,7 +366,13 @@ public class mainScript : MonoBehaviour
                     
 
                     tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
-                    tests[trainingNumber, chosenTest].headRotation.Add(rotation.y);
+                    tests[trainingNumber, chosenTest].headRotationy.Add(rotation.y);
+                    if (recordXandZ)
+                    {
+                        tests[trainingNumber, chosenTest].headRotationx.Add(rotation.x);
+                        tests[trainingNumber, chosenTest].headRotationz.Add(rotation.z);
+
+                    }
 
                     break;
                 }
@@ -572,7 +588,14 @@ public class mainScript : MonoBehaviour
                                 builder.Append("\",\"");
                                 builder.Append(tests[j, i].timestamp[k]);
                                 builder.Append("\",\"");
-                                builder.Append(tests[j, i].headRotation[k]);
+                                builder.Append(tests[j, i].headRotationy[k]);
+                                if (recordXandZ)
+                                {
+                                    builder.Append("\",\"");
+                                    builder.Append(tests[j, i].headRotationx[k]);
+                                    builder.Append("\",\"");
+                                    builder.Append(tests[j, i].headRotationz[k]);
+                                }
                                 builder.Append("\"");
                                 builder.Append("\r\n");
                             }
