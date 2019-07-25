@@ -281,7 +281,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.6953125, y: 0}
+  savedTextUV0: {x: 0.2578125, y: 0}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -786,7 +786,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.7734375, y: 0}
+  savedTextUV0: {x: 0.734375, y: 0}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -849,7 +849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &381295015
 Transform:
   m_ObjectHideFlags: 0
@@ -943,7 +943,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0, y: 0.27734375}
+  savedTextUV0: {x: 0.2578125, y: 0}
   savedFill: 0
 --- !u!114 &406628752
 MonoBehaviour:
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.26171875, y: 0}
+  savedTextUV0: {x: 0.05859375, y: 0.359375}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -2595,7 +2595,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.03125, y: 0.05859375}
+  savedTextUV0: {x: 0.62890625, y: 0.3203125}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2792,7 +2792,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.7734375, y: 0}
+  savedTextUV0: {x: 0.734375, y: 0}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -4253,9 +4253,9 @@ MonoBehaviour:
   - 60
   - 100
   trainingTime:
-  - 1
-  - 1
-  - 1
+  - 27
+  - 21
+  - 10.5
   firstTrainingToPerform: 0
   ReverbVersion: 1
   recordXandZ: 1
@@ -4367,7 +4367,7 @@ MonoBehaviour:
   directMixLevel: 1
   reflections: 1
   indirectBinaural: 1
-  indirectMixLevel: 1
+  indirectMixLevel: 0.5
   simulationType: 0
   uniqueIdentifier: 
   avoidSilenceDuringInit: 0
@@ -4720,7 +4720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2067271882
 Transform:
   m_ObjectHideFlags: 0

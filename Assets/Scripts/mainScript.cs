@@ -350,7 +350,7 @@ public class mainScript : MonoBehaviour
                     float alpha = (deltaTime) * trainingSpeed[trainingNumber];
                     Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                     mainObject.transform.localPosition = startRotation;
-
+                                     
                     if (alpha > 180)
                     {
                         alpha = 180 - alpha;
@@ -672,6 +672,7 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TRAINING_SCREEN):
                 {
+                    mainObject.transform.position = new Vector3(0, ballDistance, 1.4f);
                     soundObject.GetComponent<MeshRenderer>().enabled = false;
                     objectFloor.transform.position = farFloorPos;
                     objectLeftWall.transform.position = farLWallPos;
