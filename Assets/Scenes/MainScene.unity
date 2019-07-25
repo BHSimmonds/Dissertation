@@ -3881,7 +3881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1831405594
 Transform:
   m_ObjectHideFlags: 0
@@ -4257,7 +4257,7 @@ MonoBehaviour:
   - 21
   - 10.5
   firstTrainingToPerform: 0
-  ReverbVersion: 1
+  ReverbVersion: 0
   recordXandZ: 1
   worldAnchor: {fileID: 1501405076}
   OculusCenterEyes: {fileID: 461435256}
@@ -4285,7 +4285,7 @@ MonoBehaviour:
   chosenTest: 0
   StartPart: 0
   audioTest: 0
-  debugObjects: 0
+  debugObjects: 1
 --- !u!1 &2002677402
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,7 +4358,7 @@ MonoBehaviour:
   directBinaural: 1
   interpolation: 1
   physicsBasedAttenuation: 1
-  airAbsorption: 0
+  airAbsorption: 1
   dipoleWeight: 0.307
   dipolePower: 0.85
   occlusionMode: 0
@@ -4395,7 +4395,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 2fbf61c4b4579f44ea50d43ca3c0d73a,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2a5324bb824c3df4fb0f7a27be0a1d84, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b382a0a63632344e954a9e3e1920bc8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4404,7 +4404,7 @@ AudioSource:
   Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 2
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
