@@ -92,11 +92,7 @@ public class mainScript : MonoBehaviour
     public GameObject noButton;
     [HideInInspector]
     public GameObject testID;
-
-    public GameObject floorReverb;
-    public GameObject LeftWallReverb;
-    public GameObject RightWallReverb;
-
+      
     public GameObject objectFloor;
     public GameObject objectLeftWall;
     public GameObject objectRightWall;
@@ -105,6 +101,7 @@ public class mainScript : MonoBehaviour
 
 
     public GameObject mainObject;
+    public GameObject soundObject;
     public GameObject limitRightSide;
     public GameObject limitLeftSide;
 
@@ -169,7 +166,7 @@ public class mainScript : MonoBehaviour
         }
 
         Debug.Log("AMOUNT: "+ _amountTestsToPerform);
-        mainObject.GetComponent<AudioSource>().Play();
+        soundObject.GetComponent<AudioSource>().Play();
 
         // loading the index file to get the most recent participant ID
         try
@@ -349,7 +346,40 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TEST):
                 {
-               
+
+                    float alpha = (deltaTime) * trainingSpeed[trainingNumber];
+                    Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
+                    mainObject.transform.localPosition = startRotation;
+
+                    if (alpha > 180)
+                    {
+                        alpha = 180 - alpha;
+                    }
+
+
+                    //if (deltaTime > trainingTime[trainingNumber])
+                    //{
+                    //    trainingFinished[trainingNumber] = true;
+                    //    changeStage(STAGE_TEST_SCREEN);
+                    //}
+
+
+                    // RaycastHit seen = new RaycastHit();
+                    // Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
+                    // mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
+                    // bool trying = false;
+                    // if (Physics.Raycast(raydirection, out seen, 25.0f))
+                    // {
+                    // 
+                    //     if (seen.collider.tag == "matterObject")
+                    //     {
+                    //         mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
+                    //         trying = true;
+                    //     }
+                    // 
+                    // }
+
+
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
                    
@@ -358,11 +388,11 @@ public class mainScript : MonoBehaviour
                         rotation.y = rotation.y - 360;
                     }
 
-                    Vector3 startRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
-                    mainObject.transform.localPosition = startRotation;
+                    Vector3 soundRotation = new Vector3((Mathf.Sin( Mathf.PI / 180f *  gValue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f*gValue * (rotation.y))) * ballDistance);
+                    soundObject.transform.localPosition = soundRotation;
                     
                     sourceDirection = (gValue * (rotation.y)) + 180; // makes the source dirtectional
-                    mainObject.transform.eulerAngles = new Vector3(0, sourceDirection, 0);
+                    soundObject.transform.eulerAngles = new Vector3(0, sourceDirection, 0);
                     
 
                     tests[trainingNumber, chosenTest].timestamp.Add(deltaTime);
@@ -560,7 +590,7 @@ public class mainScript : MonoBehaviour
                 {
 
                     StringBuilder builder = new StringBuilder();
-                    builder.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation\"");
+                    builder.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation x\"");
                   //  builder.Append("\"id");
                     int i;
                     int j;
@@ -587,12 +617,15 @@ public class mainScript : MonoBehaviour
                                 builder.Append(Convert.ToInt32(tests[j, i].result));
                                 builder.Append("\",\"");
                                 builder.Append(tests[j, i].timestamp[k]);
-                                builder.Append("\",\"");
-                                builder.Append(tests[j, i].headRotationy[k]);
                                 if (recordXandZ)
                                 {
                                     builder.Append("\",\"");
                                     builder.Append(tests[j, i].headRotationx[k]);
+                                }
+                                builder.Append("\",\"");
+                                builder.Append(tests[j, i].headRotationy[k]);
+                                if (recordXandZ)
+                                {
                                     builder.Append("\",\"");
                                     builder.Append(tests[j, i].headRotationz[k]);
                                 }
@@ -639,6 +672,7 @@ public class mainScript : MonoBehaviour
 
             case (STAGE_TRAINING_SCREEN):
                 {
+                    soundObject.GetComponent<MeshRenderer>().enabled = false;
                     objectFloor.transform.position = farFloorPos;
                     objectLeftWall.transform.position = farLWallPos;
                     objectRightWall.transform.position = farRWallPos;
@@ -658,7 +692,7 @@ public class mainScript : MonoBehaviour
 
                     Canvas.SetActive(true);
                     participantTextfield.GetComponent<Text>().text = participantId.ToString();
-                    mainObject.GetComponent<AudioSource>().mute = true;
+                    soundObject.GetComponent<AudioSource>().mute = true;
 
                     limitLeftSide.SetActive(false);
                     limitRightSide.SetActive(false);
@@ -700,7 +734,7 @@ public class mainScript : MonoBehaviour
                     objectFloor.transform.position = origFloorPos;
                     objectLeftWall.transform.position = origLWallPos;
                     objectRightWall.transform.position = origRWallPos;
-                    mainObject.GetComponent<AudioSource>().mute = false;
+                    soundObject.GetComponent<AudioSource>().mute = false;
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     playerOrigin = OculusCenterEyes.transform.position;
@@ -711,14 +745,13 @@ public class mainScript : MonoBehaviour
                     LeanTween.scale(mainObject, new Vector3(1f, 1f, 1f), .5f);
                     if (debugObjects == false)
                     {
-                        mainObject.GetComponent<MeshRenderer>().enabled = false;
+                        soundObject.GetComponent<MeshRenderer>().enabled = false;
                     } else
                     {
-                        mainObject.GetComponent<MeshRenderer>().enabled = true;
+                        soundObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     chooseRandomTest();
                     appStage = STAGE_TEST;
-                    // volumeUp.TransitionTo(.5f);
                     break;
                 }
 
@@ -726,7 +759,7 @@ public class mainScript : MonoBehaviour
             case (STAGE_FINAL_SCREEN):
                 {
                     appStage = STAGE_FINAL_SCREEN;
-                    mainObject.GetComponent<AudioSource>().mute = true;
+                    soundObject.GetComponent<AudioSource>().mute = true;
                     LeanTween.alphaCanvas(UIpanels[2].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     UIpanels[3].SetActive(true);
                     LeanTween.alphaCanvas(UIpanels[3].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
