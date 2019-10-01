@@ -10,6 +10,7 @@ using System;
 public class testInstance
 {
     public float gValue;
+    public int headSpeed;
     public uint reflections; // bitwise boolean value = refFloor, refRWall, refLWall
     public bool finished;
     public bool result;
@@ -55,6 +56,9 @@ public class mainScript : MonoBehaviour
     public float[] trainingSpeed = new float[3];
     public float[] trainingTime = new float[3];
     private bool[] trainingFinished = new bool[3];
+    public float arcAngle;
+    private float a1, a2, alpha, deltaAngle;
+    private float previousAngle = 0;
     public int firstTrainingToPerform;
     public bool ReverbVersion = false;
     public bool recordXandZ = false;
@@ -62,6 +66,7 @@ public class mainScript : MonoBehaviour
     private int _variantsG = 6;  // amount of G variants
     private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
     private int _variantsTraining = 3; // amount of trainings
+    private int stars;
 
     // ______________ BINDINGS TO GAMEOBJECTS
 
@@ -146,6 +151,7 @@ public class mainScript : MonoBehaviour
         farFloorPos.y -= 10000;
         farLWallPos.x -= 10000;
         farRWallPos.x += 10000;
+       
 
         if (ReverbVersion)
         {
@@ -308,7 +314,20 @@ public class mainScript : MonoBehaviour
             case (STAGE_TRAINING):
                 {
 
-                    float alpha = (deltaTime) * trainingSpeed[trainingNumber];
+                    a1 = a2;
+                    a2 = (deltaTime) * trainingSpeed[trainingNumber];
+                    deltaAngle = a2 - a1;
+                    alpha += deltaAngle;
+
+                    if (alpha > arcAngle)
+                        alpha += (2*(90 - arcAngle));
+                    else if (alpha > (180+arcAngle))
+                        alpha += (2*(90 - arcAngle));
+
+                    if (alpha > 360)
+                        alpha -= 360;
+                    Debug.Log("Alpha" + alpha);
+
                     Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                     mainObject.transform.localPosition = startRotation;
                    
@@ -582,6 +601,7 @@ public class mainScript : MonoBehaviour
                     tests[trainingNumber,chosenTest].result = false;
                     tests[trainingNumber,chosenTest].finished = true;
                     acknowledgeTests(false);
+                    
                     // volumeDown.TransitionTo(.5f);
                     break;
                 }
@@ -589,55 +609,83 @@ public class mainScript : MonoBehaviour
             case (BUTTON_FINAL_YES):
                 {
 
-                    StringBuilder builder = new StringBuilder();
-                    builder.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation x\"");
-                  //  builder.Append("\"id");
+                    StringBuilder movement = new StringBuilder();
+                    StringBuilder results = new StringBuilder();
+                    movement.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation x\"");
+                    results.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
+                    //  builder.Append("\"id");
                     int i;
                     int j;
                     int k;
                     for (j = 0; j < 3; j++) {
                         for (i = 0; i < _amountTestsToPerform; i++)
                         {
-                         
+                            results.Append("\"");
+                            results.Append(participantId);
+                            results.Append("\",\"");
+                            results.Append(trainingSpeed[j]);
+                            results.Append("\",\"");
+                            results.Append(Convert.ToInt32((tests[j, i].reflections & 0x01) == 1));
+                            results.Append("\",\"");
+                            results.Append(Convert.ToInt32((tests[j, i].reflections & 0x02) == 2));
+                            results.Append("\",\"");
+                            results.Append(Convert.ToInt32((tests[j, i].reflections & 0x04) == 4));
+                            results.Append("\",\"");
+                            results.Append(tests[j, i].gValue);
+                            results.Append("\",\"");
+                            results.Append(Convert.ToInt32(tests[j, i].result));
+                            results.Append("\"");
+                            results.Append("\r\n");
+
+
                             for (k = 0; k < tests[j, i].timestamp.Count; k++)
                             {
-                                builder.Append("\"");
-                                builder.Append(participantId);
-                                builder.Append("\",\"");
-                                builder.Append(trainingSpeed[j]);
-                                builder.Append("\",\"");
-                                builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x01) == 1));
-                                builder.Append("\",\"");
-                                builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x02) == 2));
-                                builder.Append("\",\"");
-                                builder.Append(Convert.ToInt32((tests[j, i].reflections & 0x04) == 4));
-                                builder.Append("\",\"");
-                                builder.Append(tests[j, i].gValue);
-                                builder.Append("\",\"");
-                                builder.Append(Convert.ToInt32(tests[j, i].result));
-                                builder.Append("\",\"");
-                                builder.Append(tests[j, i].timestamp[k]);
+                                movement.Append("\"");
+                                movement.Append(participantId);
+                                movement.Append("\",\"");
+                                movement.Append(trainingSpeed[j]);
+                                movement.Append("\",\"");
+                                movement.Append(Convert.ToInt32((tests[j, i].reflections & 0x01) == 1));
+                                movement.Append("\",\"");
+                                movement.Append(Convert.ToInt32((tests[j, i].reflections & 0x02) == 2));
+                                movement.Append("\",\"");
+                                movement.Append(Convert.ToInt32((tests[j, i].reflections & 0x04) == 4));
+                                movement.Append("\",\"");
+                                movement.Append(tests[j, i].gValue);
+                                movement.Append("\",\"");
+                                movement.Append(Convert.ToInt32(tests[j, i].result));
+                                movement.Append("\",\"");
+                                movement.Append(tests[j, i].timestamp[k]);
                                 if (recordXandZ)
                                 {
-                                    builder.Append("\",\"");
-                                    builder.Append(tests[j, i].headRotationx[k]);
+                                    movement.Append("\",\"");
+                                    movement.Append(tests[j, i].headRotationx[k]);
                                 }
-                                builder.Append("\",\"");
-                                builder.Append(tests[j, i].headRotationy[k]);
+                                movement.Append("\",\"");
+                                movement.Append(tests[j, i].headRotationy[k]);
                                 if (recordXandZ)
                                 {
-                                    builder.Append("\",\"");
-                                    builder.Append(tests[j, i].headRotationz[k]);
+                                    movement.Append("\",\"");
+                                    movement.Append(tests[j, i].headRotationz[k]);
                                 }
-                                builder.Append("\"");
-                                builder.Append("\r\n");
+                                movement.Append("\"");
+                                movement.Append("\r\n");
                             }
-                            builder.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+
 
                         }
+                            
+
+                        
                     }
                     //   FileUtil.
-                    System.IO.File.AppendAllText("data" + participantId + ".csv", builder.ToString());
+                    System.IO.File.AppendAllText("movement" + participantId + ".csv", movement.ToString());
+                    System.IO.File.AppendAllText("results" + participantId + ".csv", results.ToString());
                     // 
                     participantId++;
 
@@ -713,6 +761,7 @@ public class mainScript : MonoBehaviour
                     objectRightWall.transform.position = farRWallPos;
                     limitLeftSide.SetActive(true);
                     limitRightSide.SetActive(true);
+                    a1 = 0; // Reset the reference for the rotation
                     break;
                 }
 
@@ -735,6 +784,7 @@ public class mainScript : MonoBehaviour
                     objectFloor.transform.position = origFloorPos;
                     objectLeftWall.transform.position = origLWallPos;
                     objectRightWall.transform.position = origRWallPos;
+                    a1 = 0; // Reset the reference for the rotation
                     soundObject.GetComponent<AudioSource>().mute = false;
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
