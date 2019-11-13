@@ -4248,16 +4248,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4fec60b0fb6c34aa370a5d488095a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tests: []
   trainingSpeed:
   - 20
   - 60
   - 100
-  trainingTime:
-  - 27
-  - 21
-  - 10.75
+  trainingTime: 0
+  arcAngle: 10
   firstTrainingToPerform: 0
-  ReverbVersion: 1
   recordXandZ: 1
   worldAnchor: {fileID: 1501405076}
   OculusCenterEyes: {fileID: 461435256}
@@ -4272,8 +4270,11 @@ MonoBehaviour:
   noButton: {fileID: 1859688528}
   testID: {fileID: 1835400572}
   objectFloor: {fileID: 179281071}
+  inclFloor: 0
   objectLeftWall: {fileID: 1461735356}
+  inclLeftWall: 0
   objectRightWall: {fileID: 819249039}
+  inclRightWall: 0
   mainObject: {fileID: 986118183}
   soundObject: {fileID: 2002677402}
   limitRightSide: {fileID: 16315944}
@@ -4281,11 +4282,10 @@ MonoBehaviour:
   _amountTestsToPerform: 0
   ballDistance: 5
   gValue: 0.5
-  trainingNumber: 0
   chosenTest: 0
   StartPart: 0
   audioTest: 0
-  debugObjects: 0
+  debugObjects: 1
 --- !u!1 &2002677402
 GameObject:
   m_ObjectHideFlags: 0
