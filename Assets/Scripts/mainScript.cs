@@ -170,7 +170,10 @@ public class mainScript : MonoBehaviour
         limitRightSide.transform.Rotate(0, (-(90 - arcAngle)), 0, Space.World); // rotation of ball limits
         limitLeftSide.transform.Rotate(0, (90 - arcAngle), 0, Space.World);
 
-
+        AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
+        source.clip = soundSource[0]; // Make it play the first sound
+        source.Play(); // Play it again Sam
+        // soundObject.GetComponent<AudioSource>.clip = soundSource[0];
 
 
         _variantsRevTests = 1 + Convert.ToInt32(inclFloor) + Convert.ToInt32(inclLeftWall) + Convert.ToInt32(inclRightWall);
@@ -348,7 +351,7 @@ public class mainScript : MonoBehaviour
                         rotation.y = rotation.y - 360;
                     }
 
-                    Vector3 soundRotation = new Vector3((Mathf.Sin(Mathf.PI / 180f * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f * (rotation.y))) * ballDistance);
+                    Vector3 soundRotation = new Vector3((Mathf.Sin(Mathf.PI / 180f * -0.25f * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f * -0.25f * (rotation.y))) * ballDistance);
                     soundObject.transform.localPosition = soundRotation;
                     mainObject.transform.localPosition = soundRotation;
 
@@ -357,12 +360,21 @@ public class mainScript : MonoBehaviour
 
 
 
-
+                    int t = 0;
                     if (deltaTime > trainingTime)
                     {
+                        if (deltaTime > trainingTime && t > (soundSource.Length))
+                        {
+                            trainingFinished = true;
+                            changeStage(STAGE_TEST_SCREEN);
+                        }
 
-                        trainingFinished = true;
-                        changeStage(STAGE_TEST_SCREEN);
+                        deltaTime = 0;
+                        AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
+                        source.clip = soundSource[t];
+                        source.Play();
+                        t++;
+
                     }
 
 
