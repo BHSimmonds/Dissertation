@@ -12,6 +12,7 @@ public class testInstance
     public float gValue;
     public int headSpeed;
     public uint reflections; // bitwise boolean value = refFloor, refRWall, refLWall
+    public int soundSource;
     public bool finished;
     public bool result;
 
@@ -47,22 +48,24 @@ public class mainScript : MonoBehaviour
 
 
 
+    public AudioClip[] soundSource;
     private int appStage = 0;
 
     List<bool> testSuccessfull = new List<bool>(); // I don't know what this is
 
-    public testInstance[] tests;
+    private testInstance[] tests;
 
-    public float[] trainingSpeed = new float[3];
+    public int[] headRotSpeed = new int[3];
     public float trainingTime;
     private bool trainingFinished;
     public float arcAngle; // how long is the arc for any scenario
     private float a1, a2, alpha, deltaAngle; // a1=previous angle value, a2 is new angle value, alpha is scene angle for ball location, deltaAngle is the change in angle for the frame
     public int firstTrainingToPerform;
     public bool recordXandZ = false;
-    private int _variantsSpeeds = 3; // NEED TO LINK THIS TO SIZE OF trainingSpeed array!! ALso NEED TO LINK trainingTime array size to this. THIS NUMBER SHOULD MATCH "public float[] trainingSpeed = new float[3];"
-    private int _variantsG = 6;  // amount of G variants
-    private int _variantsRevTests; // amount of test variations - if sound is reflective or not? 
+    // private int _variantsSpeeds = 3; // NEED TO LINK THIS TO SIZE OF headRotSpeed array!! ALso NEED TO LINK trainingTime array size to this. THIS NUMBER SHOULD MATCH "public float[] headRotSpeed = new float[3];"
+    // private int _variantsG = 6;  // amount of G variants
+    private int _variantsRevTests = 0; // amount of test variations - if sound is reflective or not? 
+    // private int _variantsTests = 0; // amount of tests at each speed
     // private int _variantsTraining = 3; // amount of trainings GET RID OF THIS ******************************************************
     private int _variantsSources = 1; // need to find out how to  automate this **********************************
 
@@ -116,7 +119,7 @@ public class mainScript : MonoBehaviour
 
     //______________________________________________ IMPORTANT VALUES
 
-    private float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
+    public float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
 
     private int participantId;
     public int _amountTestsToPerform;    // during launch should be 0, if you put other value it conduct only _AmountOfTests from each training
@@ -170,11 +173,11 @@ public class mainScript : MonoBehaviour
 
 
 
-        _variantsRevTests = Convert.ToInt32(inclFloor) + Convert.ToInt32(inclLeftWall) + Convert.ToInt32(inclRightWall);
+        _variantsRevTests = 1 + Convert.ToInt32(inclFloor) + Convert.ToInt32(inclLeftWall) + Convert.ToInt32(inclRightWall);
 
         if (_amountTestsToPerform == 0)
         {
-            _amountTestsToPerform = _variantsG * _variantsRevTests * _variantsSpeeds * _variantsSources;
+            _amountTestsToPerform = (gValues.Length) * _variantsRevTests * (headRotSpeed.Length) * _variantsSources;
         }
 
         tests = new testInstance[_amountTestsToPerform];
@@ -197,70 +200,83 @@ public class mainScript : MonoBehaviour
 
         // this is the part where you generate all the test variants
 
-        int i;
+        int i = 0;
+        int j;
         uint m;
-        for (i = 0; i < _amountTestsToPerform; i++) // make a test object for each scenario
+        int l;
+        for (j = 0; j < (headRotSpeed.Length); j++) //speeds
         {
             int k;
+            // i = 0;
             k = 0;
-            for (k = 0; k < _variantsG; k++) // variants for each g value
+            for (k = 0; k < (gValues.Length); k++) // variants for each g value
             {
-                for (m = 0; m < _variantsRevTests; m++) // reverb variants for each g value
+                for (l = 0; l < _variantsSources; l++) //variants for each sound source
                 {
-                    tests[i] = new testInstance();
-                    tests[i].gValue = gValues[k];
-                    switch (m)
+
+                    for (m = 0; m < _variantsRevTests; m++) // reverb variants for each g value
                     {
-                        case (0):
-                            {
+                        tests[i] = new testInstance();
+                        tests[i].gValue = gValues[k];
+
+                        switch (m)
+                        {
+                            case (0):
+                                {
+                                    tests[i].reflections = 0;
+                                    break;
+                                }
+
+                            case (1):
+                                {
+                                    tests[i].reflections = _RefFloor;
+                                    break;
+                                }
+
+                            case (2):
+                                {
+                                    tests[i].reflections = _RefRWall;
+                                    break;
+                                }
+
+                            case (3):
+                                {
+                                    tests[i].reflections = _refLWall;
+                                    break;
+
+
+                                }
+
+                            default:
                                 tests[i].reflections = 0;
                                 break;
-                            }
 
-                        case (1):
-                            {
-                                tests[i].reflections = _RefFloor;
-                                break;
-                            }
+                        }
 
-                        case (2):
-                            {
-                                tests[i].reflections = _RefRWall;
-                                break;
-                            }
 
-                        case (3):
-                            {
-                                tests[i].reflections = _refLWall;
-                                break;
-                            }
-                    }
+                        tests[i].soundSource = l;
+                        tests[i].gValue = gValues[k];
+                        tests[i].headSpeed = headRotSpeed[j];
+                        // tests[i].finished = false;
+                        // tests[i].result = false;
+                        tests[i].timestamp = new List<float>();
+                        tests[i].headRotationy = new List<float>();
+                        if (recordXandZ)
+                        {
+                            tests[i].headRotationx = new List<float>();
+                            tests[i].headRotationz = new List<float>();
 
-                    //else
-                    //{
-                    //    tests[i].reflections = 0;
-                    //}
+                        }
+                        i++;
 
-                    tests[i].finished = false;
-                    tests[i].result = false;
-                    tests[i].timestamp = new List<float>();
-                    tests[i].headRotationy = new List<float>();
-                    if (recordXandZ)
-                    {
-                        tests[i].headRotationx = new List<float>();
-                        tests[i].headRotationz = new List<float>();
+
 
                     }
-
-
-
-
-
 
                 }
 
             }
-            i++;
+
         }
 
         newSession();
@@ -275,20 +291,20 @@ public class mainScript : MonoBehaviour
     void restartExperience()
     {
         testCount = 0;
-        // trainingNumber =firstTrainingToPerform;
+
         int i;
-        int j;
-        for (j = 0; j < 3; j++)
+
+        for (i = 0; i < _amountTestsToPerform; i++)
         {
-            for (i = 0; i < _amountTestsToPerform; i++)
-            {
-                tests[i].finished = false;
-                tests[i].result = false;
-            }
+
+            tests[i].finished = false;
+            tests[i].result = false;
+
         }
 
         trainingFinished = false;
         changeStage(STAGE_TRAINING_SCREEN);
+        Debug.Log("BUILDING TRAINING SCREEN");
     }
 
     // Update is called once per frame
@@ -318,6 +334,7 @@ public class mainScript : MonoBehaviour
                     murcki.x = OculusCenterEyes.transform.position.x;
                     murcki.z = OculusCenterEyes.transform.position.z;
                     worldAnchor.transform.position = murcki;
+                    Debug.Log("Stage_Training_Screen");
                     break;
                 }
             case (STAGE_TRAINING):
@@ -371,9 +388,9 @@ public class mainScript : MonoBehaviour
             case (STAGE_TEST):
                 {
 
-                    gValue = tests[chosenTest].gValue;
+                    gValue = (tests[chosenTest].gValue);
                     a1 = a2;
-                    a2 = (deltaTime) * tests[chosenTest].headSpeed;
+                    a2 = (deltaTime) * (tests[chosenTest].headSpeed);
                     deltaAngle = a2 - a1;
                     alpha += deltaAngle;
 
@@ -388,10 +405,10 @@ public class mainScript : MonoBehaviour
                     Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                     mainObject.transform.localPosition = startRotation;
 
-                    if (alpha > 180)
-                    {
-                        alpha = 180 - alpha;
-                    }
+                    //if (alpha > 180)
+                    //{
+                    //    alpha = 180 - alpha;
+                    //}
 
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
@@ -410,6 +427,7 @@ public class mainScript : MonoBehaviour
 
                     tests[chosenTest].timestamp.Add(deltaTime);
                     tests[chosenTest].headRotationy.Add(rotation.y);
+
                     if (recordXandZ)
                     {
                         tests[chosenTest].headRotationx.Add(rotation.x);
@@ -470,6 +488,7 @@ public class mainScript : MonoBehaviour
         testCount += 1;
 
         headSpeed = tests[chosenTest].headSpeed;
+        gValue = tests[chosenTest].gValue;
 
         if (debugObjects == true)
         {
@@ -483,9 +502,9 @@ public class mainScript : MonoBehaviour
 
         Debug.Log("chosenTest: " + chosenTest + ": at speed: " + headSpeed + "g Value: " + gValue + ": at speed: " + headSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
 
-        // floorReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefFloor) == _RefFloor); 
-        // LeftWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _refLWall) == _refLWall);
-        // RightWallReverb.SetActive((tests[trainingNumber, chosenTest].reflections & _RefRWall) == _RefRWall);
+        // floorReverb.SetActive((tests[chosenTest].reflections & _RefFloor) == _RefFloor); 
+        // LeftWallReverb.SetActive((tests[chosenTest].reflections & _refLWall) == _refLWall);
+        // RightWallReverb.SetActive((tests[chosenTest].reflections & _RefRWall) == _RefRWall);
 
         if ((tests[chosenTest].reflections & _RefFloor) == _RefFloor) // moves the walls away instead of deactivating
         {
@@ -567,7 +586,7 @@ public class mainScript : MonoBehaviour
         }
         else
         {
-            changeStage(STAGE_TRAINING_SCREEN);
+            changeStage(STAGE_TEST_SCREEN);
         }
     }
 
@@ -645,7 +664,7 @@ public class mainScript : MonoBehaviour
                                 movement.Append("\"");
                                 movement.Append(participantId);
                                 movement.Append("\",\"");
-                                movement.Append(trainingSpeed[j]);
+                                movement.Append(headRotSpeed[j]);
                                 movement.Append("\",\"");
                                 movement.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
                                 movement.Append("\",\"");
@@ -749,6 +768,7 @@ public class mainScript : MonoBehaviour
                     limitRightSide.SetActive(false);
 
                     appStage = STAGE_TRAINING_SCREEN;
+                    Debug.Log("BUILDING OPENING SCREEN");
                     break;
                 }
 
@@ -761,8 +781,8 @@ public class mainScript : MonoBehaviour
                     objectFloor.transform.position = farFloorPos;
                     objectLeftWall.transform.position = farLWallPos;
                     objectRightWall.transform.position = farRWallPos;
-                    limitLeftSide.SetActive(true);
-                    limitRightSide.SetActive(true);
+                    // limitLeftSide.SetActive(false);
+                    // limitRightSide.SetActive(false);
                     soundObject.GetComponent<AudioSource>().mute = false;
                     a2 = 0; // Reset the reference for the rotation
                     break;
@@ -778,8 +798,8 @@ public class mainScript : MonoBehaviour
                     // a2 = 0; // Reset the reference for the rotation   
                     LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
-                    // limitLeftSide.SetActive(false);
-                    // limitRightSide.SetActive(false);
+                    limitLeftSide.SetActive(true);
+                    limitRightSide.SetActive(true);
                     break;
                 }
 
@@ -791,6 +811,9 @@ public class mainScript : MonoBehaviour
                     objectRightWall.transform.position = origRWallPos;
                     a2 = 0; // Reset the reference for the rotation                    
                     soundObject.GetComponent<AudioSource>().mute = false;
+                    AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
+                    source.clip = soundSource[tests[chosenTest].soundSource];
+                    source.Play();
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);
                     playerOrigin = OculusCenterEyes.transform.position;

@@ -281,7 +281,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.2578125, y: 0}
+  savedTextUV0: {x: 0.59765625, y: 0}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -786,7 +786,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.734375, y: 0}
+  savedTextUV0: {x: 0.1015625, y: 0.296875}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -943,7 +943,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.2578125, y: 0}
+  savedTextUV0: {x: 0.3203125, y: 0.109375}
   savedFill: 0
 --- !u!114 &406628752
 MonoBehaviour:
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.05859375, y: 0.359375}
+  savedTextUV0: {x: 0.26171875, y: 0}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -1922,7 +1922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &792094306
 Transform:
   m_ObjectHideFlags: 0
@@ -2405,7 +2405,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.65234375, y: 0}
+  savedTextUV0: {x: 0, y: 0.0078125}
   savedFill: 0
 --- !u!114 &863200914
 MonoBehaviour:
@@ -2595,7 +2595,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.62890625, y: 0.3203125}
+  savedTextUV0: {x: 0.03125, y: 0.05859375}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2792,7 +2792,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.734375, y: 0}
+  savedTextUV0: {x: 0.0625, y: 0.08984375}
   savedFill: 0
 --- !u!114 &1151535338
 MonoBehaviour:
@@ -2923,7 +2923,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.5, y: 0.26953125}
+  savedTextUV0: {x: 0, y: 0.5}
   savedFill: 0
 --- !u!114 &1283119277
 MonoBehaviour:
@@ -3781,7 +3781,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.58203125, y: 0.48046875}
+  savedTextUV0: {x: 0.73046875, y: 0.4609375}
   savedFill: 0
 --- !u!114 &1684459538
 MonoBehaviour:
@@ -4010,7 +4010,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 960}
   savedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
-  savedTextUV0: {x: 0.671875, y: 0.08203125}
+  savedTextUV0: {x: 0.3359375, y: 0}
   savedFill: 0
 --- !u!114 &1835400575
 MonoBehaviour:
@@ -4248,13 +4248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4fec60b0fb6c34aa370a5d488095a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tests: []
-  trainingSpeed:
-  - 20
-  - 60
-  - 100
-  trainingTime: 0
-  arcAngle: 10
+  soundSource:
+  - {fileID: 0}
+  - {fileID: 0}
+  headRotSpeed: 14000000280000003c000000
+  trainingTime: 10
+  arcAngle: 30
   firstTrainingToPerform: 0
   recordXandZ: 1
   worldAnchor: {fileID: 1501405076}
@@ -4279,6 +4278,13 @@ MonoBehaviour:
   soundObject: {fileID: 2002677402}
   limitRightSide: {fileID: 16315944}
   limitLeftSide: {fileID: 1529923700}
+  gValues:
+  - -0.5
+  - -0.25
+  - -0
+  - 0.25
+  - 0.5
+  - 0.75
   _amountTestsToPerform: 0
   ballDistance: 5
   gValue: 0.5
