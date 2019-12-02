@@ -4249,8 +4249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundSource:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 8b382a0a63632344e954a9e3e1920bc8, type: 3}
+  - {fileID: 8300000, guid: 2a5324bb824c3df4fb0f7a27be0a1d84, type: 3}
   headRotSpeed: 14000000280000003c000000
   trainingTime: 10
   arcAngle: 30
@@ -4291,7 +4291,7 @@ MonoBehaviour:
   chosenTest: 0
   StartPart: 0
   audioTest: 0
-  debugObjects: 1
+  debugObjects: 0
 --- !u!1 &2002677402
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,7 +4403,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 2a5324bb824c3df4fb0f7a27be0a1d84, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.379
   m_Pitch: 1
   Loop: 1
   Mute: 0
