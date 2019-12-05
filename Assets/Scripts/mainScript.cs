@@ -53,7 +53,7 @@ public class mainScript : MonoBehaviour
 
     List<bool> testSuccessfull = new List<bool>(); // I don't know what this is
 
-    private testInstance[] tests;
+    public testInstance[,,] tests;
 
     public int[] headRotSpeed = new int[3];
     public float trainingTime;
@@ -62,12 +62,7 @@ public class mainScript : MonoBehaviour
     private float a1, a2, alpha, deltaAngle; // a1=previous angle value, a2 is new angle value, alpha is scene angle for ball location, deltaAngle is the change in angle for the frame
     public int firstTrainingToPerform;
     public bool recordXandZ = false;
-    // private int _variantsSpeeds = 3; // NEED TO LINK THIS TO SIZE OF headRotSpeed array!! ALso NEED TO LINK trainingTime array size to this. THIS NUMBER SHOULD MATCH "public float[] headRotSpeed = new float[3];"
-    // private int _variantsG = 6;  // amount of G variants
-    private int _variantsRevTests = 0; // amount of test variations - if sound is reflective or not? 
-    // private int _variantsTests = 0; // amount of tests at each speed
-    // private int _variantsTraining = 3; // amount of trainings GET RID OF THIS ******************************************************
-    private int _variantsSources = 1; // need to find out how to  automate this **********************************
+
 
     // ______________ BINDINGS TO GAMEOBJECTS
 
@@ -121,6 +116,10 @@ public class mainScript : MonoBehaviour
 
     public float[] gValues = new float[6] { -.5f, -.25f, -0f, .25f, .5f, .75f };
 
+    private int _variantsG = 6;  // amount of G variants
+    private int _variantsTests = 4; // amount of test variations - if sound is reflective or not? 
+    private int _variantsTraining = 3; // amount of trainings
+
     private int participantId;
     public int _amountTestsToPerform;    // during launch should be 0, if you put other value it conduct only _AmountOfTests from each training
     public float ballDistance;
@@ -152,7 +151,7 @@ public class mainScript : MonoBehaviour
         farLWallPos = origFloorPos;
         farRWallPos = origFloorPos;
 
-        
+
         farFloorPos.y -= 10000;
         farLWallPos.x -= 10000;
         farRWallPos.x += 10000;
@@ -172,25 +171,14 @@ public class mainScript : MonoBehaviour
         limitRightSide.transform.Rotate(0, (-(90 - arcAngle)), 0, Space.World); // rotation of ball limits
         limitLeftSide.transform.Rotate(0, (90 - arcAngle), 0, Space.World);
 
-     //   AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
-     //   source.clip = soundSource[0]; // Make it play the first sound
-     //   source.Play(); // Play it again Sam
-        // soundObject.GetComponent<AudioSource>.clip = soundSource[0];
-
-
-        _variantsRevTests = 1 + Convert.ToInt32(inclFloor) + Convert.ToInt32(inclLeftWall) + Convert.ToInt32(inclRightWall);
+        tests = new testInstance[_variantsTraining, _variantsG * _variantsTests,soundSource.Length];
 
         if (_amountTestsToPerform == 0)
         {
-            _amountTestsToPerform = (gValues.Length) * _variantsRevTests * (headRotSpeed.Length) * _variantsSources;
+            _amountTestsToPerform = _variantsG * _variantsTests * soundSource.Length;
         }
 
-        tests = new testInstance[_amountTestsToPerform];
-
-
-
-       // Debug.Log("AMOUNT: " + _amountTestsToPerform);
-       // soundObject.GetComponent<AudioSource>().Play();
+    
 
         // loading the index file to get the most recent participant ID
         try
@@ -205,84 +193,73 @@ public class mainScript : MonoBehaviour
 
         // this is the part where you generate all the test variants
 
-        int i = 0;
+        int i;
         int j;
         uint m;
-        int l;
-        for (j = 0; j < (headRotSpeed.Length); j++) //speeds
-        {
-            int k;
-            // i = 0;
-            k = 0;
-            for (k = 0; k < (gValues.Length); k++) // variants for each g value
-            {
-                for (l = 0; l < _variantsSources; l++) //variants for each sound source
-                {
+        int v;
 
-                    for (m = 0; m < _variantsRevTests; m++) // reverb variants for each g value
+        for (v = 0; v < soundSource.Length; v++)
+        {
+            for (j = 0; j < 3; j++) // speeds??
+            {
+                int k;
+                i = 0;
+                k = 0;
+                for (k = 0; k < _variantsG; k++)
+                {
+                    for (m = 0; m < _variantsTests; m++) // reverb variants for each g value
                     {
-                        tests[i] = new testInstance();
-                        tests[i].gValue = gValues[k];
+                        tests[j, i,v] = new testInstance();
+                        tests[j, i,v].gValue = gValues[k];
+
 
                         switch (m)
                         {
                             case (0):
                                 {
-                                    tests[i].reflections = 0;
+                                    tests[j, i,v].reflections = 0;
                                     break;
                                 }
 
                             case (1):
                                 {
-                                    tests[i].reflections = _RefFloor;
+                                    tests[j, i,v].reflections = _RefFloor;
                                     break;
                                 }
 
                             case (2):
                                 {
-                                    tests[i].reflections = _RefRWall;
+                                    tests[j, i,v].reflections = _RefRWall;
                                     break;
                                 }
 
                             case (3):
                                 {
-                                    tests[i].reflections = _refLWall;
+                                    tests[j, i,v].reflections = _refLWall;
                                     break;
-
-
                                 }
-
-                            default:
-                                tests[i].reflections = 0;
-                                break;
-
                         }
+                    }
 
-
-                        tests[i].soundSource = l;
-                        tests[i].gValue = gValues[k];
-                        tests[i].headSpeed = headRotSpeed[j];
-                        // tests[i].finished = false;
-                        // tests[i].result = false;
-                        tests[i].timestamp = new List<float>();
-                        tests[i].headRotationy = new List<float>();
-                        if (recordXandZ)
-                        {
-                            tests[i].headRotationx = new List<float>();
-                            tests[i].headRotationz = new List<float>();
-
-                        }
-                        i++;
-
-
+                    tests[j, i,v].finished = false;
+                    tests[j, i,v].result = false;
+                    tests[j, i,v].timestamp = new List<float>();
+                    tests[j, i,v].headRotationy = new List<float>();
+                    tests[j, i, v].soundSource = v;
+                    if (recordXandZ)
+                    {
+                        tests[j, i,v].headRotationx = new List<float>();
+                        tests[j, i,v].headRotationz = new List<float>();
 
                     }
 
+                    i++;
                 }
 
             }
 
         }
+    
 
         newSession();
     }
@@ -297,14 +274,21 @@ public class mainScript : MonoBehaviour
     {
         testCount = 0;
 
+        testCount = 0;
+
         int i;
-
-        for (i = 0; i < _amountTestsToPerform; i++)
+        int j;
+        int k;
+        for (k = 0; k < soundSource.Length; k++)
         {
-
-            tests[i].finished = false;
-            tests[i].result = false;
-
+            for (j = 0; j < 3; j++)
+            {
+                for (i = 0; i < _variantsG * _variantsTests; i++)
+                {
+                    tests[j, i,k].finished = false;
+                    tests[j, i,k].result = false;
+                }
+            }
         }
 
         trainingFinished = false;
