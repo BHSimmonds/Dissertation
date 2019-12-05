@@ -151,6 +151,8 @@ public class mainScript : MonoBehaviour
         farFloorPos = origFloorPos;
         farLWallPos = origFloorPos;
         farRWallPos = origFloorPos;
+
+        
         farFloorPos.y -= 10000;
         farLWallPos.x -= 10000;
         farRWallPos.x += 10000;
@@ -170,9 +172,9 @@ public class mainScript : MonoBehaviour
         limitRightSide.transform.Rotate(0, (-(90 - arcAngle)), 0, Space.World); // rotation of ball limits
         limitLeftSide.transform.Rotate(0, (90 - arcAngle), 0, Space.World);
 
-        AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
-        source.clip = soundSource[0]; // Make it play the first sound
-        source.Play(); // Play it again Sam
+     //   AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
+     //   source.clip = soundSource[0]; // Make it play the first sound
+     //   source.Play(); // Play it again Sam
         // soundObject.GetComponent<AudioSource>.clip = soundSource[0];
 
 
@@ -187,8 +189,8 @@ public class mainScript : MonoBehaviour
 
 
 
-        Debug.Log("AMOUNT: " + _amountTestsToPerform);
-        soundObject.GetComponent<AudioSource>().Play();
+       // Debug.Log("AMOUNT: " + _amountTestsToPerform);
+       // soundObject.GetComponent<AudioSource>().Play();
 
         // loading the index file to get the most recent participant ID
         try
@@ -198,7 +200,7 @@ public class mainScript : MonoBehaviour
         }
         catch (System.Exception e)
         {
-
+            participantId = 0;
         }
 
         // this is the part where you generate all the test variants
@@ -342,7 +344,7 @@ public class mainScript : MonoBehaviour
                 }
             case (STAGE_TRAINING):
                 {
-
+                    Debug.Log("Stage training");
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
 
@@ -361,19 +363,24 @@ public class mainScript : MonoBehaviour
 
 
                     int t = 0;
+                    if(deltaTime> trainingTime /2)
+                    {
+                        if (soundObject.GetComponent<AudioSource>().clip != soundSource[1])
+                        {
+                            soundObject.GetComponent<AudioSource>().Stop();
+                            soundObject.GetComponent<AudioSource>().clip = soundSource[1];
+                            soundObject.GetComponent<AudioSource>().Play();
+                        }
+                    }
                     if (deltaTime > trainingTime)
                     {
-                        if (deltaTime > trainingTime && t > (soundSource.Length))
-                        {
+                     //   if (deltaTime > trainingTime)
+                    //    {
                             trainingFinished = true;
                             changeStage(STAGE_TEST_SCREEN);
-                        }
+                     //   }
 
-                        deltaTime = 0;
-                        AudioSource source = gameObject.GetComponent<AudioSource>(); // Newly added by Ben
-                        source.clip = soundSource[t];
-                        source.Play();
-                        t++;
+       
 
                     }
 
@@ -774,11 +781,10 @@ public class mainScript : MonoBehaviour
 
                     Canvas.SetActive(true);
                     participantTextfield.GetComponent<Text>().text = participantId.ToString();
-                    soundObject.GetComponent<AudioSource>().mute = true;
+                  //  soundObject.GetComponent<AudioSource>().mute = true;
 
                     limitLeftSide.SetActive(false);
                     limitRightSide.SetActive(false);
-
                     appStage = STAGE_TRAINING_SCREEN;
                     Debug.Log("BUILDING OPENING SCREEN");
                     break;
@@ -795,7 +801,8 @@ public class mainScript : MonoBehaviour
                     objectRightWall.transform.position = farRWallPos;
                     // limitLeftSide.SetActive(false);
                     // limitRightSide.SetActive(false);
-                    soundObject.GetComponent<AudioSource>().mute = false;
+                    soundObject.GetComponent<AudioSource>().clip = soundSource[0];
+                    soundObject.GetComponent<AudioSource>().Play();
                     a2 = 0; // Reset the reference for the rotation
                     break;
                 }
@@ -806,7 +813,7 @@ public class mainScript : MonoBehaviour
                     Canvas.SetActive(true);
                     UIpanels[0].SetActive(false);
                     UIpanels[1].SetActive(true);
-
+                    soundObject.GetComponent<AudioSource>().Stop();
                     // a2 = 0; // Reset the reference for the rotation   
                     LeanTween.scale(mainObject, new Vector3(0, 0, 0), .5f);
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 1.0f, 0.5f);
