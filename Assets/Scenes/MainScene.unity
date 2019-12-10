@@ -140,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16315944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 1.2, z: -1}
+  m_LocalPosition: {x: 6.3, y: 1.2, z: -8.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1501405077}
@@ -3491,7 +3491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529923700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 1.2, z: -1}
+  m_LocalPosition: {x: -12, y: 1.2, z: -7.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1501405077}
@@ -4253,8 +4253,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2a5324bb824c3df4fb0f7a27be0a1d84, type: 3}
   tests: []
   headRotSpeed: 14000000280000003c000000
-  trainingTime: 10
-  arcAngle: 120
+  trainingTime: 5
+  arcAngle: 30
   recordXandZ: 1
   worldAnchor: {fileID: 1501405076}
   OculusCenterEyes: {fileID: 461435256}
@@ -4269,11 +4269,11 @@ MonoBehaviour:
   noButton: {fileID: 1859688528}
   testID: {fileID: 1835400572}
   objectFloor: {fileID: 179281071}
-  inclFloor: 1
+  inclFloor: 0
   objectLeftWall: {fileID: 1461735356}
-  inclLeftWall: 1
+  inclLeftWall: 0
   objectRightWall: {fileID: 819249039}
-  inclRightWall: 1
+  inclRightWall: 0
   mainObject: {fileID: 986118183}
   soundObject: {fileID: 2002677402}
   limitRightSide: {fileID: 16315944}
@@ -4506,7 +4506,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002677402}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

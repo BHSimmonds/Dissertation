@@ -157,7 +157,7 @@ public class mainScript : MonoBehaviour
         rLimitPos = limitRightSide.transform.position;
         lLimitPos = limitLeftSide.transform.position;
 
-        float limitAngle = arcAngle + 11.537f; // what is the angle of the limits with the adjustment 11.537
+        float limitAngle = arcAngle / 2f + 25; // 11.537f; // what is the angle of the limits with the adjustment 11.537
         rLimitPos.x = Mathf.Sin((limitAngle * Mathf.PI) / 180) * ballDistance;
         rLimitPos.z = Mathf.Cos((limitAngle * Mathf.PI) / 180) * ballDistance;
         lLimitPos.x = Mathf.Sin(((360 - limitAngle) * Mathf.PI) / 180) * ballDistance;
@@ -395,15 +395,29 @@ public class mainScript : MonoBehaviour
                     alpha += deltaAngle;
 
                     if ((alpha > arcAngle) && (alpha < (180 - arcAngle)))
+                    {
                         alpha += (2 * (90 - arcAngle));
-                    else if ((alpha > (180 + arcAngle)) && (alpha < (360 - arcAngle)))
-                        alpha += (2 * (90 - arcAngle));
+                    }
+                    else
+                    {
 
-                    if (alpha > 360)
-                        alpha -= 360;
+                        if ((alpha > (180 + arcAngle)) && (alpha < (360 - arcAngle)))
+                        {
+                            alpha += (2 * (90 - arcAngle));
+                        }
+                    }
+
+                        if (alpha > 360)
+                        {
+                            alpha -= 360;
+                        }
+                    
 
                     Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                     mainObject.transform.localPosition = startRotation;
+
+
+
 
                     //if (alpha > 180)
                     //{
@@ -509,28 +523,25 @@ public class mainScript : MonoBehaviour
         }
       //  playNewSound(tests[chosenTest].soundSource);
 
-        Debug.Log("chosenTest: " + chosenTest + ": at speed: " + headSpeed + "g Value: " + gValue + ": at speed: " + headSpeed);// tests[trainingNumber, chosenTest].reflections & 0x1);
+        Debug.Log("chosenTest: " + chosenTest + ": at speed: " + headSpeed + "g Value: " + gValue + ": at reflections:"+ tests[chosenTest].reflections);// tests[trainingNumber, chosenTest].reflections & 0x1);
 
-        // floorReverb.SetActive((tests[chosenTest].reflections & _RefFloor) == _RefFloor); 
-        // LeftWallReverb.SetActive((tests[chosenTest].reflections & _refLWall) == _refLWall);
-        // RightWallReverb.SetActive((tests[chosenTest].reflections & _RefRWall) == _RefRWall);
-
+        objectFloor.SetActive((tests[chosenTest].reflections & _RefFloor) == _RefFloor);
+        objectLeftWall.SetActive((tests[chosenTest].reflections & _refLWall) == _refLWall);
+        objectRightWall.SetActive((tests[chosenTest].reflections & _RefRWall) == _RefRWall);
+        /*
         if ((tests[chosenTest].reflections & _RefFloor) == _RefFloor) // moves the walls away instead of deactivating
         {
             objectFloor.transform.position = origFloorPos;
-            if (debugObjects == true)
-            {
+            
                 Debug.Log("Reverb Floor Active");
-            }
+            
         }
         else
         {
 
             objectFloor.transform.position = farFloorPos;
-            if (debugObjects == true)
-            {
-                Debug.Log("Reverb Right Wall Active");
-            }
+             Debug.Log("Reverb floor not active");
+            
         }
 
 
@@ -538,14 +549,15 @@ public class mainScript : MonoBehaviour
         if ((tests[chosenTest].reflections & _refLWall) == _refLWall)
         {
             objectLeftWall.transform.position = origLWallPos;
-            if (debugObjects == true)
-            {
+            //if (debugObjects == true)
+          //  {
                 Debug.Log("Reverb Left Wall Active");
-            }
+          //  }
         }
         else
         {
             // Vector3 lWallPos = new Vector3(-10000, 1.1f, 0);
+            Debug.Log("Reverb Left Wall not active");
             objectLeftWall.transform.position = farLWallPos;
         }
 
@@ -560,7 +572,7 @@ public class mainScript : MonoBehaviour
             // Vector3 rWallPos = new Vector3(10000, 1.63f, 0);
             objectRightWall.transform.position = farRWallPos;
         }
-
+        */
        // Debug.Log("G Value: " + gValue + ":Floor:" + objectFloor.active + ":LeftWall:" + objectLeftWall.active + ":RightWall:" + objectRightWall.active);
         return (false);
     }
@@ -579,18 +591,16 @@ public class mainScript : MonoBehaviour
             LeanTween.scale(noButton, new Vector3(0.002f, 0.002f, 0.002f), .15f).setDelay(.15f);
 
         }
+        Debug.Log("acknowledge");
         if (chooseRandomTest()) // Make sure this below can be eliminated as we now go straigt through all the tests
         {
-
-            // trainingNumber++;
-        }
-        if (testCount == _amountTestsToPerform)
-        {
+            Debug.Log("RANDOM");
             changeStage(STAGE_FINAL_SCREEN);
         }
         else
         {
-            changeStage(STAGE_TEST_SCREEN);
+            Debug.Log("Stage");
+            changeStage(STAGE_TEST);
         }
     }
 
@@ -606,6 +616,7 @@ public class mainScript : MonoBehaviour
 
             case (BUTTON_START_TEST):
                 {
+                    chooseRandomTest();
                     changeStage(STAGE_TEST);
                     break;
                 }
@@ -635,20 +646,21 @@ public class mainScript : MonoBehaviour
 
                     StringBuilder movement = new StringBuilder();
                     StringBuilder results = new StringBuilder();
-                    movement.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation x\"");
-                    results.AppendLine("\"id\", \"speed\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
+                    movement.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation x\"");
+                    results.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
                     //  builder.Append("\"id");
                     int i;
                     int j;
                     int k;
-                    for (j = 0; j < 3; j++)
-                    {
+                  
                         for (i = 0; i < _amountTestsToPerform; i++)
                         {
                             results.Append("\"");
                             results.Append(participantId);
                             results.Append("\",\"");
                             results.Append(tests[i].headSpeed);
+                            results.Append("\",\"");
+                            results.Append(tests[i].soundSource);
                             results.Append("\",\"");
                             results.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
                             results.Append("\",\"");
@@ -668,7 +680,9 @@ public class mainScript : MonoBehaviour
                                 movement.Append("\"");
                                 movement.Append(participantId);
                                 movement.Append("\",\"");
-                                movement.Append(headRotSpeed[j]);
+                                movement.Append(tests[i].headSpeed);
+                                movement.Append("\",\"");
+                                movement.Append(tests[i].soundSource);
                                 movement.Append("\",\"");
                                 movement.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
                                 movement.Append("\",\"");
@@ -707,7 +721,7 @@ public class mainScript : MonoBehaviour
 
 
 
-                    }
+                    
                     //   FileUtil.
                     System.IO.File.AppendAllText("movement" + participantId + ".csv", movement.ToString());
                     System.IO.File.AppendAllText("results" + participantId + ".csv", results.ToString());
@@ -831,7 +845,6 @@ public class mainScript : MonoBehaviour
                     {
                         soundObject.GetComponent<MeshRenderer>().enabled = true;
                     }
-                    chooseRandomTest();
                     appStage = STAGE_TEST;
                     break;
                 }
