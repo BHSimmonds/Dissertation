@@ -52,6 +52,7 @@ public class mainScript : MonoBehaviour
 
     public int[] headRotSpeed = new int[3];
     public float trainingTime;
+    public float trainingGvalue;
     private bool trainingFinished;
     public float arcAngle; // how long is the arc for any scenario
 
@@ -157,7 +158,7 @@ public class mainScript : MonoBehaviour
         rLimitPos = limitRightSide.transform.position;
         lLimitPos = limitLeftSide.transform.position;
 
-        float limitAngle = arcAngle / 2f + 25; // 11.537f; // what is the angle of the limits with the adjustment 11.537
+        float limitAngle = (arcAngle / 2f) + 11.537f; // 11.537f; // what is the angle of the limits with the adjustment 11.537
         rLimitPos.x = Mathf.Sin((limitAngle * Mathf.PI) / 180) * ballDistance;
         rLimitPos.z = Mathf.Cos((limitAngle * Mathf.PI) / 180) * ballDistance;
         lLimitPos.x = Mathf.Sin(((360 - limitAngle) * Mathf.PI) / 180) * ballDistance;
@@ -165,8 +166,8 @@ public class mainScript : MonoBehaviour
         limitRightSide.transform.position = rLimitPos;
         limitLeftSide.transform.position = lLimitPos;
 
-        limitRightSide.transform.Rotate(0, (-(90 - arcAngle)), 0, Space.World); // rotation of ball limits
-        limitLeftSide.transform.Rotate(0, (90 - arcAngle), 0, Space.World);
+        limitRightSide.transform.Rotate(0, (-(90 - (arcAngle/2))), 0, Space.World); // rotation of ball limits
+        limitLeftSide.transform.Rotate(0, (90 - (arcAngle/2)), 0, Space.World);
 
         _reflectionAmount = 1;
         reflectionMask = 0;
@@ -296,7 +297,7 @@ public class mainScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey("escape"))
         {
@@ -336,7 +337,7 @@ public class mainScript : MonoBehaviour
                         rotation.y = rotation.y - 360;
                     }
 
-                    Vector3 soundRotation = new Vector3((Mathf.Sin(Mathf.PI / 180f * -0.25f * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f * -0.25f * (rotation.y))) * ballDistance);
+                    Vector3 soundRotation = new Vector3((Mathf.Sin(Mathf.PI / 180f * trainingGvalue * (rotation.y)) * ballDistance), playerOrigin.y, Mathf.Abs(Mathf.Cos(Mathf.PI / 180f * trainingGvalue * (rotation.y))) * ballDistance);
                     soundObject.transform.localPosition = soundRotation;
                     mainObject.transform.localPosition = soundRotation;
 
@@ -394,16 +395,16 @@ public class mainScript : MonoBehaviour
                     deltaAngle = a2 - a1;
                     alpha += deltaAngle;
 
-                    if ((alpha > arcAngle) && (alpha < (180 - arcAngle)))
+                    if ((alpha > (arcAngle/2)) && (alpha < (180 - (arcAngle / 2))))
                     {
-                        alpha += (2 * (90 - arcAngle));
+                        alpha += (2 * (90 - (arcAngle / 2)));
                     }
                     else
                     {
 
-                        if ((alpha > (180 + arcAngle)) && (alpha < (360 - arcAngle)))
+                        if ((alpha > (180 + (arcAngle / 2))) && (alpha < (360 - (arcAngle / 2))))
                         {
-                            alpha += (2 * (90 - arcAngle));
+                            alpha += (2 * (90 - (arcAngle / 2)));
                         }
                     }
 
@@ -646,7 +647,7 @@ public class mainScript : MonoBehaviour
 
                     StringBuilder movement = new StringBuilder();
                     StringBuilder results = new StringBuilder();
-                    movement.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation x\"");
+                    movement.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation z\"");
                     results.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
                     //  builder.Append("\"id");
                     int i;
@@ -710,7 +711,7 @@ public class mainScript : MonoBehaviour
                                 movement.Append("\"");
                                 movement.Append("\r\n");
                             }
-                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
+                            movement.AppendLine("\"*,*,*,*,*,*,\"");
                             movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
                             movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
                             movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
