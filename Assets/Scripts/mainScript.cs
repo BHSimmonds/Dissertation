@@ -102,7 +102,7 @@ public class mainScript : MonoBehaviour
     public GameObject objectRightWall;
     public bool inclRightWall; // Is the right wall included in the test
 
-    private int  reflectionMask;
+    private int reflectionMask;
     private int _reflectionAmount;  // derived from included bools
     private int[] _reflectionArray;
 
@@ -166,12 +166,12 @@ public class mainScript : MonoBehaviour
         limitRightSide.transform.position = rLimitPos;
         limitLeftSide.transform.position = lLimitPos;
 
-        limitRightSide.transform.Rotate(0, (-(90 - (arcAngle/2))), 0, Space.World); // rotation of ball limits
-        limitLeftSide.transform.Rotate(0, (90 - (arcAngle/2)), 0, Space.World);
+        limitRightSide.transform.Rotate(0, (-(90 - (arcAngle / 2))), 0, Space.World); // rotation of ball limits
+        limitLeftSide.transform.Rotate(0, (90 - (arcAngle / 2)), 0, Space.World);
 
         _reflectionAmount = 1;
         reflectionMask = 0;
-        if(inclFloor)
+        if (inclFloor)
         {
             _reflectionAmount = _reflectionAmount * 2;
             reflectionMask = reflectionMask | _RefFloor;
@@ -187,7 +187,7 @@ public class mainScript : MonoBehaviour
             _reflectionAmount = _reflectionAmount * 2;
             reflectionMask = reflectionMask | _RefRWall;
         }
- 
+
 
         _reflectionArray = new int[_reflectionAmount];
 
@@ -196,14 +196,15 @@ public class mainScript : MonoBehaviour
         for (i = 0; i < 8; i++)
         {
 
-            if ((reflectionMask & i) == i) {
+            if ((reflectionMask & i) == i)
+            {
                 _reflectionArray[j] = i;
                 j++;
             }
         }
 
         _amountTestsToPerform = gValues.Length * headRotSpeed.Length * _reflectionAmount * soundSource.Length;
-         tests = new testInstance[_amountTestsToPerform];
+        tests = new testInstance[_amountTestsToPerform];
 
         // loading the index file to get the most recent participant ID
         try
@@ -276,7 +277,7 @@ public class mainScript : MonoBehaviour
     void restartExperience()
     {
         testCount = 0;
-     
+
         int i;
         int j;
         for (j = 0; j < 3; j++)
@@ -323,12 +324,12 @@ public class mainScript : MonoBehaviour
                     murcki.x = OculusCenterEyes.transform.position.x;
                     murcki.z = OculusCenterEyes.transform.position.z;
                     worldAnchor.transform.position = murcki;
-                 //   Debug.Log("Stage_Training_Screen");
+                    //   Debug.Log("Stage_Training_Screen");
                     break;
                 }
             case (STAGE_TRAINING):
                 {
-                   // Debug.Log("Stage training");
+                    // Debug.Log("Stage training");
                     Vector3 rotation = OculusCenterEyes.transform.eulerAngles;
 
 
@@ -344,8 +345,8 @@ public class mainScript : MonoBehaviour
                     sourceDirection = rotation.y + 180; // makes the source dirtectional
                     soundObject.transform.eulerAngles = new Vector3(0, sourceDirection, 0);
 
-                    int t = 0;
-                    if(deltaTime> trainingTime /2)
+                    // int t = 0;
+                    if (deltaTime > trainingTime / 2)
                     {
                         if (soundObject.GetComponent<AudioSource>().clip != soundSource[1])
                         {
@@ -356,21 +357,20 @@ public class mainScript : MonoBehaviour
                     }
                     if (deltaTime > trainingTime)
                     {
-                     //   if (deltaTime > trainingTime)
-                    //    {
-                            trainingFinished = true;
-                            changeStage(STAGE_TEST_SCREEN);
-                     //   }
 
-       
+                        trainingFinished = true;
+                        changeStage(STAGE_TEST_SCREEN);
+
+
+
 
                     }
 
 
-                    RaycastHit seen = new RaycastHit();
-                    Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
-                    mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
-                    bool trying = false;
+                    // RaycastHit seen = new RaycastHit();
+                    // Ray raydirection = new Ray(OculusCenterEyes.transform.position, OculusCenterEyes.transform.forward);
+                    // mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
+                    /* bool trying = false;
                     if (Physics.Raycast(raydirection, out seen, 25.0f))
                     {
 
@@ -381,7 +381,8 @@ public class mainScript : MonoBehaviour
                         }
 
                     }
-                    testSuccessfull.Add(trying);
+                    */
+                    // testSuccessfull.Add(trying);
                     // }
                     break;
                 }
@@ -395,7 +396,7 @@ public class mainScript : MonoBehaviour
                     deltaAngle = a2 - a1;
                     alpha += deltaAngle;
 
-                    if ((alpha > (arcAngle/2)) && (alpha < (180 - (arcAngle / 2))))
+                    if ((alpha > (arcAngle / 2)) && (alpha < (180 - (arcAngle / 2))))
                     {
                         alpha += (2 * (90 - (arcAngle / 2)));
                     }
@@ -408,11 +409,11 @@ public class mainScript : MonoBehaviour
                         }
                     }
 
-                        if (alpha > 360)
-                        {
-                            alpha -= 360;
-                        }
-                    
+                    if (alpha > 360)
+                    {
+                        alpha -= 360;
+                    }
+
 
                     Vector3 startRotation = new Vector3((Mathf.Sin(alpha * Mathf.PI / 180f)) * ballDistance, playerOrigin.y, Mathf.Abs(Mathf.Cos(alpha * Mathf.PI / 180f)) * ballDistance);
                     mainObject.transform.localPosition = startRotation;
@@ -459,7 +460,7 @@ public class mainScript : MonoBehaviour
 
     private void playNewSound(int indexFromSoundSource)
     {
-      
+
         soundObject.GetComponent<AudioSource>().Stop();
         soundObject.GetComponent<AudioSource>().clip = soundSource[indexFromSoundSource];
         soundObject.GetComponent<AudioSource>().mute = false;
@@ -522,9 +523,9 @@ public class mainScript : MonoBehaviour
         {
             testID.GetComponent<Text>().text = testCount + "/" + _amountTestsToPerform; //used to have * _variantsTraining on the end
         }
-      //  playNewSound(tests[chosenTest].soundSource);
+        //  playNewSound(tests[chosenTest].soundSource);
 
-        Debug.Log("chosenTest: " + chosenTest + ": at speed: " + headSpeed + "g Value: " + gValue + ": at reflections:"+ tests[chosenTest].reflections);// tests[trainingNumber, chosenTest].reflections & 0x1);
+        Debug.Log("chosenTest: " + chosenTest + ": at speed: " + headSpeed + "g Value: " + gValue + ": at reflections:" + tests[chosenTest].reflections);// tests[trainingNumber, chosenTest].reflections & 0x1);
 
         objectFloor.SetActive((tests[chosenTest].reflections & _RefFloor) == _RefFloor);
         objectLeftWall.SetActive((tests[chosenTest].reflections & _refLWall) == _refLWall);
@@ -574,7 +575,7 @@ public class mainScript : MonoBehaviour
             objectRightWall.transform.position = farRWallPos;
         }
         */
-       // Debug.Log("G Value: " + gValue + ":Floor:" + objectFloor.active + ":LeftWall:" + objectLeftWall.active + ":RightWall:" + objectRightWall.active);
+        // Debug.Log("G Value: " + gValue + ":Floor:" + objectFloor.active + ":LeftWall:" + objectLeftWall.active + ":RightWall:" + objectRightWall.active);
         return (false);
     }
 
@@ -647,82 +648,85 @@ public class mainScript : MonoBehaviour
 
                     StringBuilder movement = new StringBuilder();
                     StringBuilder results = new StringBuilder();
-                    movement.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation z\"");
-                    results.AppendLine("\"id\", \"speed\", \"songs\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
+                    movement.AppendLine("\"id\", \"speed\", \"source\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\", \"timestamp\", \"rotation x\", \"rotation y\", \"rotation z\"");
+                    results.AppendLine("\"id\", \"speed\", \"source\", \"floor\", \"rwall\", \"lwall\", \"g\", \"result\"");
                     //  builder.Append("\"id");
                     int i;
-                    int j;
+                    // int j;
                     int k;
-                  
-                        for (i = 0; i < _amountTestsToPerform; i++)
+
+                    for (i = 0; i < _amountTestsToPerform; i++)
+                    {
+                        results.Append("\"");
+                        results.Append(participantId);
+                        results.Append("\",\"");
+                        results.Append(tests[i].headSpeed);
+                        results.Append("\",\"");
+                        results.Append(tests[i].soundSource);
+                        results.Append("\",\"");
+                        results.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
+                        results.Append("\",\"");
+                        results.Append(Convert.ToInt32((tests[i].reflections & 0x02) == 2));
+                        results.Append("\",\"");
+                        results.Append(Convert.ToInt32((tests[i].reflections & 0x04) == 4));
+                        results.Append("\",\"");
+                        results.Append(tests[i].gValue);
+                        results.Append("\",\"");
+                        results.Append(Convert.ToInt32(tests[i].result));
+                        results.Append("\"");
+                        results.Append("\r\n");
+
+
+                        for (k = 0; k < tests[i].timestamp.Count; k++)
                         {
-                            results.Append("\"");
-                            results.Append(participantId);
-                            results.Append("\",\"");
-                            results.Append(tests[i].headSpeed);
-                            results.Append("\",\"");
-                            results.Append(tests[i].soundSource);
-                            results.Append("\",\"");
-                            results.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
-                            results.Append("\",\"");
-                            results.Append(Convert.ToInt32((tests[i].reflections & 0x02) == 2));
-                            results.Append("\",\"");
-                            results.Append(Convert.ToInt32((tests[i].reflections & 0x04) == 4));
-                            results.Append("\",\"");
-                            results.Append(tests[i].gValue);
-                            results.Append("\",\"");
-                            results.Append(Convert.ToInt32(tests[i].result));
-                            results.Append("\"");
-                            results.Append("\r\n");
-
-
-                            for (k = 0; k < tests[i].timestamp.Count; k++)
+                            movement.Append("\"");
+                            movement.Append(participantId);
+                            movement.Append("\",\"");
+                            movement.Append(tests[i].headSpeed);
+                            movement.Append("\",\"");
+                            movement.Append(tests[i].soundSource);
+                            movement.Append("\",\"");
+                            movement.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
+                            movement.Append("\",\"");
+                            movement.Append(Convert.ToInt32((tests[i].reflections & 0x02) == 2));
+                            movement.Append("\",\"");
+                            movement.Append(Convert.ToInt32((tests[i].reflections & 0x04) == 4));
+                            movement.Append("\",\"");
+                            movement.Append(tests[i].gValue);
+                            movement.Append("\",\"");
+                            movement.Append(Convert.ToInt32(tests[i].result));
+                            movement.Append("\",\"");
+                            movement.Append(tests[i].timestamp[k]);
+                            if (recordXandZ)
                             {
-                                movement.Append("\"");
-                                movement.Append(participantId);
                                 movement.Append("\",\"");
-                                movement.Append(tests[i].headSpeed);
-                                movement.Append("\",\"");
-                                movement.Append(tests[i].soundSource);
-                                movement.Append("\",\"");
-                                movement.Append(Convert.ToInt32((tests[i].reflections & 0x01) == 1));
-                                movement.Append("\",\"");
-                                movement.Append(Convert.ToInt32((tests[i].reflections & 0x02) == 2));
-                                movement.Append("\",\"");
-                                movement.Append(Convert.ToInt32((tests[i].reflections & 0x04) == 4));
-                                movement.Append("\",\"");
-                                movement.Append(tests[i].gValue);
-                                movement.Append("\",\"");
-                                movement.Append(Convert.ToInt32(tests[i].result));
-                                movement.Append("\",\"");
-                                movement.Append(tests[i].timestamp[k]);
-                                if (recordXandZ)
-                                {
-                                    movement.Append("\",\"");
-                                    movement.Append(tests[i].headRotationx[k]);
-                                }
-                                movement.Append("\",\"");
-                                movement.Append(tests[i].headRotationy[k]);
-                                if (recordXandZ)
-                                {
-                                    movement.Append("\",\"");
-                                    movement.Append(tests[i].headRotationz[k]);
-                                }
-                                movement.Append("\"");
-                                movement.Append("\r\n");
+                                movement.Append(tests[i].headRotationx[k]);
                             }
-                            movement.AppendLine("\"*,*,*,*,*,*,\"");
-                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
-                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
-                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
-                            movement.AppendLine("\"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\", \"*\"");
-
-
+                            movement.Append("\",\"");
+                            movement.Append(tests[i].headRotationy[k]);
+                            if (recordXandZ)
+                            {
+                                movement.Append("\",\"");
+                                movement.Append(tests[i].headRotationz[k]);
+                            }
+                            movement.Append("\"");
+                            movement.Append("\r\n");
                         }
+                        int appendicus = 0;
+                        while (appendicus <5)
+                        {
+                            movement.AppendLine("\"*\"");
+                            appendicus++;
+                        }
+                            
+                        
+
+
+                    }
 
 
 
-                    
+
                     //   FileUtil.
                     System.IO.File.AppendAllText("movement" + participantId + ".csv", movement.ToString());
                     System.IO.File.AppendAllText("results" + participantId + ".csv", results.ToString());
@@ -781,7 +785,7 @@ public class mainScript : MonoBehaviour
 
                     Canvas.SetActive(true);
                     participantTextfield.GetComponent<Text>().text = participantId.ToString();
-                  //  soundObject.GetComponent<AudioSource>().mute = true;
+                    //  soundObject.GetComponent<AudioSource>().mute = true;
 
                     limitLeftSide.SetActive(false);
                     limitRightSide.SetActive(false);
@@ -801,6 +805,7 @@ public class mainScript : MonoBehaviour
                     objectRightWall.transform.position = farRWallPos;
                     // limitLeftSide.SetActive(false);
                     // limitRightSide.SetActive(false);
+                    mainObject.GetComponent<Renderer>().material.color = new Color32(0, 255, 0, 255);
                     soundObject.GetComponent<AudioSource>().clip = soundSource[0];
                     soundObject.GetComponent<AudioSource>().Play();
                     a2 = 0; // Reset the reference for the rotation
@@ -828,7 +833,8 @@ public class mainScript : MonoBehaviour
                     objectFloor.transform.position = origFloorPos;
                     objectLeftWall.transform.position = origLWallPos;
                     objectRightWall.transform.position = origRWallPos;
-                    a2 = 0; // Reset the reference for the rotation      
+                    a2 = 0; // Reset the reference for the rotation
+                    mainObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 255);
                     playNewSound(tests[chosenTest].soundSource);
                     LeanTween.scale(mainObject, new Vector3(1, 1, 1), .5f); // TODO: Debug
                     LeanTween.alphaCanvas(UIpanels[1].GetComponent<CanvasGroup>(), 0.0f, 0.5f);

@@ -266,7 +266,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.5, y: 0}
+  savedTextUV0: {x: 0, y: 0.37890625}
   savedFill: 0
 --- !u!114 &61038081
 MonoBehaviour:
@@ -301,8 +301,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TRAINING - Follow the ball with your head, when your head rotation matches,
-    the ball will turn green. Try and keep it green.
+  m_Text: TRAINING - Move your head to get accustomed to the sound of the VR world.
+    The sound IS coming from the sphere
 --- !u!222 &61038082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Testing session finished, \nclick YES to complete session, NO to retry
-    the test. Then ask the supervisor to run the next test."
+    the test."
 --- !u!222 &362491628
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 153.93274, y: 150}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
-  savedTextUV0: {x: 0.40234375, y: 0}
+  savedTextUV0: {x: 0.66015625, y: 0.19140625}
   savedFill: 0
 --- !u!114 &380612327
 MonoBehaviour:
@@ -963,7 +963,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TESTING PHASE - Follow the ball with your head and answer the question
+  m_Text: TESTING PHASE - Now the sound IS NOT coming from the ball, it moves independently.
+    Follow the ball with your head and answer the question
 --- !u!222 &406628753
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1027,7 +1028,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 1, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.078125, y: 0}
+  savedTextUV0: {x: 0.375, y: 0.10546875}
   savedFill: 0
 --- !u!114 &433379686
 MonoBehaviour:
@@ -2442,7 +2443,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &986118185
 MeshRenderer:
@@ -2558,7 +2559,7 @@ MonoBehaviour:
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 800, y: 960}
   savedColor: {r: 0, g: 0, b: 0, a: 1}
-  savedTextUV0: {x: 0.03125, y: 0.16796875}
+  savedTextUV0: {x: 0.03125, y: 0.05859375}
   savedFill: 0
 --- !u!114 &1110392619
 MonoBehaviour:
@@ -2921,8 +2922,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Keep moving your head at the same rate. Is the source moving with your head
-    or against it?
+  m_Text: Keep moving your head at the same rate. Is the SOUND source moving with
+    your head or against it?
 --- !u!222 &1283119278
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4182,10 +4183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundSource:
-  - {fileID: 8300000, guid: 8b382a0a63632344e954a9e3e1920bc8, type: 3}
-  - {fileID: 8300000, guid: 2a5324bb824c3df4fb0f7a27be0a1d84, type: 3}
+  - {fileID: 8300000, guid: 8b8c7dc84614d864e81d53cc774e00f6, type: 3}
+  - {fileID: 8300000, guid: cdfb121ae8cd10e4c933155e7ae41dc4, type: 3}
   tests: []
-  headRotSpeed: 14000000280000003c000000
+  headRotSpeed: 140000003c000000
   trainingTime: 30
   trainingGvalue: -0.5
   arcAngle: 100
