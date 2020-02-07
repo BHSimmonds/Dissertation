@@ -45,6 +45,8 @@ public class mainScript : MonoBehaviour
 
     public AudioClip[] soundSource;
     private int appStage = 0;
+   
+
 
     List<bool> testSuccessfull = new List<bool>(); // I don't know what this is
     public testInstance[] tests;
@@ -298,7 +300,7 @@ public class mainScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKey("escape"))
         {
